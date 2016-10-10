@@ -1,0 +1,10 @@
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\bin\Release\excel2xml.exe.config
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\obj\Release\excel2xml.csproj.ResolveComReference.cache
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\bin\Release\excel2xml.exe
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\bin\Release\excel2xml.pdb
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\obj\Release\excel2xml.Form1.resources
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\obj\Release\excel2xml.Properties.Resources.resources
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\obj\Release\excel2xml.csproj.GenerateResource.Cache
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\obj\Release\excel2xml.exe
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\obj\Release\excel2xml.pdb
+C:\WorkSpace\kbengine-master\excel2xml\excel2xml\obj\Release\excel2xml.csprojResolveAssemblyReference.cache
