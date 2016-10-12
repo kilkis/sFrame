@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: 310d7406e0e7e244495fae07d4e0d426
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Weapon_qiang_001
+    100004: Weapon_qiang_002
+    100006: Weapon_qiang_003
+    100008: Weapon_qiang_004
+    100010: Weapon_qiang_005
+    100012: Weapon_qiang_006
+    100014: Weapon_qiang_007
+    100016: Weapon_qiang_008
+    100018: Weapon_qiang_009
+    100020: Weapon_qiang_010
+    100022: Weapon_qiang_011
+    100024: Weapon_qiang_012
+    400000: //RootNode
+    400002: Weapon_qiang_001
+    400004: Weapon_qiang_002
+    400006: Weapon_qiang_003
+    400008: Weapon_qiang_004
+    400010: Weapon_qiang_005
+    400012: Weapon_qiang_006
+    400014: Weapon_qiang_007
+    400016: Weapon_qiang_008
+    400018: Weapon_qiang_009
+    400020: Weapon_qiang_010
+    400022: Weapon_qiang_011
+    400024: Weapon_qiang_012
+    2300000: Weapon_qiang_001
+    2300002: Weapon_qiang_002
+    2300004: Weapon_qiang_003
+    2300006: Weapon_qiang_004
+    2300008: Weapon_qiang_005
+    2300010: Weapon_qiang_006
+    2300012: Weapon_qiang_007
+    2300014: Weapon_qiang_008
+    2300016: Weapon_qiang_009
+    2300018: Weapon_qiang_010
+    2300020: Weapon_qiang_011
+    2300022: Weapon_qiang_012
+    3300000: Weapon_qiang_001
+    3300002: Weapon_qiang_002
+    3300004: Weapon_qiang_003
+    3300006: Weapon_qiang_004
+    3300008: Weapon_qiang_005
+    3300010: Weapon_qiang_006
+    3300012: Weapon_qiang_007
+    3300014: Weapon_qiang_008
+    3300016: Weapon_qiang_009
+    3300018: Weapon_qiang_010
+    3300020: Weapon_qiang_011
+    3300022: Weapon_qiang_012
+    4300000: Weapon_qiang_001
+    4300002: Weapon_qiang_002
+    4300004: Weapon_qiang_003
+    4300006: Weapon_qiang_004
+    4300008: Weapon_qiang_005
+    4300010: Weapon_qiang_006
+    4300012: Weapon_qiang_007
+    4300014: Weapon_qiang_008
+    4300016: Weapon_qiang_009
+    4300018: Weapon_qiang_010
+    4300020: Weapon_qiang_012
+    4300022: Weapon_qiang_011
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00899999961
+    meshCompression: 2
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

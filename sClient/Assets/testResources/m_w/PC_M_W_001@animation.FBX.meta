@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 12bab03482eb1a649afee49140225def
+ModelImporter:
+  fileIDToRecycleName:
+    4300000: Pc_M_W_Leg_001
+    4300002: Pc_M_W_Hair_001
+    4300004: Pc_M_W_Feet_001
+    4300006: Pc_M_W_Hand_001
+    4300008: Pc_M_W_Body_001
+    7400000: Take 001 //// PC_M_W_001@animation
+    7400002: idle //// PC_M_W_001@animation
+    7400004: idle0 //// PC_M_W_001@animation
+    7400006: idle01 //// PC_M_W_001@animation
+    7400008: idle012 //// PC_M_W_001@animation
+    7400010: idle0123 //// PC_M_W_001@animation
+    7400012: idle01234 //// PC_M_W_001@animation
+    7400014: idle012345 //// PC_M_W_001@animation
+    7400016: idle0123456 //// PC_M_W_001@animation
+    7400018: idle01234567 //// PC_M_W_001@animation
+    7400020: idle012345678 //// PC_M_W_001@animation
+    7400022: idle0123456789 //// PC_M_W_001@animation
+    7400024: idle012345678910 //// PC_M_W_001@animation
+    7400026: idle01234567891011 //// PC_M_W_001@animation
+    7400028: idle0123456789101112 //// PC_M_W_001@animation
+    7400030: idle012345678910111213 //// PC_M_W_001@animation
+    7400032: walk //// PC_M_W_001@animation
+    7400034: run //// PC_M_W_001@animation
+    7400036: wait //// PC_M_W_001@animation
+    7400038: run_attack //// PC_M_W_001@animation
+    7400040: attack_wait //// PC_M_W_001@animation
+    7400042: attack_idle //// PC_M_W_001@animation
+    7400044: attack //// PC_M_W_001@animation
+    7400046: skill_wait0 //// PC_M_W_001@animation
+    7400048: skill0 //// PC_M_W_001@animation
+    7400050: skill1 //// PC_M_W_001@animation
+    7400052: skill2 //// PC_M_W_001@animation
+    7400054: skill3 //// PC_M_W_001@animation
+    7400056: beatt //// PC_M_W_001@animation
+    7400058: beattacked //// PC_M_W_001@animation
+    7400060: dead //// PC_M_W_001@animation
+    7400062: rider_run //// PC_M_W_001@animation
+    7400064: rider_wait //// PC_M_W_001@animation
+    100100000: DataTemplate __Singleton__
+  serializedVersion: 10
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    generateAnimations: 3
+    bakeSimulation: 0
+    splitAnimations: 1
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: walk
+      firstFrame: 390
+      lastFrame: 409
+      wrapMode: 2
+      loop: 1
+    - name: run
+      firstFrame: 25
+      lastFrame: 36
+      wrapMode: 2
+      loop: 1
+    - name: wait
+      firstFrame: 42
+      lastFrame: 72
+      wrapMode: 2
+      loop: 1
+    - name: idle
+      firstFrame: 77
+      lastFrame: 114
+      wrapMode: 1
+      loop: 0
+    - name: run_attack
+      firstFrame: 120
+      lastFrame: 131
+      wrapMode: 2
+      loop: 1
+    - name: attack_wait
+      firstFrame: 137
+      lastFrame: 157
+      wrapMode: 2
+      loop: 1
+    - name: attack_idle
+      firstFrame: 162
+      lastFrame: 191
+      wrapMode: 1
+      loop: 0
+    - name: attack
+      firstFrame: 197
+      lastFrame: 208
+      wrapMode: 1
+      loop: 0
+    - name: skill_wait0
+      firstFrame: 214
+      lastFrame: 216
+      wrapMode: 1
+      loop: 0
+    - name: skill0
+      firstFrame: 217
+      lastFrame: 226
+      wrapMode: 1
+      loop: 0
+    - name: skill1
+      firstFrame: 231
+      lastFrame: 242
+      wrapMode: 1
+      loop: 0
+    - name: skill2
+      firstFrame: 249
+      lastFrame: 261
+      wrapMode: 1
+      loop: 0
+    - name: skill3
+      firstFrame: 266
+      lastFrame: 268
+      wrapMode: 1
+      loop: 0
+    - name: beattacked
+      firstFrame: 272
+      lastFrame: 282
+      wrapMode: 1
+      loop: 0
+    - name: dead
+      firstFrame: 287
+      lastFrame: 321
+      wrapMode: 1
+      loop: 0
+    - name: rider_run
+      firstFrame: 327
+      lastFrame: 336
+      wrapMode: 2
+      loop: 1
+    - name: rider_wait
+      firstFrame: 342
+      lastFrame: 363
+      wrapMode: 2
+      loop: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 3
+    addColliders: 0
+    swapUVChannels: 1
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMesh: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  textMetaNamesToFileIDs:
+    //RootNode:
+      data:
+        first: 1
+        second: e2860100
+      data:
+        first: 4
+        second: c21a0600
+      data:
+        first: 111
+        second: 605fa900
+    Bip01:
+      data:
+        first: 1
+        second: d8860100
+      data:
+        first: 4
+        second: b81a0600
+    Bip01 Head:
+      data:
+        first: 1
+        second: da860100
+      data:
+        first: 4
+        second: ba1a0600
+    Bip01 L Calf:
+      data:
+        first: 1
+        second: a0860100
+      data:
+        first: 4
+        second: 801a0600
+    Bip01 L Clavicle:
+      data:
+        first: 1
+        second: ec860100
+      data:
+        first: 4
+        second: cc1a0600
+    Bip01 L Finger0:
+      data:
+        first: 1
+        second: e0860100
+      data:
+        first: 4
+        second: c01a0600
+    Bip01 L Finger01:
+      data:
+        first: 1
+        second: 0e870100
+      data:
+        first: 4
+        second: ee1a0600
+    Bip01 L Finger1:
+      data:
+        first: 1
+        second: b8860100
+      data:
+        first: 4
+        second: 981a0600
+    Bip01 L Finger11:
+      data:
+        first: 1
+        second: ea860100
+      data:
+        first: 4
+        second: ca1a0600
+    Bip01 L Foot:
+      data:
+        first: 1
+        second: ca860100
+      data:
+        first: 4
+        second: aa1a0600
+    Bip01 L Forearm:
+      data:
+        first: 1
+        second: 0a870100
+      data:
+        first: 4
+        second: ea1a0600
+    Bip01 L Hand:
+      data:
+        first: 1
+        second: d2860100
+      data:
+        first: 4
+        second: b21a0600
+    Bip01 L Thigh:
+      data:
+        first: 1
+        second: b2860100
+      data:
+        first: 4
+        second: 921a0600
+    Bip01 L Toe0:
+      data:
+        first: 1
+        second: 10870100
+      data:
+        first: 4
+        second: f01a0600
+    Bip01 L UpperArm:
+      data:
+        first: 1
+        second: 0c870100
+      data:
+        first: 4
+        second: ec1a0600
+    Bip01 Neck:
+      data:
+        first: 1
+        second: c0860100
+      data:
+        first: 4
+        second: a01a0600
+    Bip01 Pelvis:
+      data:
+        first: 1
+        second: a6860100
+      data:
+        first: 4
+        second: 861a0600
+    Bip01 R Calf:
+      data:
+        first: 1
+        second: a8860100
+      data:
+        first: 4
+        second: 881a0600
+    Bip01 R Clavicle:
+      data:
+        first: 1
+        second: f8860100
+      data:
+        first: 4
+        second: d81a0600
+    Bip01 R Finger0:
+      data:
+        first: 1
+        second: 08870100
+      data:
+        first: 4
+        second: e81a0600
+    Bip01 R Finger01:
+      data:
+        first: 1
+        second: f2860100
+      data:
+        first: 4
+        second: d21a0600
+    Bip01 R Finger1:
+      data:
+        first: 1
+        second: d6860100
+      data:
+        first: 4
+        second: b61a0600
+    Bip01 R Finger11:
+      data:
+        first: 1
+        second: f6860100
+      data:
+        first: 4
+        second: d61a0600
+    Bip01 R Foot:
+      data:
+        first: 1
+        second: fe860100
+      data:
+        first: 4
+        second: de1a0600
+    Bip01 R Forearm:
+      data:
+        first: 1
+        second: 04870100
+      data:
+        first: 4
+        second: e41a0600
+    Bip01 R Hand:
+      data:
+        first: 1
+        second: bc860100
+      data:
+        first: 4
+        second: 9c1a0600
+    Bip01 R Thigh:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+    Bip01 R Toe0:
+      data:
+        first: 1
+        second: e6860100
+      data:
+        first: 4
+        second: c61a0600
+    Bip01 R UpperArm:
+      data:
+        first: 1
+        second: f0860100
+      data:
+        first: 4
+        second: d01a0600
+    Bip01 Spine:
+      data:
+        first: 1
+        second: 14870100
+      data:
+        first: 4
+        second: f41a0600
+    Bip01 Spine1:
+      data:
+        first: 1
+        second: 02870100
+      data:
+        first: 4
+        second: e21a0600
+    Bip01 Spine2:
+      data:
+        first: 1
+        second: ba860100
+      data:
+        first: 4
+        second: 9a1a0600
+    Bone02:
+      data:
+        first: 1
+        second: b6860100
+      data:
+        first: 4
+        second: 961a0600
+    Bone03:
+      data:
+        first: 1
+        second: 00870100
+      data:
+        first: 4
+        second: e01a0600
+    Bone04:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+    Bone05:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+    Bone06:
+      data:
+        first: 1
+        second: d4860100
+      data:
+        first: 4
+        second: b41a0600
+    Bone07:
+      data:
+        first: 1
+        second: c8860100
+      data:
+        first: 4
+        second: a81a0600
+    Bone08:
+      data:
+        first: 1
+        second: d0860100
+      data:
+        first: 4
+        second: b01a0600
+    Bone09:
+      data:
+        first: 1
+        second: c6860100
+      data:
+        first: 4
+        second: a61a0600
+    Bone10:
+      data:
+        first: 1
+        second: cc860100
+      data:
+        first: 4
+        second: ac1a0600
+    Bone11:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+    Bone12:
+      data:
+        first: 1
+        second: c2860100
+      data:
+        first: 4
+        second: a21a0600
+    Bone13:
+      data:
+        first: 1
+        second: dc860100
+      data:
+        first: 4
+        second: bc1a0600
+    weapon_Left:
+      data:
+        first: 1
+        second: aa860100
+      data:
+        first: 4
+        second: 8a1a0600
+    weapon_Right:
+      data:
+        first: 1
+        second: be860100
+      data:
+        first: 4
+        second: 9e1a0600
+    wing:
+      data:
+        first: 1
+        second: b4860100
+      data:
+        first: 4
+        second: 941a0600

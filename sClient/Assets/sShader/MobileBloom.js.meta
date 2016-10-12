@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 53816134a58264bc7994c41c368cc47f
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - bloomMaterial: {fileID: 2100000, guid: 5209417774801496dbc4ad7f143115a1, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
