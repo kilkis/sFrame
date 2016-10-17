@@ -18,12 +18,10 @@ public class sGameRoot : MonoBehaviour
         GameObject.DontDestroyOnLoad(_rootObj);
 
         InitSingletons();
-        
     }
 
     void Start()
     {
-        
         sGameFlow.instance.startGame();
     }
 

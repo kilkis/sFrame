@@ -53,6 +53,6 @@ public class sPlayerModel : MonoBehaviour {
 
         pc = playerCC.GetComponent<sPlayerControl>();
         pc.setAnim(anim);
-        pc.enableControl(true);
+        //pc.enableControl(true);
     }
 }

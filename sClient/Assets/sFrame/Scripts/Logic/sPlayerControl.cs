@@ -45,6 +45,24 @@ public class sPlayerControl : MonoBehaviour {
         }
     }
 
+    public void moveToPosition(Vector3 pos)
+    {
+        changeAnimState(playerState.idle);
+        _curPath.Clear();
+        _curPath.Add(pos);
+        changeAnimState(playerState.run);
+    }
+
+    public void setPosition(Vector3 pos)
+    {
+        //被服务器强制设定的坐标，状态切换回待机
+        _curPath.Clear();
+        changeAnimState(playerState.idle);
+
+        if (_trans != null)
+            _trans.position = pos;
+    }
+
 	// Update is called once per frame
 	void Update () {
 	    if(_enableControl)
@@ -77,40 +95,40 @@ public class sPlayerControl : MonoBehaviour {
 
 #else
 #endif
-            //todo:需要加入服务器通知移动控制
-            if( curState == playerState.run)
-            {
-                //自行处理移动
-                Vector3 op = _curPath[0] - transform.position;
-                op.y = 0;
-                float dis = Vector3.Distance(op, Vector3.zero);
-                float rundis = 3 * Time.deltaTime;
-                op.Normalize();
-                //Debug.Log("dis: " + dis + " : " + rundis);
-                if ( dis <= rundis )
-                {
-                    transform.position += dis*op;
-                    _curPath.RemoveAt(0);
-                    if( _curPath.Count == 0 )
-                    {
-                        changeAnimState(playerState.idle);
-                    }
-                }
-                else
-                {   
-                    transform.position += rundis * op;
-                }
-
-                if( op != Vector3.zero )
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(op), 0.5f);
-                }
-            }
-            
-            
             
         }
-	}
+
+        //todo:需要加入服务器通知移动控制
+        if (curState == playerState.run)
+        {
+            //自行处理移动
+            Vector3 op = _curPath[0] - transform.position;
+            op.y = 0;
+            float dis = Vector3.Distance(op, Vector3.zero);
+            float rundis = 3 * Time.deltaTime;
+            op.Normalize();
+            Debug.Log("dis: " + dis + " : " + rundis);
+            if (dis <= rundis)
+            {
+                transform.position += dis * op;
+                _curPath.RemoveAt(0);
+                if (_curPath.Count == 0)
+                {
+                    changeAnimState(playerState.idle);
+                }
+            }
+            else
+            {
+                transform.position += rundis * op;
+            }
+
+            if (op != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(op), 0.5f);
+            }
+        }
+
+    }
 
     public void enableControl(bool b)
     {

@@ -38,14 +38,17 @@ public class sPlayerManager : sSingleton<sPlayerManager>
     public Dictionary<long, sPlayerInfo> ready2delPlayers = new Dictionary<long, sPlayerInfo>();
     //预备删除，遍历用数据
     public List<sPlayerInfo> r2dPlayers = new List<sPlayerInfo>();
-
-
-    GameObject selfplayer;
-
+    
     public bool isSelfCreated()
     {
         return selfPlayer.playerCC == null ? false : true;
     }
+
+    bool isSelf(long uid)
+    {
+        return selfPlayer.uid == uid ? true : false;
+    }
+
     //创建自己
     public void createSelf(long uid, string name, string guildname, int vip, Vector3 startpos)
     {
@@ -55,6 +58,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         selfPlayer.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, startpos, Quaternion.LookRotation(new Vector3(1, 0, 0))) as GameObject;
         selfPlayer.playerCC.SetActive(true);
         selfPlayer.pc = selfPlayer.playerCC.GetComponent<sPlayerControl>();
+        selfPlayer.pc.enableControl(true);
 
         sULoading.instance.enableCamera();
         sCamera.instance.setFollower(selfPlayer.playerCC.transform);
@@ -86,13 +90,15 @@ public class sPlayerManager : sSingleton<sPlayerManager>
     }
     public void pushPlayer(long uid, string name, string guildname, int vip, Vector3 startpos)
     {
+        if (isSelf(uid))
+            return;
         if( !s2cPlayers.ContainsKey(uid))
         {
-            Debug.Log("pid:" + uid);
+            Debug.Log("push pid:" + uid);
             sPlayerInfo tmp = new sPlayerInfo();
             tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, startpos, Quaternion.LookRotation(new Vector3(1, 0, 0))) as GameObject;
             tmp.playerCC.SetActive(true);
-            
+            tmp.pc = tmp.playerCC.GetComponent<sPlayerControl>();
             tmp.uid = uid;
             tmp.pm = new sPlayerModel();
             tmp.pm.playerUID = uid;
@@ -108,23 +114,78 @@ public class sPlayerManager : sSingleton<sPlayerManager>
             tmp.name = name;
             tmp.guildname = guildname;
             tmp.vip = vip;
+
+            s2cPlayers.Add(tmp.uid, tmp);
         }
     }
 
     public void popPlayer(long uid)
     {
-        if( s2cPlayers.ContainsKey(uid))
+        if (isSelf(uid))
+            return;
+        if ( s2cPlayers.ContainsKey(uid))
         {
             s2cPlayers[uid].pm.destroyModel();
             //todo:删除后续内容
         }
     }
 
-    public void logicUpdate()
+    public void logicUpdate(float deltaTime)
     {
         for( int i= 0;i < r2dPlayers.Count; ++i )
         {
 
         }
+    }
+
+    public void renderUpdate()
+    {
+
+    }
+
+    //强制设定坐标
+    public void setPosition(long uid, Vector3 pos)
+    {
+        Debug.Log("set position:" + uid + " : " + pos);
+        //强制设定坐标的情况是会包含自身的
+        if( isSelf(uid))
+        {
+            if (selfPlayer.pc != null)
+                selfPlayer.pc.setPosition(pos);
+        }
+        else
+        {
+            sPlayerInfo tmp = null;
+            if( s2cPlayers.TryGetValue(uid, out tmp))
+            {
+                tmp.pc.setPosition(pos);
+            }
+        }
+    }
+
+    //移动到某个坐标
+    public void moveToPosition(long uid, Vector3 pos)
+    {
+        Debug.Log("move position:" + uid + " : " + pos);
+        //自身是不允许服务器传递移动消息的
+        if ( isSelf(uid))
+        {
+            Debug.LogError("move position can't be self");
+            return;
+        }
+        sPlayerInfo tmp = null;
+        if( s2cPlayers.TryGetValue(uid, out tmp))
+        {
+            tmp.pc.moveToPosition(pos);
+        }
+        else
+        {
+            Debug.LogError("can't find uid:" + uid);
+        }
+    }
+
+    public void setDirection(long uid, Vector3 dir)
+    {
+
     }
 }

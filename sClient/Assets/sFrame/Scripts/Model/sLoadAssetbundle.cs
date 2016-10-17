@@ -18,8 +18,8 @@ public class AssetRef
 /// </summary>
 public class sLoadAssetbundle : sSingleton<sLoadAssetbundle> {
 
-    public string m_assetPath;
-    public string m_dataPath;
+    public string m_assetPath = Application.streamingAssetsPath;
+    public string m_dataPath = Application.persistentDataPath + "/asset";
     string assetTail = ".sab";
 
     #region 必须存在于整个生命周期的内容
@@ -41,9 +41,7 @@ public class sLoadAssetbundle : sSingleton<sLoadAssetbundle> {
 
     public override void Init()
     {
-        m_assetPath = Application.streamingAssetsPath;
-        m_dataPath = Application.persistentDataPath + "/asset";
-
+        //这里读取和维护更新后文件的配置
         loadUpdateFile();
     }
 
