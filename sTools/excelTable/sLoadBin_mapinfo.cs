@@ -9,6 +9,9 @@ namespace sFrame.LoadBin
 	{
 		public int mapID;
 		public string mapName;
+		public string navMesh;
+		public int type;
+		public Vector3 position;
 	}
 
 	public class sLoadBin_mapinfo
@@ -25,6 +28,14 @@ namespace sFrame.LoadBin
 				data_mapinfo tmp = new data_mapinfo();
 				tmp.mapID = br.ReadInt32();
 				tmp.mapName = br.ReadString();
+				tmp.navMesh = br.ReadString();
+				tmp.type = br.ReadInt32();
+				{
+					float x = br.ReadSingle();
+					float y = br.ReadSingle();
+					float z = br.ReadSingle();
+					tmp.position = new Vector3(x, y, z);
+				}
 				data.Add(tmp.mapID ,tmp);
 			}
 			br.Close();

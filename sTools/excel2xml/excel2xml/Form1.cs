@@ -22,6 +22,23 @@ namespace excel2xml
         {
             InitializeComponent();
         }
+
+        bool isClient(string name)
+        {
+            string tmp = name.Substring(0, 3);
+            if (tmp != "(S)")
+                return true;
+            return false;
+        }
+
+        bool isServer(string name)
+        {
+            string tmp = name.Substring(0, 3);
+            if (tmp != "(C)")
+                return true;
+            return false;
+        }
+
         //open excel
         private void button1_Click(object sender, EventArgs e)
         {
@@ -54,7 +71,7 @@ namespace excel2xml
                 label1.Text = "[读取完成]" + FileName;
             }
         }
-        //export xml
+        //export
         private void button2_Click(object sender, EventArgs e)
         {
             if( !label1.Text.Contains("读取完成"))
@@ -98,6 +115,8 @@ namespace excel2xml
                     
                     foreach (DataColumn dc in dt.Columns)   //遍历所有的列
                     {
+                        if (!isClient(dc.ColumnName))
+                            continue;
                         //Console.WriteLine("{0},   {1},   {2}", dt.TableName, dc.ColumnName, dr[dc]);   //表名,列名,单元格数据
                         if (dc.ColumnName.EndsWith("(I)"))
                         {
@@ -156,6 +175,8 @@ namespace excel2xml
                 }
                 foreach (DataColumn dc in dt.Columns)   //遍历所有的列
                 {
+                    if (!isServer(dc.ColumnName))
+                        continue;
                     if (dc.ColumnName.EndsWith("(V)"))
                     {
                         sw.WriteLine("\t\t\"" + getPName(dc.ColumnName) + "\":(" + dr[dc].ToString() + "),");
@@ -199,6 +220,9 @@ namespace excel2xml
 
         private string getPName(string name)
         {
+            string tmp = name.Substring(0, 3);
+            if (tmp == "(C)" || tmp == "(S)")
+                name = name.Substring(3, name.Length - 3);
             if (name.EndsWith("(I)"))
                 return name.Replace("(I)", "");
             else if (name.EndsWith("(V)"))
@@ -234,6 +258,8 @@ namespace excel2xml
             for (int i = 0; i < dt.Columns.Count; ++i)
             {
                 DataColumn dc = dt.Columns[i];
+                if (!isClient(dc.ColumnName))
+                    continue;
                 sw.WriteLine("\t\tpublic " + getType(dc.ColumnName) + " " + getPName(dc.ColumnName) + ";");
             }
             sw.WriteLine("\t}");
@@ -256,6 +282,8 @@ namespace excel2xml
             for (int i = 0; i < dt.Columns.Count; ++i )
             {
                 DataColumn dc = dt.Columns[i];
+                if (!isClient(dc.ColumnName))
+                    continue;
                 if( getType(dc.ColumnName) == "Vector3")
                 {
                     sw.WriteLine("\t\t\t\t{");
