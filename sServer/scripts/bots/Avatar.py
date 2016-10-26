@@ -4,7 +4,7 @@ import KBExtra
 import random, math
 import Math
 import time
-import d_spaces
+import d_mapinfo
 import GlobalDefine
 from KBEDebug import *
 from interfaces.GameObject import GameObject

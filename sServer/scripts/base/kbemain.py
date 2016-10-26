@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import KBEngine
 import Watcher
-import d_spaces
+import d_mapinfo
 from KBEDebug import *
 
 def onBaseAppReady(isBootstrap):
@@ -45,7 +45,7 @@ def onReadyForLogin(isBootstrap):
 		
 	spacesEntity = KBEngine.globalData["Spaces"]
 	
-	tmpDatas = list(d_spaces.datas.keys())
+	tmpDatas = list(d_mapinfo.datas.keys())
 	count = 0
 	total = len(tmpDatas)
 	

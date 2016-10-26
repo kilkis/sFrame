@@ -3,7 +3,7 @@ import random
 import math
 import time
 import SCDefine
-import d_spaces
+import d_mapinfo
 import KBEngine
 from KBEDebug import *
 from interfaces.GameObject import GameObject
@@ -52,16 +52,16 @@ class Gate(KBEngine.Entity, GameObject):
 						range_xz, range_y, controllerID, userarg))
 		
 		if self.uid == 40001003: # currspace - teleport
-			spaceData = d_spaces.datas.get(entityEntering.spaceUType)
-			entityEntering.teleport(None, spaceData["spawnPos"], tuple(self.direction))		
+			spaceData = d_mapinfo.datas.get(entityEntering.spaceUType)
+			entityEntering.teleport(None, spaceData["position"], tuple(self.direction))		
 		else:					 # teleport to xxspace
 			if entityEntering.spaceUType == 3:
 				gotoSpaceUType = 4
 			else:
 				gotoSpaceUType = 3
 			
-			spaceData = d_spaces.datas.get(gotoSpaceUType)
-			entityEntering.teleportSpace(gotoSpaceUType, spaceData["spawnPos"], tuple(self.direction), {})
+			spaceData = d_mapinfo.datas.get(gotoSpaceUType)
+			entityEntering.teleportSpace(gotoSpaceUType, spaceData["position"], tuple(self.direction), {})
 
 	def onLeaveTrap(self, entityLeaving, range_xz, range_y, controllerID, userarg):
 		"""

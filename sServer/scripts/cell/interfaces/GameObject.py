@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import KBEngine
-import d_spaces
+import d_mapinfo
 import SCDefine
 import GlobalDefine
 from KBEDebug import * 

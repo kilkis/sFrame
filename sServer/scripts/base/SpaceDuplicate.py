@@ -4,7 +4,7 @@ import random
 from KBEDebug import *
 from Space import Space
 import d_entities
-import d_spaces
+import d_mapinfo
 
 class SpaceDuplicate(Space):
 	"""

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import KBEngine
 import Functor
-import d_spaces
+import d_mapinfo
 import SCDefine
 import Watcher
 from KBEDebug import *
@@ -28,10 +28,11 @@ class Spaces(KBEngine.Base, GameObject):
 		self._spaceAllocs = {}
 		self.addTimer(3, 1, SCDefine.TIMER_TYPE_CREATE_SPACES)
 		
-		self._tmpDatas = list(d_spaces.datas.keys())
+		self._tmpDatas = list(d_mapinfo.datas.keys())
 		for utype in self._tmpDatas:
-			spaceData = d_spaces.datas.get(utype)
-			if spaceData["entityType"] == "SpaceDuplicate":
+			spaceData = d_mapinfo.datas.get(utype)
+			ERROR_MSG("map info:%i, %i"%(utype, spaceData["type"]))
+			if spaceData["type"] == 1:
 				self._spaceAllocs[utype] = SpaceAllocDuplicate(utype)
 			else:
 				self._spaceAllocs[utype] = SpaceAlloc(utype)

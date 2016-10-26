@@ -4,7 +4,6 @@ import random
 import SCDefine
 import time
 import GlobalConst
-import d_spaces
 import d_avatar_inittab
 from KBEDebug import *
 from interfaces.GameObject import GameObject

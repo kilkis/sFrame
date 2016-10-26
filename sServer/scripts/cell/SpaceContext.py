@@ -2,6 +2,7 @@
 import KBEngine
 from KBEDebug import *
 import d_spaces
+import d_mapinfo
 
 class SpaceContext(dict):
 	"""
@@ -30,9 +31,9 @@ class SpaceDuplicateContext(SpaceContext):
 def createContext(entity, spaceUType):
 	"""
 	"""
-	spaceData = d_spaces.datas.get(spaceUType)
+	spaceData = d_mapinfo.datas.get(spaceUType)
 	
 	return {
-		"Space" : SpaceContext,
-		"SpaceDuplicate" : SpaceDuplicateContext,
-	}[spaceData["entityType"]].create(entity)
+		0 : SpaceContext,
+		1 : SpaceDuplicateContext,
+	}[spaceData["type"]].create(entity)

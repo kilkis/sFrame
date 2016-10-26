@@ -2,7 +2,6 @@
 import KBEngine
 import random
 import time
-import d_spaces
 import GlobalConst
 from AVATAR_INFOS import TAvatarInfos
 from AVATAR_INFOS import TAvatarInfosList

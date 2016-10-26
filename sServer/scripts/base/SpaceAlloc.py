@@ -3,7 +3,7 @@ import KBEngine
 import Functor
 from KBEDebug import *
 import d_entities
-import d_spaces
+import d_mapinfo
 import copy
 
 CONST_WAIT_CREATE = -1
@@ -32,10 +32,13 @@ class SpaceAlloc:
 		"""
 		if spaceKey <= 0:
 			spaceKey = KBEngine.genUUID64()
-			
+		
 		context = copy.copy(context)
-		spaceData = d_spaces.datas.get(self._utype)
-		KBEngine.createBaseAnywhere(spaceData["entityType"], \
+		spaceData = d_mapinfo.datas.get(self._utype)
+		name = "Space"
+		if spaceData["type"] == 1:
+			name = "SpaceDuplicate"
+		KBEngine.createBaseAnywhere(name, \
 											{"spaceUType" : self._utype,	\
 											"spaceKey" : spaceKey,	\
 											"context" : context,	\

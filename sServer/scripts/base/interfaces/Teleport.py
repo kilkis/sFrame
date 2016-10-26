@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import KBEngine
 import GlobalConst
-import d_spaces
+import d_mapinfo
 import d_avatar_inittab
 from KBEDebug import * 
 
@@ -11,10 +11,10 @@ class Teleport:
 		# 因为副本是需要钥匙开启的，所有的副本都使用实体SpaceDuplicate创建
 		# 因此我们只需要简单判断当前spaceUType所对应的配置中场景的脚本类型是否包含"Duplicate"
 		# 就能得出是否在一个副本中
-		spacedatas = d_spaces.datas[self.cellData["spaceUType"]]
+		spacedatas = d_mapinfo.datas[self.cellData["spaceUType"]]
 		avatar_inittab = d_avatar_inittab.datas[self.roleType]
 
-		if "Duplicate" in spacedatas["entityType"]:
+		if spacedatas["type"] == 1:
 			self.cellData["spaceUType"] = avatar_inittab["spaceUType"]
 			self.cellData["direction"] = (0, 0, avatar_inittab["spawnYaw"])
 			self.cellData["position"] = avatar_inittab["spawnPos"]
@@ -37,7 +37,7 @@ class Teleport:
 				spaceUType = GlobalConst.g_demoMaps.get(self.getClientDatas(), 1)
 
 				if self.cellData["spaceUType"] != spaceUType:
-					spacedatas = d_spaces.datas[spaceUType]
+					spacedatas = d_mapinfo.datas[spaceUType]
 					self.spaceUTypeB = spaceUType
 					self.cellData["spaceUType"] = spaceUType
 					self.cellData["position"] = spacedatas.get("spawnPos", (0,0,0))

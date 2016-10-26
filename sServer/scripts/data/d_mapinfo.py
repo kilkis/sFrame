@@ -1,6 +1,8 @@
 datas={
 	1:{
 		"mapID":1,
-		"mapName":"scene/TestScene",
+		"resPath":"spaces/newplayerscene1",
+		"type":0,
+		"position":(0,0,0),
 		},
 }

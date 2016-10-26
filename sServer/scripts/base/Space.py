@@ -7,7 +7,7 @@ import math
 from KBEDebug import *
 from interfaces.GameObject import GameObject
 import d_entities
-import d_spaces
+import d_mapinfo
 import d_spaces_spawns
 import xml.etree.ElementTree as etree 
 
@@ -23,7 +23,7 @@ class Space(KBEngine.Base, GameObject):
 		
 		self.spaceUTypeB = self.cellData["spaceUType"]
 		
-		self.spaceResName = d_spaces.datas.get(self.spaceUTypeB)['resPath']
+		self.spaceResName = d_mapinfo.datas.get(self.spaceUTypeB)['resPath']
 		
 		# 这个地图上创建的entity总数
 		self.tmpCreateEntityDatas = copy.deepcopy(d_spaces_spawns.datas.get(self.spaceUTypeB, ()))
