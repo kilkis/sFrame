@@ -9,6 +9,7 @@ public class sBuildAssetbundle
     public static string sourcePath = Application.dataPath + "/sResources";
     public static string avatarPath = Application.dataPath + "/sAvatar";
     public static string shaderPath = Application.dataPath + "/sShader";
+    public static string binPath = Application.dataPath + "/sBin";
     const string AssetBundlesOutputPath = "Assets/StreamingAssets";
     const string AssetBundlesOutputPath1 = "Assets/sUpdateResource";
 
@@ -19,6 +20,7 @@ public class sBuildAssetbundle
         BuildAssetBundle();
         BuildLua();
         BuildAvatar();
+        CopyBin();
         if (Directory.Exists(LuaFramework.Util.DataPath))
         {
             Directory.Delete(LuaFramework.Util.DataPath, true);
@@ -316,15 +318,50 @@ public class sBuildAssetbundle
 
         AssetDatabase.Refresh();
     }
+
+    [MenuItem("sFrame/第五步.Copy Bin File")]
+    static void CopyBin()
+    {
+        if (!Directory.Exists(AssetBundlesOutputPath+"/bin"))
+        {
+            Directory.CreateDirectory(AssetBundlesOutputPath + "/bin");
+        }
+        System.IO.DirectoryInfo dir = new DirectoryInfo(binPath);
+        if (dir.Exists)
+        {
+            FileInfo[] fiList = dir.GetFiles();
+            for (int i = 0; i < fiList.Length; ++i)
+            {
+                if (fiList[i].Name.EndsWith(".bin"))
+                {
+                    System.IO.File.Copy(binPath + "/" + fiList[i].Name, Application.dataPath + "/StreamingAssets/bin/" + fiList[i].Name, true);
+                }
+            }
+        }
+        
+    }
     [MenuItem("sFrame/-----------分隔线-NavMesh--------------")]
     static void fgxs()
     { }
 
-    [MenuItem("sFrame/打包NavMesh")]
+    [MenuItem("sFrame/打包NavMesh(需点选目录)")]
     static void BuildNavMesh()
     {
-        string[] levels = { "Assets/sNavmesh/testscene.unity" };
-        BuildPipeline.BuildPlayer(levels, AssetBundlesOutputPath + "/navTest.sab", EditorUserBuildSettings.activeBuildTarget, BuildOptions.BuildAdditionalStreamedScenes);
+        foreach (Object o in Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets))
+        {
+            string pathname = AssetDatabase.GetAssetPath(o);
+            
+            if( pathname.EndsWith(".unity") )
+            {
+                string[] levels = { pathname };
+                string[] ns = pathname.Split('/');
+                pathname = ns[ns.Length - 1];
+                ns = pathname.Split('.');
+                Debug.Log("output:" + AssetBundlesOutputPath + "/" + ns[0] + ".sab");
+                BuildPipeline.BuildPlayer(levels, AssetBundlesOutputPath + "/"+ns[ns.Length-2]+".sab", EditorUserBuildSettings.activeBuildTarget, BuildOptions.BuildAdditionalStreamedScenes);
+            }
+        }
+        
         AssetDatabase.Refresh();
     }
 

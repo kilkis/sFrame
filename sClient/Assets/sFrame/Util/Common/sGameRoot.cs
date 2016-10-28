@@ -51,11 +51,12 @@ public class sGameRoot : MonoBehaviour
         AddSingleton<sFirstGame>();//firstGame和UpdateGame的顺序不能变！
         AddSingleton<sUpdateGame>();
         AddSingleton<sLoadingGame>();
+        AddSingleton<sLoadBin>();
         AddSingleton<sAvatarMgr>();
         //AddSingleton<sGameFlow>();
 
         AddSingleton<sPlayerManager>();
-
+        
         Debug.Log("init singleton over");
 
     }
