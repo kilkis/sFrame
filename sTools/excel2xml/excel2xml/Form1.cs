@@ -270,6 +270,7 @@ namespace excel2xml
                 sw.WriteLine("\t\tpublic List<data_" + fn + "> data = new List<data_" + fn + ">();");
             else
                 sw.WriteLine("\t\tpublic Dictionary<" + getType(dt.Columns[0].ColumnName) + " ,data_" + fn + "> data = new Dictionary<" + getType(dt.Columns[0].ColumnName) + " ,data_" + fn + ">();");
+            sw.WriteLine("\t\tpublic static sLoadBin_" + fn + " instance = new sLoadBin_" + fn + "();");
             sw.WriteLine("");
             sw.WriteLine("\t\tpublic void load(string name)");
             sw.WriteLine("\t\t{");
