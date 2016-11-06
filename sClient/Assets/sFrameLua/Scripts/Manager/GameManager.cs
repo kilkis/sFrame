@@ -110,7 +110,7 @@ namespace LuaFramework {
             //StartCoroutine(OnUpdateResource());
 
             //lua初始化结束，flow继续
-            sFrame.sGameFlow.instance.changeNextState();
+            sFramework.sGameFlow.instance.changeNextState();
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace LuaFramework {
             if (!AppConst.UpdateMode) {
                 OnResourceInited();
                 //lua初始化结束，flow继续
-                sFrame.sGameFlow.instance.changeNextState();
+                sFramework.sGameFlow.instance.changeNextState();
                 yield break;
             }
             string dataPath = Util.DataPath;  //数据目录

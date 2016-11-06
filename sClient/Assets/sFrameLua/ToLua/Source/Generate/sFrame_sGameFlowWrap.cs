@@ -6,7 +6,7 @@ public class sFrame_sGameFlowWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(sFrame.sGameFlow), typeof(UnityEngine.MonoBehaviour));
+		L.BeginClass(typeof(sFramework.sGameFlow), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("startGame", startGame);
 		L.RegFunction("changeNextState", changeNextState);
 		L.RegFunction("logicUpdate", logicUpdate);
@@ -26,7 +26,7 @@ public class sFrame_sGameFlowWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sGameFlow obj = (sFrame.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFrame.sGameFlow));
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			obj.startGame();
 			return 0;
 		}
@@ -42,7 +42,7 @@ public class sFrame_sGameFlowWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sGameFlow obj = (sFrame.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFrame.sGameFlow));
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			obj.changeNextState();
 			return 0;
 		}
@@ -58,7 +58,7 @@ public class sFrame_sGameFlowWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sGameFlow obj = (sFrame.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFrame.sGameFlow));
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			obj.logicUpdate();
 			return 0;
 		}
@@ -74,7 +74,7 @@ public class sFrame_sGameFlowWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			sFrame.sGameFlow obj = (sFrame.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFrame.sGameFlow));
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			string arg1 = ToLua.CheckString(L, 3);
 			obj.onNeedUpdateState(arg0, arg1);
@@ -92,7 +92,7 @@ public class sFrame_sGameFlowWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			sFrame.sGameFlow obj = (sFrame.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFrame.sGameFlow));
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			string arg1 = ToLua.CheckString(L, 3);
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
@@ -111,7 +111,7 @@ public class sFrame_sGameFlowWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sGameFlow obj = (sFrame.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFrame.sGameFlow));
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			obj.onUpdateFinish();
 			return 0;
 		}
@@ -127,7 +127,7 @@ public class sFrame_sGameFlowWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sGameFlow obj = (sFrame.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFrame.sGameFlow));
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			obj.onLoadAllFinish();
 			return 0;
 		}
@@ -177,7 +177,7 @@ public class sFrame_sGameFlowWrap
 	{
 		try
 		{
-			ToLua.Push(L, sFrame.sGameFlow.instance);
+			ToLua.Push(L, sFramework.sGameFlow.instance);
 			return 1;
 		}
 		catch(Exception e)
@@ -191,8 +191,8 @@ public class sFrame_sGameFlowWrap
 	{
 		try
 		{
-			sFrame.sGameFlow arg0 = (sFrame.sGameFlow)ToLua.CheckUnityObject(L, 2, typeof(sFrame.sGameFlow));
-			sFrame.sGameFlow.instance = arg0;
+			sFramework.sGameFlow arg0 = (sFramework.sGameFlow)ToLua.CheckUnityObject(L, 2, typeof(sFramework.sGameFlow));
+			sFramework.sGameFlow.instance = arg0;
 			return 0;
 		}
 		catch(Exception e)

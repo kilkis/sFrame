@@ -6,7 +6,7 @@ public class sFrame_sULoadingWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(sFrame.sULoading), typeof(UnityEngine.MonoBehaviour));
+		L.BeginClass(typeof(sFramework.sULoading), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("hideLoading", hideLoading);
 		L.RegFunction("showLoading", showLoading);
 		L.RegFunction("enableCamera", enableCamera);
@@ -26,7 +26,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)ToLua.CheckObject(L, 1, typeof(sFrame.sULoading));
+			sFramework.sULoading obj = (sFramework.sULoading)ToLua.CheckObject(L, 1, typeof(sFramework.sULoading));
 			obj.hideLoading();
 			return 0;
 		}
@@ -42,7 +42,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)ToLua.CheckObject(L, 1, typeof(sFrame.sULoading));
+			sFramework.sULoading obj = (sFramework.sULoading)ToLua.CheckObject(L, 1, typeof(sFramework.sULoading));
 			obj.showLoading();
 			return 0;
 		}
@@ -58,7 +58,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)ToLua.CheckObject(L, 1, typeof(sFrame.sULoading));
+			sFramework.sULoading obj = (sFramework.sULoading)ToLua.CheckObject(L, 1, typeof(sFramework.sULoading));
 			obj.enableCamera();
 			return 0;
 		}
@@ -74,7 +74,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)ToLua.CheckObject(L, 1, typeof(sFrame.sULoading));
+			sFramework.sULoading obj = (sFramework.sULoading)ToLua.CheckObject(L, 1, typeof(sFramework.sULoading));
 			obj.disableCamera();
 			return 0;
 		}
@@ -124,7 +124,7 @@ public class sFrame_sULoadingWrap
 	{
 		try
 		{
-			ToLua.Push(L, sFrame.sULoading.instance);
+			ToLua.Push(L, sFramework.sULoading.instance);
 			return 1;
 		}
 		catch(Exception e)
@@ -141,7 +141,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)o;
+			sFramework.sULoading obj = (sFramework.sULoading)o;
 			UnityEngine.GameObject ret = obj.loading;
 			ToLua.Push(L, ret);
 			return 1;
@@ -160,7 +160,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)o;
+			sFramework.sULoading obj = (sFramework.sULoading)o;
 			UnityEngine.GameObject ret = obj.maincamera;
 			ToLua.Push(L, ret);
 			return 1;
@@ -179,7 +179,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)o;
+			sFramework.sULoading obj = (sFramework.sULoading)o;
 			UnityEngine.GameObject ret = obj.playerCC;
 			ToLua.Push(L, ret);
 			return 1;
@@ -195,8 +195,8 @@ public class sFrame_sULoadingWrap
 	{
 		try
 		{
-			sFrame.sULoading arg0 = (sFrame.sULoading)ToLua.CheckUnityObject(L, 2, typeof(sFrame.sULoading));
-			sFrame.sULoading.instance = arg0;
+			sFramework.sULoading arg0 = (sFramework.sULoading)ToLua.CheckUnityObject(L, 2, typeof(sFramework.sULoading));
+			sFramework.sULoading.instance = arg0;
 			return 0;
 		}
 		catch(Exception e)
@@ -213,7 +213,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)o;
+			sFramework.sULoading obj = (sFramework.sULoading)o;
 			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.loading = arg0;
 			return 0;
@@ -232,7 +232,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)o;
+			sFramework.sULoading obj = (sFramework.sULoading)o;
 			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.maincamera = arg0;
 			return 0;
@@ -251,7 +251,7 @@ public class sFrame_sULoadingWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sULoading obj = (sFrame.sULoading)o;
+			sFramework.sULoading obj = (sFramework.sULoading)o;
 			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckUnityObject(L, 2, typeof(UnityEngine.GameObject));
 			obj.playerCC = arg0;
 			return 0;

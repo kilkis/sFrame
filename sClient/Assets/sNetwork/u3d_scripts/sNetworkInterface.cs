@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace sFrame
+namespace sFramework
 {
     public class sNetworkInterface : MonoBehaviour
     {

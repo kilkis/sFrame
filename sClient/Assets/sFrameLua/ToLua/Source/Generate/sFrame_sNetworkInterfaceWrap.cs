@@ -6,7 +6,7 @@ public class sFrame_sNetworkInterfaceWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(sFrame.sNetworkInterface), typeof(UnityEngine.MonoBehaviour));
+		L.BeginClass(typeof(sFramework.sNetworkInterface), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("createAccount", createAccount);
 		L.RegFunction("login", login);
 		L.RegFunction("sendMsg2Server", sendMsg2Server);
@@ -25,7 +25,7 @@ public class sFrame_sNetworkInterfaceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 5);
-			sFrame.sNetworkInterface obj = (sFrame.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFrame.sNetworkInterface));
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFramework.sNetworkInterface));
 			string arg0 = ToLua.CheckString(L, 2);
 			string arg1 = ToLua.CheckString(L, 3);
 			string arg2 = ToLua.CheckString(L, 4);
@@ -45,7 +45,7 @@ public class sFrame_sNetworkInterfaceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 5);
-			sFrame.sNetworkInterface obj = (sFrame.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFrame.sNetworkInterface));
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFramework.sNetworkInterface));
 			string arg0 = ToLua.CheckString(L, 2);
 			string arg1 = ToLua.CheckString(L, 3);
 			string arg2 = ToLua.CheckString(L, 4);
@@ -65,7 +65,7 @@ public class sFrame_sNetworkInterfaceWrap
 		try
 		{
 			int count = LuaDLL.lua_gettop(L);
-			sFrame.sNetworkInterface obj = (sFrame.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFrame.sNetworkInterface));
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFramework.sNetworkInterface));
 			string arg0 = ToLua.CheckString(L, 2);
 			object[] arg1 = ToLua.ToParamsObject(L, 3, count - 2);
 			obj.sendMsg2Server(arg0, arg1);
@@ -83,7 +83,7 @@ public class sFrame_sNetworkInterfaceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			sFrame.sNetworkInterface obj = (sFrame.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFrame.sNetworkInterface));
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFramework.sNetworkInterface));
 			ulong arg0 = (ulong)LuaDLL.luaL_checknumber(L, 2);
 			string arg1 = ToLua.CheckString(L, 3);
 			string arg2 = ToLua.CheckString(L, 4);
@@ -102,7 +102,7 @@ public class sFrame_sNetworkInterfaceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			sFrame.sNetworkInterface obj = (sFrame.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFrame.sNetworkInterface));
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFramework.sNetworkInterface));
 			System.Collections.Generic.Dictionary<ulong,sAvatarList> o = obj.getAvatarList();
 			ToLua.PushObject(L, o);
 			return 1;
@@ -153,7 +153,7 @@ public class sFrame_sNetworkInterfaceWrap
 	{
 		try
 		{
-			ToLua.Push(L, sFrame.sNetworkInterface.instance);
+			ToLua.Push(L, sFramework.sNetworkInterface.instance);
 			return 1;
 		}
 		catch(Exception e)
@@ -170,7 +170,7 @@ public class sFrame_sNetworkInterfaceWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sNetworkInterface obj = (sFrame.sNetworkInterface)o;
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)o;
 			ulong ret = obj.selAvatarDBID;
 			LuaDLL.lua_pushnumber(L, ret);
 			return 1;
@@ -186,8 +186,8 @@ public class sFrame_sNetworkInterfaceWrap
 	{
 		try
 		{
-			sFrame.sNetworkInterface arg0 = (sFrame.sNetworkInterface)ToLua.CheckUnityObject(L, 2, typeof(sFrame.sNetworkInterface));
-			sFrame.sNetworkInterface.instance = arg0;
+			sFramework.sNetworkInterface arg0 = (sFramework.sNetworkInterface)ToLua.CheckUnityObject(L, 2, typeof(sFramework.sNetworkInterface));
+			sFramework.sNetworkInterface.instance = arg0;
 			return 0;
 		}
 		catch(Exception e)
@@ -204,7 +204,7 @@ public class sFrame_sNetworkInterfaceWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			sFrame.sNetworkInterface obj = (sFrame.sNetworkInterface)o;
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)o;
 			ulong arg0 = (ulong)LuaDLL.luaL_checknumber(L, 2);
 			obj.selAvatarDBID = arg0;
 			return 0;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using LuaInterface;
 using LuaFramework;
-using sFrame;
+using sFramework;
 
 using BindType = ToLuaMenu.BindType;
 using UnityEngine.UI;

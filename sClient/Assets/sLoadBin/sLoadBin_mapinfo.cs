@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-namespace sFrame.LoadBin
+namespace sFramework.LoadBin
 {
 	public class data_mapinfo
 	{
