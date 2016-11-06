@@ -18,3 +18,13 @@ D:\mycode\sTools\excel2xml\excel2xml\obj\Release\excel2xml.csprojResolveAssembly
 D:\mycode\sTools\excel2xml\excel2xml\obj\Release\excel2xml.Form1.resources
 D:\mycode\sTools\excel2xml\excel2xml\obj\Release\excel2xml.Properties.Resources.resources
 D:\mycode\sTools\excel2xml\excel2xml\obj\Release\excel2xml.csproj.GenerateResource.Cache
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\bin\Release\excel2xml.exe.config
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\obj\Release\excel2xml.csproj.ResolveComReference.cache
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\obj\Release\excel2xml.exe
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\obj\Release\excel2xml.pdb
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\bin\Release\excel2xml.exe
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\bin\Release\excel2xml.pdb
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\obj\Release\excel2xml.csprojResolveAssemblyReference.cache
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\obj\Release\excel2xml.Form1.resources
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\obj\Release\excel2xml.Properties.Resources.resources
+C:\Users\shawn su\Documents\GitHub\sFrame\sTools\excel2xml\excel2xml\obj\Release\excel2xml.csproj.GenerateResource.Cache

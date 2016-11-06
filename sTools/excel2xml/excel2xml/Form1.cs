@@ -250,7 +250,7 @@ namespace excel2xml
             sw.WriteLine("using System.Collections.Generic;");
             sw.WriteLine("using System.IO;");
             sw.WriteLine("");
-            sw.WriteLine("namespace sFrame.LoadBin");
+            sw.WriteLine("namespace sFramework.LoadBin");
             sw.WriteLine("{");
             string dataname = "data_" + fn;
             sw.WriteLine("\tpublic class data_"+fn);
