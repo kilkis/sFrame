@@ -1,6 +1,7 @@
 ﻿using KBEngine;
 using UnityEngine;
-using System; 
+using System;
+using sFramework;
 
 public class sNetworkInWorld : MonoBehaviour 
 {
@@ -24,8 +25,9 @@ public class sNetworkInWorld : MonoBehaviour
 
 	void installEvents()
 	{
-		// in world
-		KBEngine.Event.registerOut("addSpaceGeometryMapping", this, "addSpaceGeometryMapping");
+        KBEngine.Event.registerOut("onConnectStatus", this, "onConnectStatus");
+        // in world
+        KBEngine.Event.registerOut("addSpaceGeometryMapping", this, "addSpaceGeometryMapping");
 		KBEngine.Event.registerOut("onAvatarEnterWorld", this, "onAvatarEnterWorld");
 		KBEngine.Event.registerOut("onEnterWorld", this, "onEnterWorld");
 		KBEngine.Event.registerOut("onLeaveWorld", this, "onLeaveWorld");
@@ -46,9 +48,21 @@ public class sNetworkInWorld : MonoBehaviour
 		KBEngine.Event.registerOut("recvDamage", this, "recvDamage");
 		KBEngine.Event.registerOut("otherAvatarOnJump", this, "otherAvatarOnJump");
 		KBEngine.Event.registerOut("onAddSkill", this, "onAddSkill");
-	}
 
-	void OnDestroy()
+        KBEngine.Event.registerOut("onSetSpaceData", this, "onSetSpaceData");
+        KBEngine.Event.registerOut("onEnterSpace", this, "onEnterSpace");
+    }
+
+    public void onConnectStatus(bool success)
+    {
+        if (!success)
+            Debug.LogError("base connect(" + KBEngineApp.app.getInitArgs().ip + ":" + KBEngineApp.app.getInitArgs().port + ") is error! (连接错误)");
+        else
+            Debug.Log("base connect successfully, please wait...(连接成功，请等候...)");
+    }
+
+
+    void OnDestroy()
 	{
 		KBEngine.Event.deregisterOut(this);
 	}
@@ -89,18 +103,36 @@ public class sNetworkInWorld : MonoBehaviour
 		} */   
 	}
 	
-	public void addSpaceGeometryMapping(string respath)
+    public void onSetSpaceData(UInt32 spaceID, string key, string value)
+    {
+        if( sGameFlow.instance.getCurState() == sGameState.Create )
+        {
+            //去除选择界面的相关内容，前提是这个流程在正常顺序内只进入一次
+            sNetworkOutOfWorld.inst.callAndRemoveLua("selAvatar");
+        }
+        //这里会获得当前角色所在的地图的信息，主要只使用spaceID
+        Debug.LogError("onSetSpaceData:" + spaceID + "," + key + "," + value);
+        sMapManager.GetInstance().loadMap((int)spaceID);
+    }
+
+    public void onEnterSpace(KBEngine.Entity entity)
+    {
+        //通常这个函数不处理
+        Debug.LogError("onEnterSpace:" + entity.id);
+    }
+
+    public void addSpaceGeometryMapping(string respath)
 	{
-		Debug.Log("loading scene(" + respath + ")...");
-        sNetworkOutOfWorld.inst.info("scene(" + respath + "), spaceID=" + KBEngineApp.app.spaceID);
+        return;
+        //这个函数是服务器加载地图的情况，服务器几张图，客户端会收到多少，所以不能在这里加载地形
+        //Debug.Log("loading scene(" + respath + ")...");
+        //sNetworkOutOfWorld.inst.info("scene(" + respath + "), spaceID=" + KBEngineApp.app.spaceID);
 		//if(terrain == null)
         //	terrain = Instantiate(terrainPerfab) as UnityEngine.GameObject;
 
-		if(player)
-			player.GetComponent<GameEntity>().entityEnable();
+		//if(player)
+			//player.GetComponent<GameEntity>().entityEnable();
 
-        //放这里可能有问题，因为地图可能会2次加载，暂不确定，先放着
-        sNetworkOutOfWorld.inst.callAndRemoveLua("selAvatar");
     }	
 	
 	public void onAvatarEnterWorld(UInt64 rndUUID, Int32 eid, KBEngine.Avatar avatar)

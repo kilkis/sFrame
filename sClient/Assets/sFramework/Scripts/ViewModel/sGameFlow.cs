@@ -58,6 +58,11 @@ namespace sFramework
             Init();
             
         }
+
+        public sGameState getCurState()
+        {
+            return _state;
+        }
         /// <summary>
         /// 改变状态的时候执行
         /// 只执行一次
@@ -66,7 +71,7 @@ namespace sFramework
         {
             if (_state == sGameState.Game)
                 return;
-            Debug.Log("######## changeNextState:" + _state);
+            Debug.Log("######## changeNextState:" + _state + " -> " + (_state+1));
            
             if(_curFlow != null )
             {

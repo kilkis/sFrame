@@ -1921,8 +1921,11 @@
 			
 			Vector3 position = playerEntity.position;
 			Vector3 direction = playerEntity.direction;
-			
-			bool posHasChanged = Vector3.Distance(playerEntity._entityLastLocalPos, position) > 0.001f;
+
+            Debug.Log("pos:" + playerEntity._entityLastLocalPos + " - " + position);
+            Debug.Log("dir:" + playerEntity._entityLastLocalDir + " - " + direction);
+
+            bool posHasChanged = Vector3.Distance(playerEntity._entityLastLocalPos, position) > 0.001f;
 			bool dirHasChanged = Vector3.Distance(playerEntity._entityLastLocalDir, direction) > 0.001f;
 			
 			if(posHasChanged || dirHasChanged)

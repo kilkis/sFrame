@@ -286,7 +286,6 @@ public class sLoadAssetbundle : sSingleton<sLoadAssetbundle> {
         {
             LoadResReturnWWW(realName, (www) =>
             {
-                Debug.LogError("load navmesh:" + name + " ok");
                 int index = realName.LastIndexOf("/");
                 string assetName = realName.Substring(index + 1);
                 assetName = assetName.Replace(assetTail, "");
