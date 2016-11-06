@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-namespace sFrame.LoadBin
+namespace sFramework.LoadBin
 {
 	public class data_mapinfo
 	{
@@ -17,6 +17,7 @@ namespace sFrame.LoadBin
 	public class sLoadBin_mapinfo
 	{
 		public Dictionary<int ,data_mapinfo> data = new Dictionary<int ,data_mapinfo>();
+		public static sLoadBin_mapinfo instance = new sLoadBin_mapinfo();
 
 		public void load(string name)
 		{
