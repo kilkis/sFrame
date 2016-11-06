@@ -31,16 +31,16 @@ class Teleport:
 		# 防止使用同一个号登陆不同的demo造成无法找到匹配的地图从而无法加载资源导致无法进入游戏
 		# 这里检查一下， 发现不对则强制同步到匹配的地图
 		# 忽略机器人的检查
-		if hasattr(self, "cellData") and self.getClientType() != 6:
+		#if hasattr(self, "cellData") and self.getClientType() != 6:
 			# 如果角色跳转到了同属某个demo的其他场景那么不强制回到出生的主场景
-			if self.cellData["spaceUType"] in GlobalConst.g_demoMaps.values():
-				spaceUType = GlobalConst.g_demoMaps.get(self.getClientDatas(), 1)
+		#	if self.cellData["spaceUType"] in GlobalConst.g_demoMaps.values():
+		#		spaceUType = GlobalConst.g_demoMaps.get(self.getClientDatas(), 1)
 
-				if self.cellData["spaceUType"] != spaceUType:
-					spacedatas = d_mapinfo.datas[spaceUType]
-					self.spaceUTypeB = spaceUType
-					self.cellData["spaceUType"] = spaceUType
-					self.cellData["position"] = spacedatas.get("spawnPos", (0,0,0))
+		#		if self.cellData["spaceUType"] != spaceUType:
+		#			spacedatas = d_mapinfo.datas[spaceUType]
+		#			self.spaceUTypeB = spaceUType
+		#			self.cellData["spaceUType"] = spaceUType
+		#			self.cellData["position"] = spacedatas.get("spawnPos", (0,0,0))
 		
 		KBEngine.globalData["Spaces"].loginToSpace(self, self.spaceUTypeB, {})
 
