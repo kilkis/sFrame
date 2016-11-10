@@ -1922,15 +1922,22 @@
 			Vector3 position = playerEntity.position;
 			Vector3 direction = playerEntity.direction;
 
-            Debug.Log("pos:" + playerEntity._entityLastLocalPos + " - " + position);
-            Debug.Log("dir:" + playerEntity._entityLastLocalDir + " - " + direction);
+            
 
             bool posHasChanged = Vector3.Distance(playerEntity._entityLastLocalPos, position) > 0.001f;
 			bool dirHasChanged = Vector3.Distance(playerEntity._entityLastLocalDir, direction) > 0.001f;
-			
+
+            
 			if(posHasChanged || dirHasChanged)
 			{
-				playerEntity._entityLastLocalPos = position;
+                Debug.Log("pos:" + playerEntity._entityLastLocalPos + " - " + position);
+                Debug.Log("dir:" + playerEntity._entityLastLocalDir + " - " + direction);
+                Debug.Log("fuck1:" + Vector3.Distance(playerEntity._entityLastLocalPos, position));
+                Debug.Log("fuck2:" + Vector3.Distance(playerEntity._entityLastLocalDir, direction));
+                Debug.Log("fuck all:" + posHasChanged + " - " + dirHasChanged);
+
+
+                playerEntity._entityLastLocalPos = position;
 				playerEntity._entityLastLocalDir = direction;
 
 				Bundle bundle = Bundle.createObject();

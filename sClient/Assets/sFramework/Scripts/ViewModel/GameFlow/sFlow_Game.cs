@@ -14,16 +14,14 @@ public class sFlow_Game : sBaseFlow
         base.flowIn();
         
         //sULoading.instance.enableCamera();
-
-        //sPlayerManager.GetInstance().createSelf(1, "test", "xx", 0, startpos);
-
+        
         
     }
 
     public override void flowing()
     {
         base.flowing();
-        Debug.Log("game flowing");
+
     }
 
     public override void flowOut()

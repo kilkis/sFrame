@@ -10,10 +10,8 @@ public class sPlayerInfo
     public sPlayerControl pc;
     public float delTime;
 
-    public string name;
-    public string guildname;
-    public int vip;
-
+    public sPlayerAttr attr = new sPlayerAttr();
+    
     public GameObject playerCC;
 }
 
@@ -75,9 +73,9 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         selfPlayer.pm.createFromName(selfPlayer.playerCC);
 
         selfPlayer.delTime = 0;
-        selfPlayer.name = name;
-        selfPlayer.guildname = guildname;
-        selfPlayer.vip = vip;
+        //selfPlayer.name = name;
+        //selfPlayer.guildname = guildname;
+        //selfPlayer.vip = vip;
     }
 
     public bool isPlayerCreated(long uid)
@@ -88,35 +86,41 @@ public class sPlayerManager : sSingleton<sPlayerManager>
             return false;
         return true;
     }
+
+    public sPlayerInfo getOrCreatePlayer(long uid)
+    {
+        if (s2cPlayers.ContainsKey(uid))
+            return s2cPlayers[uid];
+        sPlayerInfo tmp = new sPlayerInfo();
+        tmp.uid = uid;
+        s2cPlayers.Add(uid, tmp);
+        return tmp;
+    }
     public void pushPlayer(long uid, string name, string guildname, int vip, Vector3 startpos)
     {
         if (isSelf(uid))
             return;
-        if( !s2cPlayers.ContainsKey(uid))
-        {
-            Debug.Log("push pid:" + uid);
-            sPlayerInfo tmp = new sPlayerInfo();
-            tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, startpos, Quaternion.LookRotation(new Vector3(1, 0, 0))) as GameObject;
-            tmp.playerCC.SetActive(true);
-            tmp.pc = tmp.playerCC.GetComponent<sPlayerControl>();
-            tmp.uid = uid;
-            tmp.pm = tmp.playerCC.GetComponent<sPlayerModel>();
-            tmp.pm.playerUID = uid;
-            tmp.pm.bone = "FS_bone";
-            tmp.pm.chestName = "FS_chest_000";
-            tmp.pm.footName = "FS_foot_000";
-            tmp.pm.handName = "FS_hand_000";
-            tmp.pm.headName = "FS_head_000";
-            tmp.pm.legName = "FS_leg_000";
-            tmp.pm.createFromName(tmp.playerCC);
 
-            tmp.delTime = 0;
-            tmp.name = name;
-            tmp.guildname = guildname;
-            tmp.vip = vip;
+        Debug.Log("push pid:" + uid);
+        sPlayerInfo tmp = getOrCreatePlayer(uid);
+        tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, startpos, Quaternion.LookRotation(new Vector3(1, 0, 0))) as GameObject;
+        tmp.playerCC.SetActive(true);
+        tmp.pc = tmp.playerCC.GetComponent<sPlayerControl>();
+        tmp.uid = uid;
+        tmp.pm = tmp.playerCC.GetComponent<sPlayerModel>();
+        tmp.pm.playerUID = uid;
+        tmp.pm.bone = "FS_bone";
+        tmp.pm.chestName = "FS_chest_000";
+        tmp.pm.footName = "FS_foot_000";
+        tmp.pm.handName = "FS_hand_000";
+        tmp.pm.headName = "FS_head_000";
+        tmp.pm.legName = "FS_leg_000";
+        tmp.pm.createFromName(tmp.playerCC);
 
-            s2cPlayers.Add(tmp.uid, tmp);
-        }
+        tmp.delTime = 0;
+        
+
+
     }
 
     public void popPlayer(long uid)
@@ -188,4 +192,22 @@ public class sPlayerManager : sSingleton<sPlayerManager>
     {
 
     }
+
+    //set attr
+    public void setName(long uid, string name)
+    {
+        sPlayerInfo tmp = getOrCreatePlayer(uid);
+        tmp.attr.name = name;
+    }
+
+    public void setGuildName(long uid, string gname)
+    {
+
+    }
+
+    public void setVip(long uid, int vip)
+    {
+
+    }
+    //...
 }

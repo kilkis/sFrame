@@ -41,7 +41,8 @@ public class sNetworkInWorld : MonoBehaviour
 		KBEngine.Event.registerOut("set_MP_Max", this, "set_MP_Max");
 		KBEngine.Event.registerOut("set_level", this, "set_level");
 		KBEngine.Event.registerOut("set_name", this, "set_entityName");
-		KBEngine.Event.registerOut("set_state", this, "set_state");
+        KBEngine.Event.registerOut("set_strength", this, "set_strength");
+        KBEngine.Event.registerOut("set_state", this, "set_state");
 		KBEngine.Event.registerOut("set_moveSpeed", this, "set_moveSpeed");
 		KBEngine.Event.registerOut("set_modelScale", this, "set_modelScale");
 		KBEngine.Event.registerOut("set_modelID", this, "set_modelID");
@@ -214,21 +215,25 @@ public class sNetworkInWorld : MonoBehaviour
 
 	public void set_position(KBEngine.Entity entity)
 	{
-		if(entity.renderObj == null)
-			return;
+        sPlayerManager.GetInstance().setPosition(entity.id, entity.position);
+        
+		//if(entity.renderObj == null)
+			//return;
 
-		((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().destPosition = entity.position;
-		((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().position = entity.position;
+		//((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().destPosition = entity.position;
+		//((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().position = entity.position;
 	}
 
 	public void updatePosition(KBEngine.Entity entity)
 	{
-		if(entity.renderObj == null)
-			return;
+        sPlayerManager.GetInstance().moveToPosition(entity.id, entity.position);
+        
+        //if (entity.renderObj == null)
+			//return;
 		
-		GameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>();
-		gameEntity.destPosition = entity.position;
-		gameEntity.isOnGround = entity.isOnGround;
+		//GameEntity gameEntity = ((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>();
+		//gameEntity.destPosition = entity.position;
+		//gameEntity.isOnGround = entity.isOnGround;
 	}
 	
 	public void onControlled(KBEngine.Entity entity, bool isControlled)
@@ -251,6 +256,7 @@ public class sNetworkInWorld : MonoBehaviour
 
 	public void set_HP(KBEngine.Entity entity, object v)
 	{
+        Debug.LogError("set hp:" + entity.id + " - " + v);
 		if(entity.renderObj != null)
 		{
 			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = "" + (Int32)v + "/" + (Int32)entity.getDefinedProperty("HP_Max");
@@ -259,11 +265,13 @@ public class sNetworkInWorld : MonoBehaviour
 	
 	public void set_MP(KBEngine.Entity entity, object v)
 	{
-	}
+        Debug.LogError("set mp:" + entity.id + " - " + v);
+    }
 	
 	public void set_HP_Max(KBEngine.Entity entity, object v)
 	{
-		if(entity.renderObj != null)
+        Debug.LogError("set hp max:" + entity.id + " - " + v);
+        if (entity.renderObj != null)
 		{
 			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = (Int32)entity.getDefinedProperty("HP") + "/" + (Int32)v;
 		}
@@ -271,13 +279,20 @@ public class sNetworkInWorld : MonoBehaviour
 	
 	public void set_MP_Max(KBEngine.Entity entity, object v)
 	{
-	}
+        Debug.LogError("set mp max:" + entity.id + " - " + v);
+    }
 	
 	public void set_level(KBEngine.Entity entity, object v)
 	{
-	}
-	
-	public void set_entityName(KBEngine.Entity entity, object v)
+        Debug.LogError("set lvl:" + entity.id + " - " + v);
+    }
+
+    public void set_strength(KBEngine.Entity entity, object v)
+    {
+        Debug.LogError("set strength:" + entity.id + " - " + v);
+    }
+    
+    public void set_entityName(KBEngine.Entity entity, object v)
 	{
 		if(entity.renderObj != null)
 		{
