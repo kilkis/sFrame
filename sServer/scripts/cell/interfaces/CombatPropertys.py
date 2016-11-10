@@ -88,4 +88,7 @@ class CombatPropertys:
 		mpmax = int(mpmax)
 		self.MP_Max = mpmax
 		
+	def setStrength(self, str):
+		str = int(str)
+		self.Strength = str
 

@@ -2,7 +2,7 @@
 	<Properties>
 		<state>
 			<Type>			ENTITY_STATE				</Type>
-			<Utype> 		47006 </Utype>
+			<Utype> 		47106 </Utype>
 			<Flags>			ALL_CLIENTS				</Flags>
 			<Persistent>	true						</Persistent> 
 			<Default>		0					</Default>
@@ -10,13 +10,13 @@
 
 		<subState>
 			<Type>          ENTITY_SUBSTATE					</Type>
-			<Utype> 		47007 </Utype>
+			<Utype> 		47107 </Utype>
 			<Flags>         ALL_CLIENTS					</Flags>
 		</subState>
 
 		<forbids>
 			<Type>			ENTITY_FORBIDS				</Type>
-			<Utype> 		47005 </Utype>
+			<Utype> 		47105 </Utype>
 			<Flags>			ALL_CLIENTS				</Flags>
 			<Default>		0					</Default>
 		</forbids>

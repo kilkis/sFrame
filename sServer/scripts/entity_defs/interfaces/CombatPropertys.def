@@ -12,6 +12,7 @@
 			<Type>			HP				</Type>
 			<Utype>			47002				</Utype>
 			<Flags>			ALL_CLIENTS			</Flags>
+			<Persistent>	true					</Persistent> 
 			<Default>		0				</Default>
 		</HP_Max>
 
@@ -27,8 +28,10 @@
 			<Type>			HP				</Type>
 			<Utype>			47004				</Utype>
 			<Flags>			ALL_CLIENTS			</Flags>
+			<Persistent>	true					</Persistent> 
 			<Default>		0				</Default>
 		</MP_Max>
+		
 	</Properties>
 
 	<CellMethods>
@@ -55,6 +58,7 @@
 		<setMPMax>
 			<Arg>			MP				</Arg>
 		</setMPMax>
+		
 	</CellMethods>
 </root>
 

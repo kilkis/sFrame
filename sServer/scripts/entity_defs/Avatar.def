@@ -48,6 +48,14 @@
 			<Type>	UINT16					</Type>
 			<Flags>	OWN_CLIENT					</Flags>
 		</own_val>
+		
+		<strength>
+			<Type>			INT32			</Type>
+			<Utype>			41008				</Utype>
+			<Flags> 		OWN_CLIENT		</Flags>
+			<Persistent>	true					</Persistent> 
+			<Default> 		0				</Default>
+		</strength>
 	</Properties>
 
 	<BaseMethods>
