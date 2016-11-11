@@ -1,0 +1,12 @@
+datas={
+	1:{
+		"id":1,
+		"MaxHp":100,
+		"MaxMp":100,
+		"MoveSpeed":10,
+		"Strength":100,
+		"SkillID":0,
+		"ViewRange":10,
+		"BackRange":100,
+		},
+}
