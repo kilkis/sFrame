@@ -112,14 +112,14 @@ public class sNetworkInWorld : MonoBehaviour
             sNetworkOutOfWorld.inst.callAndRemoveLua("selAvatar");
         }
         //这里会获得当前角色所在的地图的信息，主要只使用spaceID
-        Debug.LogError("onSetSpaceData:" + spaceID + "," + key + "," + value);
+        Debug.Log("onSetSpaceData:" + spaceID + "," + key + "," + value);
         sMapManager.GetInstance().loadMap((int)spaceID);
     }
 
     public void onEnterSpace(KBEngine.Entity entity)
     {
         //通常这个函数不处理
-        Debug.LogError("onEnterSpace:" + entity.id);
+        Debug.Log("onEnterSpace:" + entity.id);
     }
 
     public void addSpaceGeometryMapping(string respath)
@@ -138,7 +138,7 @@ public class sNetworkInWorld : MonoBehaviour
 	
 	public void onAvatarEnterWorld(UInt64 rndUUID, Int32 eid, KBEngine.Avatar avatar)
 	{
-        Debug.LogError("onAvatarEnterWorld");
+        Debug.Log("onAvatarEnterWorld");
 		if(!avatar.isPlayer())
 		{
 			return;
@@ -187,7 +187,7 @@ public class sNetworkInWorld : MonoBehaviour
 	
 	public void onEnterWorld(KBEngine.Entity entity)
 	{
-        Debug.LogError("onEnterWorld");
+        Debug.Log("onEnterWorld");
         if (entity.isPlayer())
 			return;
         Debug.Log("entity id:" + entity.className+" - "+entity.id);
@@ -256,40 +256,32 @@ public class sNetworkInWorld : MonoBehaviour
 
 	public void set_HP(KBEngine.Entity entity, object v)
 	{
-        Debug.LogError("set hp:" + entity.id + " - " + v);
-		if(entity.renderObj != null)
-		{
-			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = "" + (Int32)v + "/" + (Int32)entity.getDefinedProperty("HP_Max");
-		}
+		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Hp, v);
 	}
 	
 	public void set_MP(KBEngine.Entity entity, object v)
 	{
-        Debug.LogError("set mp:" + entity.id + " - " + v);
+		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Mp, v);
     }
 	
 	public void set_HP_Max(KBEngine.Entity entity, object v)
 	{
-        Debug.LogError("set hp max:" + entity.id + " - " + v);
-        if (entity.renderObj != null)
-		{
-			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = (Int32)entity.getDefinedProperty("HP") + "/" + (Int32)v;
-		}
+		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.HpMax, v);
 	}
 	
 	public void set_MP_Max(KBEngine.Entity entity, object v)
 	{
-        Debug.LogError("set mp max:" + entity.id + " - " + v);
+		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.MpMax, v);
     }
 	
 	public void set_level(KBEngine.Entity entity, object v)
 	{
-        Debug.LogError("set lvl:" + entity.id + " - " + v);
+		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Lvl, v);
     }
 
     public void set_strength(KBEngine.Entity entity, object v)
     {
-        Debug.LogError("set strength:" + entity.id + " - " + v);
+		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Strength, v);
     }
     
     public void set_entityName(KBEngine.Entity entity, object v)

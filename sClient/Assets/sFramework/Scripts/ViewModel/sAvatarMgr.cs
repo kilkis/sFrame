@@ -48,7 +48,7 @@ public class sAvatarMgr : sSingleton<sAvatarMgr>
         ad.playerID = id;
         ad.isUsing = true;
         ad.leaveTime = 0;
-        Debug.LogError("avatar create:" + id);
+        Debug.Log("avatar create:" + id);
         _cacheAvatar.Add(id, ad);
         return ad;
     }

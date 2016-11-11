@@ -45,6 +45,14 @@ public class sPlayerControl : MonoBehaviour {
         }
     }
 
+	public void setDirection(Vector3 dir)
+	{
+		if (dir == Vector3.zero)
+			return;
+		if (_trans != null)
+			_trans.rotation = Quaternion.Lerp (_trans.rotation, Quaternion.LookRotation (dir), 0.1f * Time.deltaTime);
+	}
+
     public void moveToPosition(Vector3 pos)
     {
         changeAnimState(playerState.idle);

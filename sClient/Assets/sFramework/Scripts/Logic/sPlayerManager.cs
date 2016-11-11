@@ -103,7 +103,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
 
         Debug.Log("push pid:" + uid);
         sPlayerInfo tmp = getOrCreatePlayer(uid);
-        tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, startpos, Quaternion.LookRotation(new Vector3(1, 0, 0))) as GameObject;
+		tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, tmp.attr.position == Vector3.zero?startpos:tmp.attr.position, Quaternion.LookRotation(tmp.attr.direction)) as GameObject;
         tmp.playerCC.SetActive(true);
         tmp.pc = tmp.playerCC.GetComponent<sPlayerControl>();
         tmp.uid = uid;
@@ -154,16 +154,18 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         //强制设定坐标的情况是会包含自身的
         if( isSelf(uid))
         {
-            if (selfPlayer.pc != null)
-                selfPlayer.pc.setPosition(pos);
+			if (selfPlayer.pc != null)
+				selfPlayer.pc.setPosition (pos);
+			else
+				selfPlayer.attr.position = pos;
         }
         else
         {
-            sPlayerInfo tmp = null;
-            if( s2cPlayers.TryGetValue(uid, out tmp))
-            {
-                tmp.pc.setPosition(pos);
-            }
+			sPlayerInfo tmp = getOrCreatePlayer(uid);
+			if (tmp.pc != null)
+				tmp.pc.setPosition (pos);
+			else
+				tmp.attr.position = pos;
         }
     }
 
@@ -177,37 +179,67 @@ public class sPlayerManager : sSingleton<sPlayerManager>
             Debug.LogError("move position can't be self");
             return;
         }
-        sPlayerInfo tmp = null;
-        if( s2cPlayers.TryGetValue(uid, out tmp))
-        {
-            tmp.pc.moveToPosition(pos);
-        }
-        else
-        {
-            Debug.LogError("can't find uid:" + uid);
-        }
+    
+		sPlayerInfo tmp = getOrCreatePlayer(uid);
+		if (tmp.pc != null)
+			tmp.pc.moveToPosition (pos);
+		else
+			tmp.attr.position = pos;
     }
 
     public void setDirection(long uid, Vector3 dir)
     {
+		if ( isSelf(uid))
+		{
+			Debug.LogError("move position can't be self");
+			return;
+		}
 
+		sPlayerInfo tmp = getOrCreatePlayer(uid);
+		if (tmp.pc != null)
+			tmp.pc.setDirection (dir);
+		else
+			tmp.attr.direction = dir;
     }
 
     //set attr
-    public void setName(long uid, string name)
-    {
-        sPlayerInfo tmp = getOrCreatePlayer(uid);
-        tmp.attr.name = name;
-    }
-
-    public void setGuildName(long uid, string gname)
-    {
-
-    }
-
-    public void setVip(long uid, int vip)
-    {
-
-    }
+	public void setAttr(long uid, sPlayerAttrType paType, object value)
+	{
+		Debug.Log ("set attr:" + uid + " - " + paType + " - " + value);
+		sPlayerInfo tmp = getOrCreatePlayer(uid);
+		switch (paType) {
+		case sPlayerAttrType.Name:
+			tmp.attr.name = (string)value;
+			break;
+		case sPlayerAttrType.GuildName:
+			tmp.attr.guildname = (string)value;
+			break;
+		case sPlayerAttrType.Vip:
+			tmp.attr.vip = (int)value;
+			break;
+		case sPlayerAttrType.Lvl:
+			tmp.attr.level = (ushort)value;
+			break;
+		case sPlayerAttrType.Exp:
+			tmp.attr.exp = (int)value;
+			break;
+		case sPlayerAttrType.Hp:
+			tmp.attr.hp = (int)value;
+			break;
+		case sPlayerAttrType.HpMax:
+			tmp.attr.hp_max = (int)value;
+			break;
+		case sPlayerAttrType.Mp:
+			tmp.attr.mp = (int)value;
+			break;
+		case sPlayerAttrType.MpMax:
+			tmp.attr.mp_max = (int)value;
+			break;
+		case sPlayerAttrType.Strength:
+			tmp.attr.strength = (int)value;
+			break;
+		}
+	}
+   
     //...
 }
