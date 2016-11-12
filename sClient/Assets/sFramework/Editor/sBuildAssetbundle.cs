@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 
 public class sBuildAssetbundle
 {
@@ -382,12 +383,57 @@ public class sBuildAssetbundle
 	static void fgxssx()
 	{ }
 
+	static void CreateNode(XmlDocument xmlDoc,XmlNode parentNode,string name,string value)  
+	{  
+		XmlNode node = xmlDoc.CreateNode(XmlNodeType.Element, name, null);  
+		node.InnerText = value;  
+		parentNode.AppendChild(node);  
+	}  
+
 	[MenuItem("sFramework/打包当前场景怪物布局")]
 	static void BuildMonster()
 	{
-		string tmp = EditorUtility.SaveFilePanel ("选择导出文件", "", "", ".py");
+		string tmp = EditorUtility.SaveFilePanel ("选择导出文件", "", "", ".xml");
 
-		FileStream fs = new FileStream (tmp, FileMode.OpenOrCreate);
+		XmlDocument xmlDoc = new XmlDocument ();
+		XmlNode node = xmlDoc.CreateXmlDeclaration ("1.0", "utf-8", "");
+		xmlDoc.AppendChild (node);
+
+		XmlNode root = xmlDoc.CreateElement ("root");
+		xmlDoc.AppendChild (root);
+		GameObject[] gos = GameObject.FindGameObjectsWithTag ("Editor_Monster");
+		for (int i = 0; i < gos.Length; ++i) {	
+			XmlNode node1 = xmlDoc.CreateNode (XmlNodeType.Element, "GameObject", null);
+			root.AppendChild (node1);
+			XmlNode pos = xmlDoc.CreateNode (XmlNodeType.Element, "pos", null);
+			node1.AppendChild (pos);
+			CreateNode (xmlDoc, pos, "x", gos[i].transform.position.x.ToString());
+			CreateNode (xmlDoc, pos, "y", gos[i].transform.position.y.ToString());
+			CreateNode (xmlDoc, pos, "z", gos[i].transform.position.z.ToString());
+
+			XmlNode dir = xmlDoc.CreateNode (XmlNodeType.Element, "dir", null);
+			node1.AppendChild (dir);
+			CreateNode (xmlDoc, dir, "x", gos[i].transform.rotation.eulerAngles.x.ToString());
+			CreateNode (xmlDoc, dir, "y", gos[i].transform.rotation.eulerAngles.y.ToString());
+			CreateNode (xmlDoc, dir, "z", gos[i].transform.rotation.eulerAngles.z.ToString());
+
+			XmlNode scale = xmlDoc.CreateNode (XmlNodeType.Element, "scale", null);
+			node1.AppendChild (scale);
+			CreateNode (xmlDoc, scale, "x", gos[i].transform.localScale.x.ToString());
+			CreateNode (xmlDoc, scale, "y", gos[i].transform.localScale.y.ToString());
+			CreateNode (xmlDoc, scale, "z", gos[i].transform.localScale.z.ToString());
+
+			XmlNode prop = xmlDoc.CreateNode (XmlNodeType.Element, "prop", null);
+			node1.AppendChild (prop);
+
+			sEditor_Monster em = gos [i].GetComponent<sEditor_Monster> ();
+			CreateNode (xmlDoc, prop, "mid", em.monsterID.ToString ());
+			CreateNode (xmlDoc, prop, "viewRange", em.viewRange.ToString ());
+			CreateNode (xmlDoc, prop, "backRange", em.backRange.ToString ());
+
+		}
+		xmlDoc.Save (tmp);
+		/*FileStream fs = new FileStream (tmp, FileMode.OpenOrCreate);
 		StreamWriter sw = new StreamWriter (fs);
 		sw.WriteLine ("datas={");
 		GameObject[] gos = GameObject.FindGameObjectsWithTag ("Editor_Monster");
@@ -397,13 +443,13 @@ public class sBuildAssetbundle
 			sw.WriteLine ("\t\t\"mid\":" + em.monsterID.ToString () + ",");
 			sw.WriteLine ("\t\t\"pos\":" + gos[i].transform.position + ",");
 			sw.WriteLine ("\t\t\"dir\":" + gos [i].transform.rotation.eulerAngles + ",");
-			sw.WriteLine ("\t\t\"mid\":" + em.viewRange.ToString () + ",");
-			sw.WriteLine ("\t\t\"mid\":" + em.backRange.ToString () + ",");
+			sw.WriteLine ("\t\t\"viewRange\":" + em.viewRange.ToString () + ",");
+			sw.WriteLine ("\t\t\"backRange\":" + em.backRange.ToString () + ",");
 			sw.WriteLine ("\t\t},");
 		}
 		sw.WriteLine("}");
 		sw.Close();
-		fs.Close();
+		fs.Close();*/
 		EditorUtility.DisplayDialog ("保存成功", "怪物信息保存成功", "确认");
 	}
 	[MenuItem("sFramework/打包当前场景NPC布局")]
