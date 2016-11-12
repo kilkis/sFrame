@@ -377,10 +377,43 @@ public class sBuildAssetbundle
         AssetDatabase.Refresh();
     }
 
-    [MenuItem("sFramework/-----------分隔线1--------------")]
-    static void fgx()
-    { }
+   
+	[MenuItem("sFramework/-----------分隔线-场景怪物NPC布局--------------")]
+	static void fgxssx()
+	{ }
 
+	[MenuItem("sFramework/打包当前场景怪物布局")]
+	static void BuildMonster()
+	{
+		string tmp = EditorUtility.SaveFilePanel ("选择导出文件", "", "", ".py");
+
+		FileStream fs = new FileStream (tmp, FileMode.OpenOrCreate);
+		StreamWriter sw = new StreamWriter (fs);
+		sw.WriteLine ("datas={");
+		GameObject[] gos = GameObject.FindGameObjectsWithTag ("Editor_Monster");
+		for (int i = 0; i < gos.Length; ++i) {
+			sEditor_Monster em = gos [i].GetComponent<sEditor_Monster> ();
+			sw.WriteLine ("\t" + i.ToString () + ":{");
+			sw.WriteLine ("\t\t\"mid\":" + em.monsterID.ToString () + ",");
+			sw.WriteLine ("\t\t\"pos\":" + gos[i].transform.position + ",");
+			sw.WriteLine ("\t\t\"dir\":" + gos [i].transform.rotation.eulerAngles + ",");
+			sw.WriteLine ("\t\t\"mid\":" + em.viewRange.ToString () + ",");
+			sw.WriteLine ("\t\t\"mid\":" + em.backRange.ToString () + ",");
+			sw.WriteLine ("\t\t},");
+		}
+		sw.WriteLine("}");
+		sw.Close();
+		fs.Close();
+		EditorUtility.DisplayDialog ("保存成功", "怪物信息保存成功", "确认");
+	}
+	[MenuItem("sFramework/打包当前场景NPC布局")]
+	static void BuildNPC()
+	{
+
+	}
+	[MenuItem("sFramework/-----------分隔线1--------------")]
+	static void fgx()
+	{ }
     [MenuItem("sFramework/Build AssetBundle~更新资源打包")]
     static void BuildAssetBundle1()
     {
