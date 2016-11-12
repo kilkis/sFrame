@@ -26,7 +26,7 @@ class Space(KBEngine.Base, GameObject):
 		self.spaceResName = d_mapinfo.datas.get(self.spaceUTypeB)['resPath']
 		
 		# 这个地图上创建的entity总数
-		self.tmpCreateEntityDatas = copy.deepcopy(d_spaces_spawns.datas.get(self.spaceUTypeB, ()))
+		self.tmpCreateEntityDatas = []#copy.deepcopy(d_spaces_spawns.datas.get(self.spaceUTypeB, ()))
 		
 		self.avatars = {}
 		self.createSpawnPointDatas()
@@ -34,7 +34,8 @@ class Space(KBEngine.Base, GameObject):
 	def createSpawnPointDatas(self):
 		"""
 		"""
-		res = r"scripts\data\spawnpoints\%s_spawnpoints.xml" % (self.spaceResName.replace("\\", "/").split("/")[-1])
+		res = d_mapinfo.datas.get(self.spaceUTypeB)['MonsterFile'];
+		#res = r"scripts\data\spawnpoints\%s_spawnpoints.xml" % (self.spaceResName.replace("\\", "/").split("/")[-1])
 		if(len(self.spaceResName) == 0 or not KBEngine.hasRes(res)):
 			return
 			
@@ -46,9 +47,10 @@ class Space(KBEngine.Base, GameObject):
 		DEBUG_MSG("Space::createSpawnPointDatas: %s" % (res))
 		
 		for child in root:
-			positionNode = child[0][0]
-			directionNode = child[0][1]
-			scaleNode = child[0][2]
+			positionNode = child[0]
+			directionNode = child[1]
+			scaleNode = child[2]
+			propNode = child[3]
 			
 			scale = int(((float(scaleNode[0].text) + float(scaleNode[1].text) + float(scaleNode[2].text)) / 3.0) * 10)
 			position = (float(positionNode[0].text), float(positionNode[1].text), float(positionNode[2].text))
@@ -61,7 +63,7 @@ class Space(KBEngine.Base, GameObject):
 			if direction[2] - math.pi > 0.0:
 				direction[2] -= math.pi * 2
 				
-			self.tmpCreateEntityDatas.append([int(child.attrib['name']), \
+			self.tmpCreateEntityDatas.append([int(propNode[0].text), \
 			position, \
 			direction, \
 			scale, \

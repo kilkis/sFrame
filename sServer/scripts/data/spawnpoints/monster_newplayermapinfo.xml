@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GameObject>
+    <pos>
+      <x>-157.82</x>
+      <y>1.11</y>
+      <z>112.71</z>
+    </pos>
+    <dir>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </dir>
+    <scale>
+      <x>1</x>
+      <y>2</y>
+      <z>1</z>
+    </scale>
+    <prop>
+      <mid>0</mid>
+      <viewRange>5</viewRange>
+      <backRange>10</backRange>
+    </prop>
+  </GameObject>
+  <GameObject>
+    <pos>
+      <x>-142.3</x>
+      <y>1.11</y>
+      <z>136.7</z>
+    </pos>
+    <dir>
+      <x>0</x>
+      <y>278.4913</y>
+      <z>0</z>
+    </dir>
+    <scale>
+      <x>1</x>
+      <y>2</y>
+      <z>1</z>
+    </scale>
+    <prop>
+      <mid>0</mid>
+      <viewRange>5</viewRange>
+      <backRange>10</backRange>
+    </prop>
+  </GameObject>
+</root>
