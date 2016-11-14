@@ -33,8 +33,8 @@ class Monster(KBEngine.Entity,
 		
 		# entity所在的层，可以设置多个不同的navmesh层来寻路, 这里20002001是warring-demo中在天上的飞龙，
 		# 第0层是地面，第1层是忽略建筑物的寻路层
-		if self.modelID == 20002001:
-			self.layer = 1 
+		#if self.modelID == 20002001:
+		#	self.layer = 1 
 			
 	def initEntity(self):
 		"""

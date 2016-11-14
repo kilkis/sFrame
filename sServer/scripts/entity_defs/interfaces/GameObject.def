@@ -1,12 +1,12 @@
 <root>
 	<Properties>
-		<name>
+		<!--<name>
 			<Type>			UNICODE			</Type>
 			<Utype> 		41003			</Utype>
 			<Flags>			ALL_CLIENTS		</Flags>
 			<Persistent>		true			</Persistent>
 			<DetailLevel>		MEDIUM			</DetailLevel>
-		</name>
+		</name>-->
 
 		<uid>
 			<Type>			UINT32			</Type>
@@ -23,20 +23,20 @@
 			<Persistent>		true			</Persistent>
 		</dbid>
 
-		<utype>
+		<!--<utype>
 			<Type>			UINT32			</Type>
 			<Utype> 		41005			</Utype>
 			<Flags>			ALL_CLIENTS		</Flags>
 			<Default>		0			</Default>
 			<Persistent>		true			</Persistent>
-		</utype>
+		</utype>-->
 
-		<modelID>
+		<!--<modelID>
 			<Type>			UINT32			</Type>
 			<Utype> 		41006			</Utype>
 			<Flags>			ALL_CLIENTS		</Flags>
 			<Default>		0			</Default>
-		</modelID>
+		</modelID>-->
 
 		<modelScale>
 			<Type>			UINT8			</Type>

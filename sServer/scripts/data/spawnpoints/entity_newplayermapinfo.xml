@@ -17,7 +17,7 @@
       <z>1</z>
     </scale>
     <prop>
-      <mid>0</mid>
+      <mid>1</mid>
       <viewRange>5</viewRange>
       <backRange>10</backRange>
     </prop>
@@ -39,7 +39,7 @@
       <z>1</z>
     </scale>
     <prop>
-      <mid>0</mid>
+      <mid>90000</mid>
       <viewRange>5</viewRange>
       <backRange>10</backRange>
     </prop>

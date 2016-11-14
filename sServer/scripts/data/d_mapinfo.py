@@ -4,7 +4,7 @@ datas={
 		"resPath":"spaces/newplayerscene1",
 		"type":0,
 		"position":(0,0,0),
-		"MonsterFile":"scripts\data\spawnpoints\monster_newplayermapinfo.xml",
+		"MonsterFile":"scripts\data\spawnpoints\entity_newplayermapinfo.xml",
 		"NPCFile":"",
 		},
 }

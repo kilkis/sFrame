@@ -23,6 +23,7 @@ class Motion:
 			self.isMoving = False
 
 	def randomWalk(self, basePos):
+		return False
 		"""
 		随机移动entity
 		"""

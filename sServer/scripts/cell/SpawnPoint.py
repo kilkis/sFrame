@@ -3,7 +3,8 @@ import KBEngine
 import SCDefine
 from KBEDebug import *
 from interfaces.GameObject import GameObject
-import d_entities
+#import d_entities
+import d_entity
 
 class SpawnPoint(KBEngine.Entity, GameObject):
 	def __init__(self):
@@ -11,7 +12,7 @@ class SpawnPoint(KBEngine.Entity, GameObject):
 		self.addTimer(1, 0, SCDefine.TIMER_TYPE_SPAWN)
 		
 	def spawnTimer(self):
-		datas = d_entities.datas.get(self.spawnEntityNO)
+		datas = d_entity.datas.get(self.spawnEntityNO)
 		
 		if datas is None:
 			ERROR_MSG("SpawnPoint::spawn:%i not found." % self.spawnEntityNO)
@@ -21,15 +22,15 @@ class SpawnPoint(KBEngine.Entity, GameObject):
 			"spawnID"	: self.id,
 			"spawnPos" : tuple(self.position),
 			"uid" : datas["id"],
-			"utype" : datas["etype"],
-			"modelID" : datas["modelID"],
+			#"utype" : datas["etype"],
+			#"modelID" : datas["modelID"],
 			"modelScale" : self.modelScale,
-			"dialogID" : datas["dialogID"],
-			"name" : datas["name"],
-			"descr" : datas.get("descr", ''),
+			"dialogID" : 0,#datas["dialogID"],
+			#"name" : datas["name"],
+			#"descr" : datas.get("descr", ''),
 		}
 		
-		e = KBEngine.createEntity(datas["entityType"], self.spaceID, tuple(self.position), tuple(self.direction), params)
+		e = KBEngine.createEntity(datas["Type"], self.spaceID, tuple(self.position), tuple(self.direction), params)
 
 	#--------------------------------------------------------------------------------------------
 	#                              Callbacks

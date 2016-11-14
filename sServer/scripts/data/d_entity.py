@@ -1,0 +1,20 @@
+datas={
+	1:{
+		"id":1,
+		"Type":"Monster",
+		"MaxHp":100,
+		"MaxMp":100,
+		"MoveSpeed":10,
+		"Strength":100,
+		"SkillID":0,
+		},
+	90000:{
+		"id":90000,
+		"Type":"NPC",
+		"MaxHp":1000,
+		"MaxMp":1000,
+		"MoveSpeed":15,
+		"Strength":200,
+		"SkillID":1,
+		},
+}

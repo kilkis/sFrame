@@ -6,9 +6,7 @@ import copy
 import math
 from KBEDebug import *
 from interfaces.GameObject import GameObject
-import d_entities
 import d_mapinfo
-import d_spaces_spawns
 import xml.etree.ElementTree as etree 
 
 class Space(KBEngine.Base, GameObject):
@@ -81,7 +79,7 @@ class Space(KBEngine.Base, GameObject):
 		
 		if datas is None:
 			ERROR_MSG("Space::onTimer: spawn %i is error!" % datas[0])
-
+		ERROR_MSG("create spawn:%i"%(datas[0]))
 		KBEngine.createBaseAnywhere("SpawnPoint", 
 									{"spawnEntityNO"	: datas[0], 	\
 									"position"			: datas[1], 	\
