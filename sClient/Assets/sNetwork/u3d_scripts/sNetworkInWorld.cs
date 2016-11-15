@@ -171,7 +171,7 @@ public class sNetworkInWorld : MonoBehaviour
         //	y = 1.3f;
         Debug.Log("server pos:"+avatar.position);
         Vector3 startpos = new Vector3(0.0f, 0.0f, 0.0f);
-        sPlayerManager.GetInstance().createSelf(avatar.id, "test", "xx", 0, avatar.position);
+        sPlayerManager.GetInstance().createSelf(avatar.id, avatar.position);
         //player = Instantiate(avatarPerfab, new Vector3(avatar.position.x, y, avatar.position.z), 
 		  //                   Quaternion.Euler(new Vector3(avatar.direction.y, avatar.direction.z, avatar.direction.x))) as UnityEngine.GameObject;
 
@@ -199,7 +199,7 @@ public class sNetworkInWorld : MonoBehaviour
         //Quaternion.Euler(new Vector3(entity.direction.y, entity.direction.z, entity.direction.x))) as UnityEngine.GameObject;
 
         //((UnityEngine.GameObject)entity.renderObj).name = entity.className + "_" + entity.id;
-        sPlayerManager.GetInstance().pushPlayer(entity.id, entity.className, "", 0, entity.position);
+        sPlayerManager.GetInstance().pushPlayer(entity.id, entity.position);
 	}
 	
 	public void onLeaveWorld(KBEngine.Entity entity)

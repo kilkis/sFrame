@@ -17,13 +17,20 @@ public class sPlayerModel : MonoBehaviour {
     Animation anim;
     sPlayerControl pc;
 
+	sCacheUnit _model;
+
 	// Use this for initialization
 	void Start () {
         
     }
 
+	public void createModel(GameObject sp)
+	{
+		playerCC = sp;
+		sLoadingGame.GetInstance ().loadWeak ("cube", loadModelOK, false);
+	}
     //调用创建avatar的接口
-    public void createFromName(GameObject sp)
+    public void createAvatar(GameObject sp)
     {
         if( string.IsNullOrEmpty(bone) || string.IsNullOrEmpty(chestName) || string.IsNullOrEmpty(footName) ||
             string.IsNullOrEmpty(handName) || string.IsNullOrEmpty(headName) || string.IsNullOrEmpty(legName))
@@ -35,10 +42,31 @@ public class sPlayerModel : MonoBehaviour {
         sAvatarMgr.GetInstance().createPlayer(playerUID, bone, "", new string[] { chestName, footName, handName, headName, legName }, loadAvatarOK);
     }
 
-    public void destroyModel()
+    public void destroyAvatar()
     {
         sAvatarMgr.GetInstance().deletePlayer(playerUID);
     }
+
+	public void destroyModel()
+	{
+		sLoadingGame.GetInstance ().unloadWeak (_model);
+		_model = null;
+	}
+
+	void loadModelOK(sCacheUnit scu)
+	{
+		
+		scu.obj.transform.parent = playerCC.transform;
+
+		float height = playerCC.GetComponent<CapsuleCollider>().height;
+		scu.obj.transform.localPosition = new Vector3(0, -height/2, 0);
+		scu.obj.transform.localRotation = Quaternion.identity;
+		anim = scu.obj.GetComponent<Animation> ();
+		pc = playerCC.GetComponent<sPlayerControl>();
+		pc.setAnim(anim);
+
+		_model = scu;
+	}
     
     //avatar创建成功
     void loadAvatarOK()

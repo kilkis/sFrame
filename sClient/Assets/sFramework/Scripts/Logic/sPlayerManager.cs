@@ -48,7 +48,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
     }
 
     //创建自己
-    public void createSelf(long uid, string name, string guildname, int vip, Vector3 startpos)
+    public void createSelf(long uid, Vector3 startpos)
     {
         if (selfPlayer.playerCC != null)
             return;
@@ -70,7 +70,8 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         selfPlayer.pm.handName = "FS_hand_000";
         selfPlayer.pm.headName = "FS_head_000";
         selfPlayer.pm.legName = "FS_leg_000";
-        selfPlayer.pm.createFromName(selfPlayer.playerCC);
+		//selfPlayer.pm.createAvatar(selfPlayer.playerCC);
+		selfPlayer.pm.createModel(selfPlayer.playerCC);
 
         selfPlayer.delTime = 0;
         //selfPlayer.name = name;
@@ -96,7 +97,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         s2cPlayers.Add(uid, tmp);
         return tmp;
     }
-    public void pushPlayer(long uid, string name, string guildname, int vip, Vector3 startpos)
+    public void pushPlayer(long uid, Vector3 startpos)
     {
         if (isSelf(uid))
             return;
@@ -115,7 +116,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         tmp.pm.handName = "FS_hand_000";
         tmp.pm.headName = "FS_head_000";
         tmp.pm.legName = "FS_leg_000";
-        tmp.pm.createFromName(tmp.playerCC);
+		tmp.pm.createAvatar(tmp.playerCC);
 
         tmp.delTime = 0;
         
