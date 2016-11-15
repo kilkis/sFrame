@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using sFramework;
+using sFramework.LoadBin;
 
 public class sNetworkInWorld : MonoBehaviour 
 {
@@ -190,7 +191,8 @@ public class sNetworkInWorld : MonoBehaviour
         Debug.Log("onEnterWorld");
         if (entity.isPlayer())
 			return;
-        Debug.Log("entity id:" + entity.className+" - "+entity.id);
+		Debug.Log("entity id:" + entity.className+" - "+entity.id);
+		//Debug.Log ();
         //float y = entity.position.y;
         //if(entity.isOnGround)
         //y = 1.3f;
@@ -199,7 +201,20 @@ public class sNetworkInWorld : MonoBehaviour
         //Quaternion.Euler(new Vector3(entity.direction.y, entity.direction.z, entity.direction.x))) as UnityEngine.GameObject;
 
         //((UnityEngine.GameObject)entity.renderObj).name = entity.className + "_" + entity.id;
-        sPlayerManager.GetInstance().pushPlayer(entity.id, entity.position);
+		switch (entity.className) {
+		case "Avatar":
+			sPlayerManager.GetInstance ().pushPlayer (entity.id, entity.position);
+			break;
+		case "Monster":
+		case "NPC":
+			{
+				int tid = int.Parse(entity.getDefinedProperty ("uid").ToString());
+				//sLoadBin_entity.instance.data.TryGetValue(
+			}
+			break;
+		}
+			
+		
 	}
 	
 	public void onLeaveWorld(KBEngine.Entity entity)
