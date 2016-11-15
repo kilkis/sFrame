@@ -203,13 +203,16 @@ public class sNetworkInWorld : MonoBehaviour
         //((UnityEngine.GameObject)entity.renderObj).name = entity.className + "_" + entity.id;
 		switch (entity.className) {
 		case "Avatar":
-			sEntityManager.GetInstance ().pushPlayer (entity.id, entity.position);
+			sEntityManager.GetInstance ().pushEntity (entity.id, entity.position, entity.className);
 			break;
 		case "Monster":
 		case "NPC":
 			{
 				int tid = int.Parse(entity.getDefinedProperty ("uid").ToString());
-				//sLoadBin_entity.instance.data.TryGetValue(
+				data_entity tmp = null;
+				if (sLoadBin_entity.instance.data.TryGetValue (tid, out tmp)) {
+					sEntityManager.GetInstance ().pushEntity (entity.id, entity.position, tmp.ModelName, entity.className);
+				}
 			}
 			break;
 		}

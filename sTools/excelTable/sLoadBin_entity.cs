@@ -8,13 +8,10 @@ namespace sFramework.LoadBin
 	public class data_entity
 	{
 		public int id;
-		public string NameID;
+		public int NameID;
+		public string ModelName;
 		public string Type;
-		public int MaxHp;
-		public int MaxMp;
 		public int MoveSpeed;
-		public int Strength;
-		public int SkillID;
 	}
 
 	public class sLoadBin_entity
@@ -31,13 +28,10 @@ namespace sFramework.LoadBin
 			{
 				data_entity tmp = new data_entity();
 				tmp.id = br.ReadInt32();
-				tmp.NameID = br.ReadString();
+				tmp.NameID = br.ReadInt32();
+				tmp.ModelName = br.ReadString();
 				tmp.Type = br.ReadString();
-				tmp.MaxHp = br.ReadInt32();
-				tmp.MaxMp = br.ReadInt32();
 				tmp.MoveSpeed = br.ReadInt32();
-				tmp.Strength = br.ReadInt32();
-				tmp.SkillID = br.ReadInt32();
 				data.Add(tmp.id ,tmp);
 			}
 			br.Close();

@@ -5,6 +5,7 @@ using sFramework;
 
 public class sEntityInfo
 {
+	public string type;
     public long uid;
     public sEntityModel pm;//模型层
     public sEntityControl pc;//控制层
@@ -16,9 +17,9 @@ public class sEntityInfo
 }
 
 /// <summary>
-/// 玩家管理器
-/// 负责管理所有服务器下发玩家的信息，包括玩家模型的脚本管理
-/// todo:范围内玩家模型读取与显示，显示上限处理，动态变化
+/// entity管理器
+/// 负责管理所有服务器下发玩家,怪物，npc的信息，包括模型的脚本管理
+/// todo:范围内模型读取与显示，显示上限处理，动态变化
 /// </summary>
 public class sEntityManager : sSingleton<sEntityManager>
 {
@@ -30,7 +31,7 @@ public class sEntityManager : sSingleton<sEntityManager>
     public bool showPlayer = true;
 
     public sEntityInfo selfPlayer = new sEntityInfo();
-    //服务器下发到客户端的玩家
+    //服务器下发到客户端的entity
     public Dictionary<long, sEntityInfo> s2cPlayers = new Dictionary<long, sEntityInfo>();
     //预备删除，记录用数据
     public Dictionary<long, sEntityInfo> ready2delPlayers = new Dictionary<long, sEntityInfo>();
@@ -70,8 +71,8 @@ public class sEntityManager : sSingleton<sEntityManager>
         selfPlayer.pm.handName = "FS_hand_000";
         selfPlayer.pm.headName = "FS_head_000";
         selfPlayer.pm.legName = "FS_leg_000";
-		//selfPlayer.pm.createAvatar(selfPlayer.playerCC);
-		selfPlayer.pm.createModel(selfPlayer.playerCC);
+		selfPlayer.pm.createAvatar(selfPlayer.playerCC);
+		//selfPlayer.pm.createModel("cube", selfPlayer.playerCC);
 
         selfPlayer.delTime = 0;
         //selfPlayer.name = name;
@@ -97,7 +98,7 @@ public class sEntityManager : sSingleton<sEntityManager>
         s2cPlayers.Add(uid, tmp);
         return tmp;
     }
-    public void pushPlayer(long uid, Vector3 startpos)
+	public void pushEntity(long uid, Vector3 startpos, string etype)
     {
         if (isSelf(uid))
             return;
@@ -120,9 +121,24 @@ public class sEntityManager : sSingleton<sEntityManager>
 
         tmp.delTime = 0;
         
-
-
     }
+
+	public void pushEntity(long uid, Vector3 startpos, string modelName, string etype)
+	{
+		if (isSelf (uid))
+			return;
+		Debug.Log ("push pid2:" + uid);
+
+		sEntityInfo tmp = getOrCreatePlayer(uid);
+		tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, tmp.attr.position == Vector3.zero?startpos:tmp.attr.position, Quaternion.LookRotation(tmp.attr.direction)) as GameObject;
+		tmp.playerCC.SetActive(true);
+		tmp.pc = tmp.playerCC.GetComponent<sEntityControl>();
+		tmp.uid = uid;
+		tmp.pm = tmp.playerCC.GetComponent<sEntityModel>();
+		tmp.pm.playerUID = uid;
+		tmp.pm.createModel (modelName, tmp.playerCC);
+		tmp.delTime = 0;
+	}
 
     public void popPlayer(long uid)
     {
