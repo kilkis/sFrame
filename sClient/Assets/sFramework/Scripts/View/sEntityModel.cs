@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class sPlayerModel : MonoBehaviour {
+public class sEntityModel : MonoBehaviour {
 
     public long playerUID = -1;
 
@@ -15,7 +15,7 @@ public class sPlayerModel : MonoBehaviour {
     public GameObject playerCC;
 
     Animation anim;
-    sPlayerControl pc;
+    sEntityControl pc;
 
 	sCacheUnit _model;
 
@@ -62,7 +62,7 @@ public class sPlayerModel : MonoBehaviour {
 		scu.obj.transform.localPosition = new Vector3(0, -height/2, 0);
 		scu.obj.transform.localRotation = Quaternion.identity;
 		anim = scu.obj.GetComponent<Animation> ();
-		pc = playerCC.GetComponent<sPlayerControl>();
+		pc = playerCC.GetComponent<sEntityControl>();
 		pc.setAnim(anim);
 
 		_model = scu;
@@ -79,7 +79,7 @@ public class sPlayerModel : MonoBehaviour {
 
         anim = ac.controller.Instance.GetComponent<Animation>();
 
-        pc = playerCC.GetComponent<sPlayerControl>();
+        pc = playerCC.GetComponent<sEntityControl>();
         pc.setAnim(anim);
         //pc.enableControl(true);
     }

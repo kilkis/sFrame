@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum sPlayerAttrType
+public enum sEntityAttrType
 {
 	Name,
 	GuildName,
@@ -15,7 +15,7 @@ public enum sPlayerAttrType
 	Strength
 }
 
-public class sPlayerAttr
+public class sEntityAttr
 {
 	//这里的坐标和方向用于保存在pc未创建时候服务器下发的消息
 	public Vector3 position = Vector3.zero;

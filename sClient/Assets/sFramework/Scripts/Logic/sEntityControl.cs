@@ -9,7 +9,7 @@ public enum playerState
     run,
 }
 
-public class sPlayerControl : MonoBehaviour {
+public class sEntityControl : MonoBehaviour {
 
     public NavMeshAgent agent;
     //确认是否可以控制

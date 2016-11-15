@@ -55,7 +55,7 @@ public class sGameRoot : MonoBehaviour
         AddSingleton<sAvatarMgr>();
         //AddSingleton<sGameFlow>();
         AddSingleton<sMapManager>();
-        AddSingleton<sPlayerManager>();
+        AddSingleton<sEntityManager>();
         
         Debug.Log("init singleton over");
 

@@ -153,7 +153,7 @@ public class sNetworkInWorld : MonoBehaviour
 	{
         //if (player != null)
         //	return;
-        if (sPlayerManager.GetInstance().isSelfCreated())
+        if (sEntityManager.GetInstance().isSelfCreated())
             return;
 
 		if (KBEngineApp.app.entity_type != "Avatar") {
@@ -172,7 +172,7 @@ public class sNetworkInWorld : MonoBehaviour
         //	y = 1.3f;
         Debug.Log("server pos:"+avatar.position);
         Vector3 startpos = new Vector3(0.0f, 0.0f, 0.0f);
-        sPlayerManager.GetInstance().createSelf(avatar.id, avatar.position);
+        sEntityManager.GetInstance().createSelf(avatar.id, avatar.position);
         //player = Instantiate(avatarPerfab, new Vector3(avatar.position.x, y, avatar.position.z), 
 		  //                   Quaternion.Euler(new Vector3(avatar.direction.y, avatar.direction.z, avatar.direction.x))) as UnityEngine.GameObject;
 
@@ -203,7 +203,7 @@ public class sNetworkInWorld : MonoBehaviour
         //((UnityEngine.GameObject)entity.renderObj).name = entity.className + "_" + entity.id;
 		switch (entity.className) {
 		case "Avatar":
-			sPlayerManager.GetInstance ().pushPlayer (entity.id, entity.position);
+			sEntityManager.GetInstance ().pushPlayer (entity.id, entity.position);
 			break;
 		case "Monster":
 		case "NPC":
@@ -225,12 +225,12 @@ public class sNetworkInWorld : MonoBehaviour
 
         //UnityEngine.GameObject.Destroy((UnityEngine.GameObject)entity.renderObj);
         //entity.renderObj = null;
-        sPlayerManager.GetInstance().popPlayer(entity.id);
+        sEntityManager.GetInstance().popPlayer(entity.id);
     }
 
 	public void set_position(KBEngine.Entity entity)
 	{
-        sPlayerManager.GetInstance().setPosition(entity.id, entity.position);
+        sEntityManager.GetInstance().setPosition(entity.id, entity.position);
         
 		//if(entity.renderObj == null)
 			//return;
@@ -241,7 +241,7 @@ public class sNetworkInWorld : MonoBehaviour
 
 	public void updatePosition(KBEngine.Entity entity)
 	{
-        sPlayerManager.GetInstance().moveToPosition(entity.id, entity.position);
+        sEntityManager.GetInstance().moveToPosition(entity.id, entity.position);
         
         //if (entity.renderObj == null)
 			//return;
@@ -271,32 +271,32 @@ public class sNetworkInWorld : MonoBehaviour
 
 	public void set_HP(KBEngine.Entity entity, object v)
 	{
-		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Hp, v);
+		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.Hp, v);
 	}
 	
 	public void set_MP(KBEngine.Entity entity, object v)
 	{
-		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Mp, v);
+		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.Mp, v);
     }
 	
 	public void set_HP_Max(KBEngine.Entity entity, object v)
 	{
-		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.HpMax, v);
+		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.HpMax, v);
 	}
 	
 	public void set_MP_Max(KBEngine.Entity entity, object v)
 	{
-		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.MpMax, v);
+		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.MpMax, v);
     }
 	
 	public void set_level(KBEngine.Entity entity, object v)
 	{
-		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Lvl, v);
+		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.Lvl, v);
     }
 
     public void set_strength(KBEngine.Entity entity, object v)
     {
-		sPlayerManager.GetInstance ().setAttr (entity.id, sPlayerAttrType.Strength, v);
+		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.Strength, v);
     }
     
     public void set_entityName(KBEngine.Entity entity, object v)

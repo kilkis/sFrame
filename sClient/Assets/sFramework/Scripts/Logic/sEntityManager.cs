@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using sFramework;
 
-public class sPlayerInfo
+public class sEntityInfo
 {
     public long uid;
-    public sPlayerModel pm;
-    public sPlayerControl pc;
+    public sEntityModel pm;//模型层
+    public sEntityControl pc;//控制层
     public float delTime;
 
-    public sPlayerAttr attr = new sPlayerAttr();
+	public sEntityAttr attr = new sEntityAttr();
     
-    public GameObject playerCC;
+    public GameObject playerCC;//dummy层
 }
 
 /// <summary>
@@ -20,7 +20,7 @@ public class sPlayerInfo
 /// 负责管理所有服务器下发玩家的信息，包括玩家模型的脚本管理
 /// todo:范围内玩家模型读取与显示，显示上限处理，动态变化
 /// </summary>
-public class sPlayerManager : sSingleton<sPlayerManager>
+public class sEntityManager : sSingleton<sEntityManager>
 {
     //最多显示的玩家数量
     public int maxShowPlayers = 30;
@@ -29,13 +29,13 @@ public class sPlayerManager : sSingleton<sPlayerManager>
     //是否显示玩家
     public bool showPlayer = true;
 
-    public sPlayerInfo selfPlayer = new sPlayerInfo();
+    public sEntityInfo selfPlayer = new sEntityInfo();
     //服务器下发到客户端的玩家
-    public Dictionary<long, sPlayerInfo> s2cPlayers = new Dictionary<long, sPlayerInfo>();
+    public Dictionary<long, sEntityInfo> s2cPlayers = new Dictionary<long, sEntityInfo>();
     //预备删除，记录用数据
-    public Dictionary<long, sPlayerInfo> ready2delPlayers = new Dictionary<long, sPlayerInfo>();
+    public Dictionary<long, sEntityInfo> ready2delPlayers = new Dictionary<long, sEntityInfo>();
     //预备删除，遍历用数据
-    public List<sPlayerInfo> r2dPlayers = new List<sPlayerInfo>();
+    public List<sEntityInfo> r2dPlayers = new List<sEntityInfo>();
     
     public bool isSelfCreated()
     {
@@ -55,14 +55,14 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         Debug.Log("self id:" + uid);
         selfPlayer.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, startpos, Quaternion.LookRotation(new Vector3(1, 0, 0))) as GameObject;
         selfPlayer.playerCC.SetActive(true);
-        selfPlayer.pc = selfPlayer.playerCC.GetComponent<sPlayerControl>();
+        selfPlayer.pc = selfPlayer.playerCC.GetComponent<sEntityControl>();
         selfPlayer.pc.enableControl(true);
 
         sULoading.instance.enableCamera();
         sCamera.instance.setFollower(selfPlayer.playerCC.transform);
 
         selfPlayer.uid = uid;
-        selfPlayer.pm = selfPlayer.playerCC.GetComponent<sPlayerModel>();
+        selfPlayer.pm = selfPlayer.playerCC.GetComponent<sEntityModel>();
         selfPlayer.pm.playerUID = uid;
         selfPlayer.pm.bone = "FS_bone";
         selfPlayer.pm.chestName = "FS_chest_000";
@@ -88,11 +88,11 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         return true;
     }
 
-    public sPlayerInfo getOrCreatePlayer(long uid)
+    public sEntityInfo getOrCreatePlayer(long uid)
     {
         if (s2cPlayers.ContainsKey(uid))
             return s2cPlayers[uid];
-        sPlayerInfo tmp = new sPlayerInfo();
+        sEntityInfo tmp = new sEntityInfo();
         tmp.uid = uid;
         s2cPlayers.Add(uid, tmp);
         return tmp;
@@ -103,12 +103,12 @@ public class sPlayerManager : sSingleton<sPlayerManager>
             return;
 
         Debug.Log("push pid:" + uid);
-        sPlayerInfo tmp = getOrCreatePlayer(uid);
+        sEntityInfo tmp = getOrCreatePlayer(uid);
 		tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, tmp.attr.position == Vector3.zero?startpos:tmp.attr.position, Quaternion.LookRotation(tmp.attr.direction)) as GameObject;
         tmp.playerCC.SetActive(true);
-        tmp.pc = tmp.playerCC.GetComponent<sPlayerControl>();
+        tmp.pc = tmp.playerCC.GetComponent<sEntityControl>();
         tmp.uid = uid;
-        tmp.pm = tmp.playerCC.GetComponent<sPlayerModel>();
+        tmp.pm = tmp.playerCC.GetComponent<sEntityModel>();
         tmp.pm.playerUID = uid;
         tmp.pm.bone = "FS_bone";
         tmp.pm.chestName = "FS_chest_000";
@@ -162,7 +162,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
         }
         else
         {
-			sPlayerInfo tmp = getOrCreatePlayer(uid);
+			sEntityInfo tmp = getOrCreatePlayer(uid);
 			if (tmp.pc != null)
 				tmp.pc.setPosition (pos);
 			else
@@ -181,7 +181,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
             return;
         }
     
-		sPlayerInfo tmp = getOrCreatePlayer(uid);
+		sEntityInfo tmp = getOrCreatePlayer(uid);
 		if (tmp.pc != null)
 			tmp.pc.moveToPosition (pos);
 		else
@@ -196,7 +196,7 @@ public class sPlayerManager : sSingleton<sPlayerManager>
 			return;
 		}
 
-		sPlayerInfo tmp = getOrCreatePlayer(uid);
+		sEntityInfo tmp = getOrCreatePlayer(uid);
 		if (tmp.pc != null)
 			tmp.pc.setDirection (dir);
 		else
@@ -204,39 +204,39 @@ public class sPlayerManager : sSingleton<sPlayerManager>
     }
 
     //set attr
-	public void setAttr(long uid, sPlayerAttrType paType, object value)
+	public void setAttr(long uid, sEntityAttrType paType, object value)
 	{
 		Debug.Log ("set attr:" + uid + " - " + paType + " - " + value);
-		sPlayerInfo tmp = getOrCreatePlayer(uid);
+		sEntityInfo tmp = getOrCreatePlayer(uid);
 		switch (paType) {
-		case sPlayerAttrType.Name:
+		case sEntityAttrType.Name:
 			tmp.attr.name = (string)value;
 			break;
-		case sPlayerAttrType.GuildName:
+		case sEntityAttrType.GuildName:
 			tmp.attr.guildname = (string)value;
 			break;
-		case sPlayerAttrType.Vip:
+		case sEntityAttrType.Vip:
 			tmp.attr.vip = (int)value;
 			break;
-		case sPlayerAttrType.Lvl:
+		case sEntityAttrType.Lvl:
 			tmp.attr.level = (ushort)value;
 			break;
-		case sPlayerAttrType.Exp:
+		case sEntityAttrType.Exp:
 			tmp.attr.exp = (int)value;
 			break;
-		case sPlayerAttrType.Hp:
+		case sEntityAttrType.Hp:
 			tmp.attr.hp = (int)value;
 			break;
-		case sPlayerAttrType.HpMax:
+		case sEntityAttrType.HpMax:
 			tmp.attr.hp_max = (int)value;
 			break;
-		case sPlayerAttrType.Mp:
+		case sEntityAttrType.Mp:
 			tmp.attr.mp = (int)value;
 			break;
-		case sPlayerAttrType.MpMax:
+		case sEntityAttrType.MpMax:
 			tmp.attr.mp_max = (int)value;
 			break;
-		case sPlayerAttrType.Strength:
+		case sEntityAttrType.Strength:
 			tmp.attr.strength = (int)value;
 			break;
 		}
