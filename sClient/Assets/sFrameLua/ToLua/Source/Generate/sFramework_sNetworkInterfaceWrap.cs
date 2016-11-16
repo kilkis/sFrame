@@ -11,6 +11,7 @@ public class sFramework_sNetworkInterfaceWrap
 		L.RegFunction("login", login);
 		L.RegFunction("sendMsg2Server", sendMsg2Server);
 		L.RegFunction("selAvatar", selAvatar);
+		L.RegFunction("createAvatar", createAvatar);
 		L.RegFunction("getAvatarList", getAvatarList);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", Lua_ToString);
@@ -88,6 +89,26 @@ public class sFramework_sNetworkInterfaceWrap
 			string arg1 = ToLua.CheckString(L, 3);
 			string arg2 = ToLua.CheckString(L, 4);
 			obj.selAvatar(arg0, arg1, arg2);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int createAvatar(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 5);
+			sFramework.sNetworkInterface obj = (sFramework.sNetworkInterface)ToLua.CheckObject(L, 1, typeof(sFramework.sNetworkInterface));
+			byte arg0 = (byte)LuaDLL.luaL_checknumber(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			string arg2 = ToLua.CheckString(L, 4);
+			string arg3 = ToLua.CheckString(L, 5);
+			obj.createAvatar(arg0, arg1, arg2, arg3);
 			return 0;
 		}
 		catch(Exception e)

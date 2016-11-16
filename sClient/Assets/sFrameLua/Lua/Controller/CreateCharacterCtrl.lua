@@ -29,6 +29,7 @@ function CreateCharacterCtrl.OnCreate(obj)
 	lb:AddClick(CreateCharacterPanel.avatarBtn[2], this.OnChoose3);
 
 	this.selAvatarDBID = ffi.new("uint64_t");
+	this.selAvatarDBID = 1
 	
 	Loading.instance:hideLoading();
 end
@@ -40,33 +41,26 @@ function CreateCharacterCtrl.OnClick(go)
 	else
 		Loading.instance:showLoading();
 		--Network.instance:sendMsg2Server("selectAvatarGame", this.selAvatarDBID);
-		Network.instance:selAvatar(this.selAvatarDBID, "CreateCharacterCtrl", "OnSelOK");
+		Network.instance:createAvatar(this.selAvatarDBID, CreateCharacterPanel.textName.transform:GetComponent("Text").text, "CreateCharacterCtrl", "OnCreateOK");
 	end
 end
 
-function CreateCharacterCtrl.OnSelOK(go)
-	destroy(gameObject);
+function CreateCharacterCtrl.OnCreateOK()
+	log("create ok");
 	Flow.instance:changeNextState();
 end
 
 
 function CreateCharacterCtrl.OnChoose1(go)
-	if CreateCharacterPanel.count > 0 then
-		log(CreateCharacterPanel.avatarInfo[0].name.." : "..CreateCharacterPanel.avatarInfo[0].dbid);
-		this.selAvatarDBID = CreateCharacterPanel.avatarInfo[0].dbid;
-	end
+	this.selAvatarDBID = 1;
 end
 
 function CreateCharacterCtrl.OnChoose2(go)
-	if CreateCharacterPanel.count > 1 then
-		log(CreateCharacterPanel.avatarInfo[1].name);
-	end
+	this.selAvatarDBID = 2;
 end
 
 function CreateCharacterCtrl.OnChoose3(go)
-	if CreateCharacterPanel.count > 2 then
-		log(CreateCharacterPanel.avatarInfo[2].name);
-	end
+	this.selAvatarDBID = 3;
 end
 
 function CreateCharacterCtrl.Close()

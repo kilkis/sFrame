@@ -28,7 +28,7 @@ class AI:
 		"""
 		ret = self.position.distTo(self.spawnPos) <= __TERRITORY_AREA__
 		if not ret:
-			INFO_MSG("%s::checkInTerritory: %i is False." % (self.getScriptName(), self.id))
+			ERROR_MSG("%s::checkInTerritory: %i is False." % (self.getScriptName(), self.id))
 			
 		return ret
 
@@ -73,6 +73,7 @@ class AI:
 		"""
 		virtual method.
 		"""
+		ERROR_MSG("think")
 		if self.isState(GlobalDefine.ENTITY_STATE_FREE):
 			self.onThinkFree()
 		elif self.isState(GlobalDefine.ENTITY_STATE_FIGHT):
@@ -143,6 +144,7 @@ class AI:
 		virtual method.
 		战斗时think
 		"""
+		ERROR_MSG("think fight")
 		if self.territoryControllerID > 0:
 			self.delTerritory()
 		

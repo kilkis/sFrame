@@ -17,6 +17,10 @@ function CreateCharacterPanel.InitPanel()
 	this.avatarNameList[0] = transform:FindChild("Image/Tooltip/CName1").gameObject;
 	this.avatarNameList[1] = transform:FindChild("Image/Tooltip1/CName2").gameObject;
 	this.avatarNameList[2] = transform:FindChild("Image/Tooltip2/CName3").gameObject;
+	
+	this.avatarNameList[0].transform:GetComponent("Text").text = "warrior";
+	this.avatarNameList[1].transform:GetComponent("Text").text = "magic";
+	this.avatarNameList[2].transform:GetComponent("Text").text = "prist";
 
 	this.avatarBtn = {}
 	this.avatarBtn[0] = transform:FindChild("Image/Tooltip").gameObject;
@@ -25,17 +29,6 @@ function CreateCharacterPanel.InitPanel()
 	
 	this.textName = transform:FindChild("NameEnter/InputField/Text").gameObject;
 
-	this.avatarInfo = {}
-
-	this.avatarList = Network.instance:getAvatarList();
-	local iter = this.avatarList:GetEnumerator();
-	this.count = 0;
-	while iter:MoveNext() do
-		local v = iter.Current.Value;
-		this.avatarNameList[this.count].transform:GetComponent("Text").text = v.name;
-		this.avatarInfo[this.count] = v;
-		this.count = this.count + 1;
-	end
 end
 
 function CreateCharacterPanel.Hide()

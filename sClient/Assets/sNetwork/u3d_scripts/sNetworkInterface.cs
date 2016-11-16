@@ -40,6 +40,11 @@ namespace sFramework
             KBEngine.Event.fireIn("selectAvatarGame", dbid);
         }
 
+        public void createAvatar(byte roleType, string name, string cbFile, string cbMethod)
+        {
+            KBEngine.Event.fireIn("reqCreateAvatar", roleType, name);
+        }
+
         public Dictionary<UInt64, sAvatarList> getAvatarList()
         {
             return sNetworkOutOfWorld.inst.getAvatarList();

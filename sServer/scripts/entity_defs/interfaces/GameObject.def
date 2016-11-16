@@ -1,12 +1,12 @@
 <root>
 	<Properties>
-		<!--<name>
+		<name>
 			<Type>			UNICODE			</Type>
 			<Utype> 		41003			</Utype>
 			<Flags>			ALL_CLIENTS		</Flags>
 			<Persistent>		true			</Persistent>
 			<DetailLevel>		MEDIUM			</DetailLevel>
-		</name>-->
+		</name>
 
 		<uid>
 			<Type>			UINT32			</Type>

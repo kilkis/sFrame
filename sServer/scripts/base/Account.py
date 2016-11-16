@@ -70,9 +70,9 @@ class Account(KBEngine.Proxy):
 			"name"				: name,
 			"roleType"			: roleType,
 			"level"				: 1,
-			"spaceUType"		: spaceData.get("mapID", 1),
-			"direction"			: spaceData.get("rotation", (0,0,0)),
-			"position"			: spaceData.get("position", (0,0,0))
+			"spaceUType"		: spaceData["mapID"],
+			"direction"			: spaceData["rotation"],
+			"position"			: spaceData["position"]
 			}
 			
 		avatar = KBEngine.createBaseLocally('Avatar', props)
