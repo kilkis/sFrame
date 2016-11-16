@@ -42,7 +42,7 @@ function LoginInfoCtrl.OnServerCB()
 		
 	Loading.instance:showLoading();
 
-	local ctrl = CtrlManager.GetCtrl(CtrlNames.CreateCharacter);
+	local ctrl = CtrlManager.GetCtrl(CtrlNames.ChooseCharacter);
 	if ctrl ~= nil then
 		ctrl:Awake();
 	end

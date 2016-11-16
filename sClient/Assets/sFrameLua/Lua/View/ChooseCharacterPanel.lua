@@ -1,17 +1,17 @@
 local transform;
 local gameObject;
 
-CreateCharacterPanel = {};
-local this = CreateCharacterPanel;
+ChooseCharacterPanel = {};
+local this = ChooseCharacterPanel;
 
-function CreateCharacterPanel.Awake(obj)
+function ChooseCharacterPanel.Awake(obj)
 	gameObject = obj;
 	transform = obj.transform;
 
 	this.InitPanel();
 end
 
-function CreateCharacterPanel.InitPanel()
+function ChooseCharacterPanel.InitPanel()
 	this.btnEnter = transform:FindChild("Choose").gameObject;
 	this.avatarNameList = {};
 	this.avatarNameList[0] = transform:FindChild("Image/Tooltip/CName1").gameObject;
@@ -36,6 +36,6 @@ function CreateCharacterPanel.InitPanel()
 	end
 end
 
-function CreateCharacterPanel.OnDestroy()
-	log("CreateCharacterPanel onDestroy>>>>>>>>>>>");
+function ChooseCharacterPanel.OnDestroy()
+	log("ChooseCharacterPanel onDestroy>>>>>>>>>>>");
 end

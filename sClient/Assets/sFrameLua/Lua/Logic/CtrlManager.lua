@@ -5,6 +5,7 @@ require "Controller/LoginCtrl"
 require "Controller/LoginInfoCtrl"
 require "Controller/LoginCreateInfoCtrl"
 require "Controller/NoticeCtrl"
+require "Controller/ChooseCharacterCtrl"
 require "Controller/CreateCharacterCtrl"
 
 
@@ -20,6 +21,7 @@ function CtrlManager.Init()
 	ctrlList[CtrlNames.LoginInfo] = LoginInfoCtrl.New();
 	ctrlList[CtrlNames.LoginCreate] = LoginCreateInfoCtrl.New();
 	ctrlList[CtrlNames.Notice] = NoticeCtrl.New();
+	ctrlList[CtrlNames.ChooseCharacter] = ChooseCharacterCtrl.New();
 	ctrlList[CtrlNames.CreateCharacter] = CreateCharacterCtrl.New();
 	return this;
 end

@@ -6,6 +6,7 @@ CtrlNames = {
 	LoginInfo = "LoginInfoCtrl",
 	LoginCreate = "LoginCreateCtrl",
 	Notice = "NoticeCtrl",
+	ChooseCharacter = "ChooseCharacterCtrl",
 	CreateCharacter = "CreateCharacterCtrl",
 }
 
@@ -16,6 +17,7 @@ PanelNames = {
 	"LoginInfoPanel",
 	"LoginCreateInfoPanel",
 	"NoticePanel",
+	"ChooseCharacterPanel",
 	"CreateCharacterPanel",
 }
 
