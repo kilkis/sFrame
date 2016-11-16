@@ -40,6 +40,7 @@ public class UnityEngine_ParticleSystemWrap
 		L.RegVar("simulationSpace", get_simulationSpace, set_simulationSpace);
 		L.RegVar("scalingMode", get_scalingMode, set_scalingMode);
 		L.RegVar("randomSeed", get_randomSeed, set_randomSeed);
+		L.RegVar("useAutoRandomSeed", get_useAutoRandomSeed, set_useAutoRandomSeed);
 		L.RegVar("emission", get_emission, null);
 		L.RegVar("shape", get_shape, null);
 		L.RegVar("velocityOverLifetime", get_velocityOverLifetime, null);
@@ -797,6 +798,25 @@ public class UnityEngine_ParticleSystemWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_useAutoRandomSeed(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)o;
+			bool ret = obj.useAutoRandomSeed;
+			LuaDLL.lua_pushboolean(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index useAutoRandomSeed on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_emission(IntPtr L)
 	{
 		object o = null;
@@ -1420,6 +1440,25 @@ public class UnityEngine_ParticleSystemWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index randomSeed on a nil value" : e.Message);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_useAutoRandomSeed(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)o;
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			obj.useAutoRandomSeed = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o == null ? "attempt to index useAutoRandomSeed on a nil value" : e.Message);
 		}
 	}
 }

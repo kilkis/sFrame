@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-public class sFrame_sULoadingWrap
+public class sFramework_sULoadingWrap
 {
 	public static void Register(LuaState L)
 	{

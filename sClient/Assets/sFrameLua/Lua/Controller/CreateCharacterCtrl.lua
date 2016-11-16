@@ -35,10 +35,13 @@ end
 
 --µ¥»÷ÊÂ¼þ--
 function CreateCharacterCtrl.OnClick(go)
-	print("click");
-	Loading.instance:showLoading();
-	--Network.instance:sendMsg2Server("selectAvatarGame", this.selAvatarDBID);
-	Network.instance:selAvatar(this.selAvatarDBID, "CreateCharacterCtrl", "OnSelOK");
+	if CreateCharacterPanel.textName.transform:GetComponent("Text").text == "" then
+		log("name is empty");
+	else
+		Loading.instance:showLoading();
+		--Network.instance:sendMsg2Server("selectAvatarGame", this.selAvatarDBID);
+		Network.instance:selAvatar(this.selAvatarDBID, "CreateCharacterCtrl", "OnSelOK");
+	end
 end
 
 function CreateCharacterCtrl.OnSelOK(go)

@@ -13,8 +13,12 @@ public class UnityEngine_CameraWrap
 		L.RegFunction("ResetAspect", ResetAspect);
 		L.RegFunction("ResetFieldOfView", ResetFieldOfView);
 		L.RegFunction("SetStereoViewMatrices", SetStereoViewMatrices);
+		L.RegFunction("GetStereoViewMatrix", GetStereoViewMatrix);
+		L.RegFunction("SetStereoViewMatrix", SetStereoViewMatrix);
 		L.RegFunction("ResetStereoViewMatrices", ResetStereoViewMatrices);
 		L.RegFunction("SetStereoProjectionMatrices", SetStereoProjectionMatrices);
+		L.RegFunction("GetStereoProjectionMatrix", GetStereoProjectionMatrix);
+		L.RegFunction("SetStereoProjectionMatrix", SetStereoProjectionMatrix);
 		L.RegFunction("ResetStereoProjectionMatrices", ResetStereoProjectionMatrices);
 		L.RegFunction("WorldToScreenPoint", WorldToScreenPoint);
 		L.RegFunction("WorldToViewportPoint", WorldToViewportPoint);
@@ -235,6 +239,42 @@ public class UnityEngine_CameraWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetStereoViewMatrix(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)ToLua.CheckObject(L, 2, typeof(UnityEngine.Camera.StereoscopicEye));
+			UnityEngine.Matrix4x4 o = obj.GetStereoViewMatrix(arg0);
+			ToLua.PushValue(L, o);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetStereoViewMatrix(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)ToLua.CheckObject(L, 2, typeof(UnityEngine.Camera.StereoscopicEye));
+			UnityEngine.Matrix4x4 arg1 = (UnityEngine.Matrix4x4)ToLua.CheckObject(L, 3, typeof(UnityEngine.Matrix4x4));
+			obj.SetStereoViewMatrix(arg0, arg1);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ResetStereoViewMatrices(IntPtr L)
 	{
 		try
@@ -260,6 +300,42 @@ public class UnityEngine_CameraWrap
 			UnityEngine.Matrix4x4 arg0 = (UnityEngine.Matrix4x4)ToLua.CheckObject(L, 2, typeof(UnityEngine.Matrix4x4));
 			UnityEngine.Matrix4x4 arg1 = (UnityEngine.Matrix4x4)ToLua.CheckObject(L, 3, typeof(UnityEngine.Matrix4x4));
 			obj.SetStereoProjectionMatrices(arg0, arg1);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetStereoProjectionMatrix(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)ToLua.CheckObject(L, 2, typeof(UnityEngine.Camera.StereoscopicEye));
+			UnityEngine.Matrix4x4 o = obj.GetStereoProjectionMatrix(arg0);
+			ToLua.PushValue(L, o);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetStereoProjectionMatrix(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)ToLua.CheckObject(L, 2, typeof(UnityEngine.Camera.StereoscopicEye));
+			UnityEngine.Matrix4x4 arg1 = (UnityEngine.Matrix4x4)ToLua.CheckObject(L, 3, typeof(UnityEngine.Matrix4x4));
+			obj.SetStereoProjectionMatrix(arg0, arg1);
 			return 0;
 		}
 		catch(Exception e)

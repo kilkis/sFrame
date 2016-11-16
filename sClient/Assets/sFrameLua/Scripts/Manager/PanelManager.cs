@@ -75,5 +75,26 @@ namespace LuaFramework {
             Debug.LogWarning("CreatePanel::>> " + name + " " + prefab);
         }
 #endif
+
+        private Dictionary<string, Vector3> _pannelInfo = new Dictionary<string, Vector3>();
+        public void hideTransformPosition(string name, Transform trans)
+        {
+            if (!_pannelInfo.ContainsKey(name))
+                _pannelInfo.Add(name, trans.localPosition);
+            else
+                _pannelInfo[name] = trans.localPosition;
+            trans.localPosition = trans.localPosition + new Vector3(5000, 0, 0);
+        }
+
+        public void showTransformPosition(string name, Transform trans)
+        {
+            if (_pannelInfo.ContainsKey(name))
+            {
+                trans.position = _pannelInfo[name];
+                _pannelInfo.Remove(name);
+            }
+            else
+                trans.position = Vector3.zero;
+        }
     }
 }

@@ -101,10 +101,10 @@ public static class LuaBinder
 		LuaFramework_NetworkManagerWrap.Register(L);
 		LuaFramework_ResourceManagerWrap.Register(L);
 		L.EndModule();
-		L.BeginModule("sFrame");
-		sFrame_sULoadingWrap.Register(L);
-		sFrame_sGameFlowWrap.Register(L);
-		sFrame_sNetworkInterfaceWrap.Register(L);
+		L.BeginModule("sFramework");
+		sFramework_sULoadingWrap.Register(L);
+		sFramework_sGameFlowWrap.Register(L);
+		sFramework_sNetworkInterfaceWrap.Register(L);
 		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);

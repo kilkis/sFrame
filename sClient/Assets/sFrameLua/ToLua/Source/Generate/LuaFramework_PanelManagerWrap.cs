@@ -8,6 +8,8 @@ public class LuaFramework_PanelManagerWrap
 	{
 		L.BeginClass(typeof(LuaFramework.PanelManager), typeof(Manager));
 		L.RegFunction("CreatePanel", CreatePanel);
+		L.RegFunction("hideTransformPosition", hideTransformPosition);
+		L.RegFunction("showTransformPosition", showTransformPosition);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", Lua_ToString);
 		L.EndClass();
@@ -23,6 +25,42 @@ public class LuaFramework_PanelManagerWrap
 			string arg0 = ToLua.CheckString(L, 2);
 			LuaFunction arg1 = ToLua.CheckLuaFunction(L, 3);
 			obj.CreatePanel(arg0, arg1);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int hideTransformPosition(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.PanelManager));
+			string arg0 = ToLua.CheckString(L, 2);
+			UnityEngine.Transform arg1 = (UnityEngine.Transform)ToLua.CheckUnityObject(L, 3, typeof(UnityEngine.Transform));
+			obj.hideTransformPosition(arg0, arg1);
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int showTransformPosition(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			LuaFramework.PanelManager obj = (LuaFramework.PanelManager)ToLua.CheckObject(L, 1, typeof(LuaFramework.PanelManager));
+			string arg0 = ToLua.CheckString(L, 2);
+			UnityEngine.Transform arg1 = (UnityEngine.Transform)ToLua.CheckUnityObject(L, 3, typeof(UnityEngine.Transform));
+			obj.showTransformPosition(arg0, arg1);
 			return 0;
 		}
 		catch(Exception e)

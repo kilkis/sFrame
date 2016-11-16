@@ -36,6 +36,15 @@ function ChooseCharacterPanel.InitPanel()
 	end
 end
 
+
+function ChooseCharacterPanel.Hide()
+	panelMgr:hideTransformPosition("ChooseCharacterPanel", transform);
+end
+
+function ChooseCharacterPanel.Show()
+	panelMgr:showTransformPosition("ChooseCharacterPanel", transform);
+end
+
 function ChooseCharacterPanel.OnDestroy()
 	log("ChooseCharacterPanel onDestroy>>>>>>>>>>>");
 end

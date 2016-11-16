@@ -12,7 +12,7 @@ function CreateCharacterPanel.Awake(obj)
 end
 
 function CreateCharacterPanel.InitPanel()
-	this.btnEnter = transform:FindChild("Choose").gameObject;
+	this.btnEnter = transform:FindChild("NameEnter/Enter").gameObject;
 	this.avatarNameList = {};
 	this.avatarNameList[0] = transform:FindChild("Image/Tooltip/CName1").gameObject;
 	this.avatarNameList[1] = transform:FindChild("Image/Tooltip1/CName2").gameObject;
@@ -22,6 +22,8 @@ function CreateCharacterPanel.InitPanel()
 	this.avatarBtn[0] = transform:FindChild("Image/Tooltip").gameObject;
 	this.avatarBtn[1] = transform:FindChild("Image/Tooltip1").gameObject;
 	this.avatarBtn[2] = transform:FindChild("Image/Tooltip2").gameObject;
+	
+	this.textName = transform:FindChild("NameEnter/InputField/Text").gameObject;
 
 	this.avatarInfo = {}
 
@@ -34,6 +36,14 @@ function CreateCharacterPanel.InitPanel()
 		this.avatarInfo[this.count] = v;
 		this.count = this.count + 1;
 	end
+end
+
+function CreateCharacterPanel.Hide()
+	panelMgr:hideTransformPosition("CreateCharacterPanel", transform);
+end
+
+function CreateCharacterPanel.Show()
+	panelMgr:showTransformPosition("CreateCharacterPanel", transform);
 end
 
 function CreateCharacterPanel.OnDestroy()

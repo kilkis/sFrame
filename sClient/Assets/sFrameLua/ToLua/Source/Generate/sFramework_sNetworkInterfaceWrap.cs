@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-public class sFrame_sNetworkInterfaceWrap
+public class sFramework_sNetworkInterfaceWrap
 {
 	public static void Register(LuaState L)
 	{

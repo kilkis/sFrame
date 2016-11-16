@@ -35,9 +35,9 @@ Util = LuaFramework.Util;
 AppConst = LuaFramework.AppConst;
 LuaHelper = LuaFramework.LuaHelper;
 ByteBuffer = LuaFramework.ByteBuffer;
-Loading = sFrame.sULoading;
-Flow = sFrame.sGameFlow;
-Network = sFrame.sNetworkInterface;
+Loading = sFramework.sULoading;
+Flow = sFramework.sGameFlow;
+Network = sFramework.sNetworkInterface;
 
 resMgr = LuaHelper.GetResManager();
 panelMgr = LuaHelper.GetPanelManager();

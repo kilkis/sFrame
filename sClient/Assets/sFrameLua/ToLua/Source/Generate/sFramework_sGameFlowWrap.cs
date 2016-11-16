@@ -2,12 +2,13 @@
 using System;
 using LuaInterface;
 
-public class sFrame_sGameFlowWrap
+public class sFramework_sGameFlowWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(sFramework.sGameFlow), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("startGame", startGame);
+		L.RegFunction("getCurState", getCurState);
 		L.RegFunction("changeNextState", changeNextState);
 		L.RegFunction("logicUpdate", logicUpdate);
 		L.RegFunction("onNeedUpdateState", onNeedUpdateState);
@@ -29,6 +30,23 @@ public class sFrame_sGameFlowWrap
 			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
 			obj.startGame();
 			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int getCurState(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			sFramework.sGameFlow obj = (sFramework.sGameFlow)ToLua.CheckObject(L, 1, typeof(sFramework.sGameFlow));
+			sFramework.sGameState o = obj.getCurState();
+			ToLua.Push(L, o);
+			return 1;
 		}
 		catch(Exception e)
 		{
