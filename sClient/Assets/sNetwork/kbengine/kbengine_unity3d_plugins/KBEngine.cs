@@ -1930,11 +1930,11 @@
             
 			if(posHasChanged || dirHasChanged)
 			{
-                Debug.Log("pos:" + playerEntity._entityLastLocalPos + " - " + position);
-                Debug.Log("dir:" + playerEntity._entityLastLocalDir + " - " + direction);
-                Debug.Log("fuck1:" + Vector3.Distance(playerEntity._entityLastLocalPos, position));
-                Debug.Log("fuck2:" + Vector3.Distance(playerEntity._entityLastLocalDir, direction));
-                Debug.Log("fuck all:" + posHasChanged + " - " + dirHasChanged);
+                //Debug.Log("pos:" + playerEntity._entityLastLocalPos + " - " + position);
+                //Debug.Log("dir:" + playerEntity._entityLastLocalDir + " - " + direction);
+                //Debug.Log("fuck1:" + Vector3.Distance(playerEntity._entityLastLocalPos, position));
+                //Debug.Log("fuck2:" + Vector3.Distance(playerEntity._entityLastLocalDir, direction));
+                //Debug.Log("fuck all:" + posHasChanged + " - " + dirHasChanged);
 
 
                 playerEntity._entityLastLocalPos = position;
@@ -1942,7 +1942,7 @@
 
 				Bundle bundle = Bundle.createObject();
 				bundle.newMessage(Message.messages["Baseapp_onUpdateDataFromClient"]);
-                Debug.Log("update2server:" + position.x + "," + position.y + "," + position.z);
+                //Debug.Log("update2server:" + position.x + "," + position.y + "," + position.z);
                 bundle.writeFloat(position.x);
 				bundle.writeFloat(position.y);
 				bundle.writeFloat(position.z);

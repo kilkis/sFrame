@@ -130,7 +130,7 @@ public class sEntityManager : sSingleton<sEntityManager>
 		Debug.Log ("push pid2:" + uid);
 
 		sEntityInfo tmp = getOrCreatePlayer(uid);
-		tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, tmp.attr.position == Vector3.zero?startpos:tmp.attr.position, Quaternion.LookRotation(tmp.attr.direction)) as GameObject;
+        tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, tmp.attr.position == Vector3.zero ? startpos : tmp.attr.position, tmp.attr.direction == Vector3.zero?Quaternion.identity:Quaternion.LookRotation(tmp.attr.direction)) as GameObject;
 		tmp.playerCC.SetActive(true);
 		tmp.pc = tmp.playerCC.GetComponent<sEntityControl>();
 		tmp.uid = uid;

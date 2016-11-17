@@ -47,18 +47,21 @@ public class sLoadingGame : sSingleton<sLoadingGame> {
         if( scu != null )
         {
             scu.isUsing = true;
-            if( _callback != null )
-                _callback(scu);
+            if (_callback != null)
+            {
+                if (sCache.GetInstance().isLoadOK(name))
+                    _callback(scu);
+                else
+                    sCache.GetInstance().pushCache(name, _callback);
+            }
             return;
         }
-        //如果cache无法解决，则读取资源
+        //如果cache无法解决，则读取资源(需要先创建一个scu，用于确保下次读取时不用重复加载）
+        sCache.GetInstance().initPreCache(CacheType.single, name, !cache);
+        sCache.GetInstance().pushCache(name, _callback);
         sLoadAssetbundle.GetInstance().loadAssetBundle(name, (obj) =>
             {
-                sCache.GetInstance().initCache(CacheType.single, name, obj, !cache);
-                scu = sCache.GetInstance().getUnusedCache(name);
-                scu.isUsing = true;
-                if( _callback != null )
-                    _callback(scu);
+                sCache.GetInstance().cacheLoadOK(name, obj);
             });
     }
 

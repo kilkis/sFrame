@@ -24,45 +24,85 @@ public class sCacheUnit
 public class sCache : sSingleton<sCache>
 {
     private Dictionary<string, List<sCacheUnit>> _caches = new Dictionary<string, List<sCacheUnit>>();
+    //在同名资源正在加载的过程中，将回调放入
+    private Dictionary<string, List<sLoadingGame.LoadCallback>> _waitCaches = new Dictionary<string, List<sLoadingGame.LoadCallback>>();
 
     //底层cache，之后的cache根据这个来
-    private Dictionary<string, GameObject> _deepCache = new Dictionary<string, GameObject>();
-    public void initCache(CacheType ctype, string name, UnityEngine.Object go, bool noCache)
+    private Dictionary<string, sCacheUnit> _deepCache = new Dictionary<string, sCacheUnit>();
+
+    public bool isLoadOK(string name)
     {
-        if( _caches.ContainsKey(name))
+        return _deepCache.ContainsKey(name);
+    }
+
+    public void pushCache(string name, sLoadingGame.LoadCallback cb)
+    {
+        if (cb == null)
+            return;
+        if( isLoadOK(name))
+        {
+            cb(getUnusedCache(name));
+            return;
+        }
+        if (!_waitCaches.ContainsKey(name))
+            _waitCaches.Add(name, new List<sLoadingGame.LoadCallback>());
+        _waitCaches[name].Add(cb);
+    }
+    public void initPreCache(CacheType ctype, string name, bool noCache)
+    {
+        if (_caches.ContainsKey(name))
         {
             Debug.LogError("same name cache:" + name);
             return;
         }
-        int cachenum = 1;
-        if (ctype == CacheType.avatar)
-            cachenum = 2;
-        else if (ctype == CacheType.particle)
-            cachenum = 2;
-        _caches.Add(name, new List<sCacheUnit>());
-        //go.SetActive(false);
-        if (noCache )
+        int cachenum = 2;
+        if (!noCache)
         {
-            //Debug.Log("nocache: "+name);
-            sCacheUnit cu = new sCacheUnit();
-            cu.name = name;
-            cu.obj = GameObject.Instantiate(go, Vector3.zero, Quaternion.identity) as GameObject;
-            cu.isUsing = false;
+            _caches.Add(name, new List<sCacheUnit>());
+            for (int i = 0; i < cachenum; ++i)
+            {
+                sCacheUnit cu = new sCacheUnit();
+                cu.name = name;
+                cu.obj = null;
+                cu.isUsing = false;
 
-            _caches[name].Add(cu);
-            return;
+                _caches[name].Add(cu);
+            }
         }
-        _deepCache.Add(name, GameObject.Instantiate(go, Vector3.zero, Quaternion.identity) as GameObject);
-        _deepCache[name].SetActive(false);
+    }
+    public void cacheLoadOK(string name, UnityEngine.Object go)
+    {
+        sCacheUnit tmp = new sCacheUnit();
+        tmp.obj = GameObject.Instantiate(go, Vector3.zero, Quaternion.identity) as GameObject;
+        tmp.obj.SetActive(false);
+        _deepCache.Add(name, tmp);
 
-        for(int i = 0;i < cachenum; ++i )
+        if( _caches.ContainsKey(name))
         {
-            sCacheUnit cu = new sCacheUnit();
-            cu.name = name;
-            cu.obj = GameObject.Instantiate(_deepCache[name], Vector3.zero, Quaternion.identity) as GameObject;
-            cu.isUsing = false;
-            
-            _caches[name].Add(cu);
+            for(int i = 0;i < _caches[name].Count; ++i )
+            {
+                _caches[name][i].obj = GameObject.Instantiate(_deepCache[name].obj, Vector3.zero, Quaternion.identity) as GameObject;
+                _caches[name][i].isUsing = false;
+            }
+        }
+
+        if (_waitCaches.ContainsKey(name))
+        {
+            Debug.Log("cache name:" + name + "," + _waitCaches[name].Count + "," + _caches.ContainsKey(name));
+            //唯一
+            if (_waitCaches[name].Count == 1 && !_caches.ContainsKey(name))
+            {
+                _waitCaches[name][0](_deepCache[name]);
+            }
+            else
+            {
+                for (int i = 0; i < _waitCaches[name].Count; ++i)
+                {
+                    sCacheUnit scu = getUnusedCache(name);
+                    scu.isUsing = true;
+                    _waitCaches[name][i](scu);
+                }
+            }
         }
     }
 
@@ -84,7 +124,7 @@ public class sCache : sSingleton<sCache>
             {
                 sCacheUnit cu = new sCacheUnit();
             
-                cu.obj = GameObject.Instantiate(_deepCache[name], Vector3.zero, Quaternion.identity) as GameObject;
+                cu.obj = GameObject.Instantiate(_deepCache[name].obj, Vector3.zero, Quaternion.identity) as GameObject;
                 cu.isUsing = false;
                 _caches[name].Add(cu);
             }

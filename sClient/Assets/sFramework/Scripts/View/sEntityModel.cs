@@ -27,7 +27,7 @@ public class sEntityModel : MonoBehaviour {
 	public void createModel(string modelName, GameObject sp)
 	{
 		playerCC = sp;
-		sLoadingGame.GetInstance ().loadWeak (modelName, loadModelOK, false);
+		sLoadingGame.GetInstance ().loadWeak (modelName, loadModelOK, true);
 	}
     //调用创建avatar的接口
     public void createAvatar(GameObject sp)
