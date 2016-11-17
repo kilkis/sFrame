@@ -45,8 +45,17 @@ function CreateCharacterCtrl.OnClick(go)
 	end
 end
 
-function CreateCharacterCtrl.OnCreateOK()
+function CreateCharacterCtrl.OnCreateOK(dbid)
 	log("create ok");
+	Network.instance:selAvatar(dbid, "CreateCharacterCtrl", "OnSelOK");
+end
+
+function CreateCharacterCtrl.OnSelOK()
+	local ctrl = CtrlManager.GetCtrl(CtrlNames.ChooseCharacter);
+	if ctrl ~= nil then
+		ctrl:CloseTogether();
+	end
+	destroy(gameObject);
 	Flow.instance:changeNextState();
 end
 

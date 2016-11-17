@@ -109,8 +109,9 @@ public class sNetworkInWorld : MonoBehaviour
     {
         if( sGameFlow.instance.getCurState() == sGameState.Create )
         {
+            Debug.Log("xxxxxxxxxxxxxxxxxx");
             //去除选择界面的相关内容，前提是这个流程在正常顺序内只进入一次
-            sNetworkOutOfWorld.inst.callAndRemoveLua("selAvatar");
+            sNetworkOutOfWorld.inst.callAndRemoveLua("selAvatar", new object[]{});
         }
         //这里会获得当前角色所在的地图的信息，主要只使用spaceID
         Debug.Log("onSetSpaceData:" + spaceID + "," + key + "," + value);

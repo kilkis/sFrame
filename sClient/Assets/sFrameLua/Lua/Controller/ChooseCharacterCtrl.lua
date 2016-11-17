@@ -27,6 +27,10 @@ function ChooseCharacterCtrl.OnCreate(obj)
 	lb:AddClick(ChooseCharacterPanel.avatarBtn[0], this.OnChoose1);
 	lb:AddClick(ChooseCharacterPanel.avatarBtn[1], this.OnChoose2);
 	lb:AddClick(ChooseCharacterPanel.avatarBtn[2], this.OnChoose3);
+	lb:AddClick(ChooseCharacterPanel.delBtn[0], this.OnDel1);
+	lb:AddClick(ChooseCharacterPanel.delBtn[1], this.OnDel2);
+	lb:AddClick(ChooseCharacterPanel.delBtn[2], this.OnDel3);
+	
 
 	this.selAvatarDBID = ffi.new("uint64_t");
 	this.selAvatarDBID = 0;
@@ -34,11 +38,11 @@ function ChooseCharacterCtrl.OnCreate(obj)
 	Loading.instance:hideLoading();
 end
 
---µ¥»÷ÊÂ¼þ--
+--å•å‡»äº‹ä»¶--
 function ChooseCharacterCtrl.OnClick(go)
 	if this.selAvatarDBID == 0 then
 		log("sel avatarDBID is zero!");
-		--ÕâÀïÓ¦¸ÃÏÔÊ¾´íÎóÌáÊ¾¿ò
+		--è¿™é‡Œåº”è¯¥æ˜¾ç¤ºé”™è¯¯æç¤ºæ¡†
 	else
 		Loading.instance:showLoading();
 		--Network.instance:sendMsg2Server("selectAvatarGame", this.selAvatarDBID);
@@ -46,9 +50,17 @@ function ChooseCharacterCtrl.OnClick(go)
 	end
 end
 
+function ChooseCharacterCtrl.CloseTogether()
+	destroy(gameObject);
+end
+
 function ChooseCharacterCtrl.OnSelOK(go)
 	destroy(gameObject);
 	Flow.instance:changeNextState();
+end
+
+function ChooseCharacterCtrl.OnDelOK(go)
+	ChooseCharacterPanel:Reset();
 end
 
 
@@ -81,6 +93,24 @@ function ChooseCharacterCtrl.OnChoose3(go)
 		this.selAvatarDBID = ChooseCharacterPanel.avatarInfo[2].dbid;
 	else
 		log("there is no character3");
+	end
+end
+
+function ChooseCharacterCtrl.OnDel1(go)
+	if ChooseCharacterPanel.count > 0 then
+		Network.instance:delAvatar(ChooseCharacterPanel.avatarNameList[0].transform:GetComponent("Text").text, "ChooseCharacterCtrl", "OnDelOK");
+	end
+end
+
+function ChooseCharacterCtrl.OnDel2(go)
+	if ChooseCharacterPanel.count > 1 then
+		Network.instance:delAvatar(ChooseCharacterPanel.avatarNameList[1].transform:GetComponent("Text").text, "ChooseCharacterCtrl", "OnDelOK");
+	end
+end
+
+function ChooseCharacterCtrl.OnDel3(go)
+	if ChooseCharacterPanel.count > 2 then
+		Network.instance:delAvatar(ChooseCharacterPanel.avatarNameList[2].transform:GetComponent("Text").text, "ChooseCharacterCtrl", "OnDelOK");
 	end
 end
 

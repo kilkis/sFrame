@@ -42,7 +42,15 @@ namespace sFramework
 
         public void createAvatar(byte roleType, string name, string cbFile, string cbMethod)
         {
+            sNetworkOutOfWorld.inst.pushLuaCB("createAvatar", cbFile, cbMethod);
             KBEngine.Event.fireIn("reqCreateAvatar", roleType, name);
+        }
+
+        public void delAvatar(string name, string cbFile, string cbMethod)
+        {
+            Debug.Log("remove avatar:" + name);
+            sNetworkOutOfWorld.inst.pushLuaCB("delAvatar", cbFile, cbMethod);
+            KBEngine.Event.fireIn("reqRemoveAvatar", name);
         }
 
         public Dictionary<UInt64, sAvatarList> getAvatarList()

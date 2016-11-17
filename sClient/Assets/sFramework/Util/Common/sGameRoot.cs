@@ -16,7 +16,6 @@ public class sGameRoot : MonoBehaviour
     {
         _rootObj = gameObject;
         GameObject.DontDestroyOnLoad(_rootObj);
-
         InitSingletons();
     }
 

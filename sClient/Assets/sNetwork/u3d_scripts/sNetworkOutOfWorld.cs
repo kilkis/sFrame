@@ -68,11 +68,11 @@ public class sNetworkOutOfWorld : MonoBehaviour
         luaCBs.Add(msg, new sLuaCallback(file, method));
     }
 
-    public void callAndRemoveLua(string msg)
+    public void callAndRemoveLua(string msg, params object[] args)
     {
         if (luaCBs.ContainsKey(msg))
         {
-            LuaFramework.Util.CallMethod(luaCBs[msg].cbFile, luaCBs[msg].cbMethod);
+            LuaFramework.Util.CallMethod(luaCBs[msg].cbFile, luaCBs[msg].cbMethod, args);
             luaCBs.Remove(msg);
         }
     }
@@ -415,7 +415,17 @@ public class sNetworkOutOfWorld : MonoBehaviour
 	{
 		info("importClientEntityDef ...");
 	}
-	
+
+    public UInt64 compNewAvatar(Dictionary<UInt64, Dictionary<string, object>> avatarList)
+    {
+        foreach(UInt64 dbid in avatarList.Keys)
+        {
+            if (ui_avatarList.ContainsKey(dbid))
+                continue;
+            return dbid;
+        }
+        return 0;
+    }
 	public void onReqAvatarList(Dictionary<UInt64, Dictionary<string, object>> avatarList)
 	{
         info("on req avatar list");
@@ -426,8 +436,9 @@ public class sNetworkOutOfWorld : MonoBehaviour
         {
             ui_avatarList.Add(dbid, new sAvatarList(dbid, (string)avatarList[dbid]["name"]));
         }
-
-        callAndRemoveLua("login");
+        
+        callAndRemoveLua("login", new object[]{});
+        
     }
 
     public Dictionary<UInt64, sAvatarList> getAvatarList()
@@ -442,8 +453,9 @@ public class sNetworkOutOfWorld : MonoBehaviour
 			err("Error creating avatar, errcode=" + retcode);
 			return;
 		}
-		
+        callAndRemoveLua("createAvatar", new object[] { compNewAvatar(avatarList) });
 		onReqAvatarList(avatarList);
+        
 	}
 	
 	public void onRemoveAvatar(UInt64 dbid, Dictionary<UInt64, Dictionary<string, object>> avatarList)
@@ -455,6 +467,7 @@ public class sNetworkOutOfWorld : MonoBehaviour
 		}
 		
 		onReqAvatarList(avatarList);
+        callAndRemoveLua("delAvatar", new object[] { });
 	}
 	
 	public void onDisableConnect()
