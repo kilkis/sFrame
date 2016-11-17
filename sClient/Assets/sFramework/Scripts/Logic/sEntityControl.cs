@@ -83,6 +83,8 @@ public class sEntityControl : MonoBehaviour {
                 if (Physics.Raycast(ray, out hitinfo, 999, layer))
                 {
                     focuspos = hitinfo.point;
+                    //Debug.Log("focus pos:" + focuspos);
+                    //Debug.Log("cur pos:" + transform.position);
                     //只使用navmesh得到路线，路线跑动自己处理逻辑
                     //agent.ResetPath();
                     
@@ -115,7 +117,7 @@ public class sEntityControl : MonoBehaviour {
             float dis = Vector3.Distance(op, Vector3.zero);
             float rundis = 3 * Time.deltaTime;
             op.Normalize();
-            Debug.Log("dis: " + dis + " : " + rundis);
+            //Debug.Log("dis: " + dis + " : " + rundis);
             if (dis <= rundis)
             {
                 transform.position += dis * op;

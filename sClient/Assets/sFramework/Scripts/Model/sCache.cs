@@ -160,6 +160,12 @@ public class sCache : sSingleton<sCache>
             _caches[name].Clear();
             _caches.Remove(name);
         }
+        else if( _deepCache.ContainsKey(name))
+        {
+            GameObject.Destroy(_deepCache[name].obj);
+            sLoadAssetbundle.GetInstance().unloadAssetBundle(name);
+            _deepCache.Remove(name);
+        }
     }
 
     /// <summary>
