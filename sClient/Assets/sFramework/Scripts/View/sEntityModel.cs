@@ -61,6 +61,7 @@ public class sEntityModel : MonoBehaviour {
 		float height = playerCC.GetComponent<CapsuleCollider>().height;
 		scu.obj.transform.localPosition = new Vector3(0, -height/2, 0);
 		scu.obj.transform.localRotation = Quaternion.identity;
+        scu.obj.SetActive(true);
 		anim = scu.obj.GetComponent<Animation> ();
 		pc = playerCC.GetComponent<sEntityControl>();
 		pc.setAnim(anim);

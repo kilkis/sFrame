@@ -31,7 +31,24 @@
 			<Persistent>	true					</Persistent> 
 			<Default>		0				</Default>
 		</MP_Max>
-		
+		<damageMin>
+			<Type> 			INT32			</Type>
+			<Flags>			OWN_CLIENT		</Flags>
+			<Default>		0				</Default>
+			<Persistent>	true			</Persistent>
+		</damageMin>
+		<damageMax>
+			<Type> 			INT32			</Type>
+			<Flags>			OWN_CLIENT		</Flags>
+			<Default>		0				</Default>
+			<Persistent>	true			</Persistent>
+		</damageMax>
+		<defence>
+			<Type>			INT32			</Type>
+			<Flags>			OWN_CLIENT		</Flags>
+			<Default>		0				</Default>
+			<Persistent>	true			</Persistent>
+		</defence>
 	</Properties>
 
 	<CellMethods>

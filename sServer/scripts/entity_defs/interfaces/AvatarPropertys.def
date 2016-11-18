@@ -1,0 +1,42 @@
+<root>
+	<Properties>
+		<money>
+			<Type>			UINT64				</Type>
+			<Flags>			OWN_CLIENT			</Flags>
+			<Persistent>	true				</Persistent> 
+		</money>
+		<exp>
+			<Type>			UINT64				</Type>
+			<Flags>			OWN_CLIENT			</Flags>
+			<Persistent>	true				</Persistent> 
+		</exp>
+
+		<strength>
+			<Type>			INT32				</Type>
+			<Flags>			OWN_CLIENT			</Flags>
+			<Persistent>	true				</Persistent> 
+		</strength>
+		<dexterity>
+			<Type>			INT32				</Type>
+			<Flags>			OWN_CLIENT			</Flags>
+			<Persistent>	true				</Persistent> 
+		</dexterity>
+		<intelligence>
+			<Type>			INT32				</Type>
+			<Flags>			OWN_CLIENT			</Flags>
+			<Persistent>	true				</Persistent> 
+		</intelligence>
+		<stamina>
+			<Type>			INT32				</Type>
+			<Flags>			OWN_CLIENT			</Flags>
+			<Persistent>	true				</Persistent> 
+		</stamina>
+		<equipLvl>
+			<Type> 			INT32			</Type>
+			<Flags>			OWN_CLIENT		</Flags>
+			<Default>		0				</Default>
+			<Persistent>	true			</Persistent>
+		</equipLvl>
+	</Properties>
+</root>
+	

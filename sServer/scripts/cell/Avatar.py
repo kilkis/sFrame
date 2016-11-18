@@ -64,6 +64,8 @@ class Avatar(KBEngine.Entity,
 		GameObject.onTimer(self, tid, userArg)
 		Spell.onTimer(self, tid, userArg)
 		
+		ERROR_MSG("on timer")
+		
 	def onGetWitness(self):
 		"""
 		KBEngine method.

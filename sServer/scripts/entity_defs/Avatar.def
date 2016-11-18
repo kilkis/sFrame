@@ -18,6 +18,7 @@
 		<Interface>	Spell			</Interface>
 		<Interface>	Teleport		</Interface>
 		<Interface>	Dialog			</Interface>
+		<Interface>	AvatarPropertys	</Interface>
 	</Implements>
 
 	<Properties>
@@ -26,7 +27,11 @@
 			<Flags>	BASE						</Flags>
 			<Persistent>	true						</Persistent>
 		</roleType>
-
+		<roleTypeCell>
+			<Type> UINT8 </Type>
+			<Flags> ALL_CLIENTS </Flags>
+			<Persistent> true </Persistent>
+		</roleTypeCell>
 		<level>
 			<Utype>	41002						</Utype>
 			<Type>	UINT16					</Type>
@@ -42,20 +47,13 @@
 			<Index> 	UNIQUE 					</Index> 属性的索引类别，UNIQUE, INDEX，分别对应唯一索引、普通索引
 			<DatabaseLength> 32						</DatabaseLength>
 		</playerName>
-		-->
+		
 
 		<own_val>
 			<Type>	UINT16					</Type>
 			<Flags>	OWN_CLIENT					</Flags>
 		</own_val>
-		
-		<strength>
-			<Type>			INT32			</Type>
-			<Utype>			41008				</Utype>
-			<Flags> 		OWN_CLIENT		</Flags>
-			<Persistent>	true					</Persistent> 
-			<Default> 		0				</Default>
-		</strength>
+		-->
 	</Properties>
 
 	<BaseMethods>

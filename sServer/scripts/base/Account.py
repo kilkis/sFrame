@@ -8,7 +8,7 @@ from AVATAR_INFOS import TAvatarInfosList
 from AVATAR_DATA import TAvatarData
 from KBEDebug import *
 import d_avatar_inittab
-
+import d_careerinit
 import d_newplayermapinfo
 import d_mapinfo
 
@@ -65,14 +65,32 @@ class Account(KBEngine.Proxy):
 		"""
 		#根据角色类型来获取出生点(可以配置一样，也可以不一样)
 		spaceData = d_newplayermapinfo.datas.get(roleType)
-		
+		careerinitData = d_careerinit.datas.get(roleType)
 		props = {
 			"name"				: name,
 			"roleType"			: roleType,
-			"level"				: 1,
 			"spaceUType"		: spaceData["mapID"],
 			"direction"			: spaceData["rotation"],
-			"position"			: spaceData["position"]
+			"position"			: spaceData["position"],
+			#----------cell---------
+			"roleTypeCell"      : roleType,
+			#---------propertys
+			"level"				: 1,
+			"exp"				: 0,
+			"equipLvl"			: 0,
+			"money"				: 0,
+			"strength"			: careerinitData['strength'],
+			"dexterity"			: careerinitData['dexterity'],
+			"intelligence"		: careerinitData['intelligence'],
+			"stamina"			: careerinitData['stamina'],
+			"HP_Max"			: careerinitData['HPMax'],
+			"HP"				: careerinitData['HPMax'],
+			"MP_Max"			: careerinitData['MPMax'],
+			"MP"				: careerinitData['MPMax'],
+			"damageMin"			: careerinitData['damageMin'],
+			"damageMax"			: careerinitData['damageMax'],
+			"defence"			: careerinitData['defence'],
+			#---------propertys
 			}
 			
 		avatar = KBEngine.createBaseLocally('Avatar', props)
