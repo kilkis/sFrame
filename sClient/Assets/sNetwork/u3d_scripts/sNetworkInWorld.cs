@@ -43,6 +43,15 @@ public class sNetworkInWorld : MonoBehaviour
 		KBEngine.Event.registerOut("set_level", this, "set_level");
 		KBEngine.Event.registerOut("set_name", this, "set_entityName");
         KBEngine.Event.registerOut("set_strength", this, "set_strength");
+        KBEngine.Event.registerOut("set_dexterity", this, "set_dexterity");
+        KBEngine.Event.registerOut("set_intelligence", this, "set_intelligence");
+        KBEngine.Event.registerOut("set_stamina", this, "set_stamina");
+        KBEngine.Event.registerOut("set_equipLvl", this, "set_equipLvl");
+        KBEngine.Event.registerOut("set_exp", this, "set_exp");
+        KBEngine.Event.registerOut("set_damageMin", this, "set_damageMin");
+        KBEngine.Event.registerOut("set_damageMax", this, "set_damageMax");
+        KBEngine.Event.registerOut("set_defence", this, "set_defence");
+
         KBEngine.Event.registerOut("set_state", this, "set_state");
 		KBEngine.Event.registerOut("set_moveSpeed", this, "set_moveSpeed");
 		KBEngine.Event.registerOut("set_modelScale", this, "set_modelScale");
@@ -301,6 +310,46 @@ public class sNetworkInWorld : MonoBehaviour
     public void set_strength(KBEngine.Entity entity, object v)
     {
 		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.Strength, v);
+    }
+
+    public void set_dexterity(KBEngine.Entity entity, object v)
+    {
+        sEntityManager.GetInstance().setAttr(entity.id, sEntityAttrType.Dexterity, v);
+    }
+
+    public void set_intelligence(KBEngine.Entity entity, object v)
+    {
+        sEntityManager.GetInstance().setAttr(entity.id, sEntityAttrType.Intelligence, v);
+    }
+
+    public void set_stamina(KBEngine.Entity entity, object v)
+    {
+		sEntityManager.GetInstance ().setAttr (entity.id, sEntityAttrType.Stamina, v);
+    }
+
+    public void set_equipLvl(KBEngine.Entity entity, object v)
+    {
+        sEntityManager.GetInstance().setAttr(entity.id, sEntityAttrType.Equiplvl, v);
+    }
+
+    public void set_exp(KBEngine.Entity entity, object v)
+    {
+        sEntityManager.GetInstance().setAttr(entity.id, sEntityAttrType.Exp, v);
+    }
+
+    public void set_damageMin(KBEngine.Entity entity, object v)
+    {
+        sEntityManager.GetInstance().setAttr(entity.id, sEntityAttrType.DamageMin, v);
+    }
+
+    public void set_damageMax(KBEngine.Entity entity, object v)
+    {
+        sEntityManager.GetInstance().setAttr(entity.id, sEntityAttrType.DamageMax, v);
+    }
+
+    public void set_defence(KBEngine.Entity entity, object v)
+    {
+        sEntityManager.GetInstance().setAttr(entity.id, sEntityAttrType.Defence, v);
     }
     
     public void set_entityName(KBEngine.Entity entity, object v)

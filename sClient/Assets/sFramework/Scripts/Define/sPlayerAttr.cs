@@ -12,7 +12,14 @@ public enum sEntityAttrType
 	HpMax,
 	Mp,
 	MpMax,
-	Strength
+	Strength,
+    Dexterity,
+    Intelligence,
+    Stamina,
+    Equiplvl,
+    DamageMin,
+    DamageMax,
+    Defence,
 }
 
 public class sEntityAttr
@@ -26,7 +33,7 @@ public class sEntityAttr
     public int vip;
 
 	public ushort level;
-    public int exp;
+    public ulong exp;
 
     public int hp;
     public int hp_max;
@@ -34,4 +41,12 @@ public class sEntityAttr
     public int mp_max;
 
     public int strength;
+    public int dexterity;
+    public int intelligence;
+    public int stamina;
+    public int equiplvl;
+
+    public int damageMin;
+    public int damageMax;
+    public int defence;
 }

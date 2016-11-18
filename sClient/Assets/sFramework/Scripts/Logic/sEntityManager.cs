@@ -225,36 +225,57 @@ public class sEntityManager : sSingleton<sEntityManager>
 		Debug.Log ("set attr:" + uid + " - " + paType + " - " + value);
 		sEntityInfo tmp = getOrCreatePlayer(uid);
 		switch (paType) {
-		case sEntityAttrType.Name:
+		    case sEntityAttrType.Name:
 			tmp.attr.name = (string)value;
 			break;
-		case sEntityAttrType.GuildName:
+		    case sEntityAttrType.GuildName:
 			tmp.attr.guildname = (string)value;
 			break;
-		case sEntityAttrType.Vip:
+		    case sEntityAttrType.Vip:
 			tmp.attr.vip = (int)value;
 			break;
-		case sEntityAttrType.Lvl:
+		    case sEntityAttrType.Lvl:
 			tmp.attr.level = (ushort)value;
 			break;
-		case sEntityAttrType.Exp:
-			tmp.attr.exp = (int)value;
+		    case sEntityAttrType.Exp:
+            tmp.attr.exp = (ulong)value;
 			break;
-		case sEntityAttrType.Hp:
+		    case sEntityAttrType.Hp:
 			tmp.attr.hp = (int)value;
 			break;
-		case sEntityAttrType.HpMax:
+		    case sEntityAttrType.HpMax:
 			tmp.attr.hp_max = (int)value;
 			break;
-		case sEntityAttrType.Mp:
+		    case sEntityAttrType.Mp:
 			tmp.attr.mp = (int)value;
 			break;
-		case sEntityAttrType.MpMax:
+		    case sEntityAttrType.MpMax:
 			tmp.attr.mp_max = (int)value;
 			break;
-		case sEntityAttrType.Strength:
+		    case sEntityAttrType.Strength:
 			tmp.attr.strength = (int)value;
 			break;
+            case sEntityAttrType.Dexterity:
+            tmp.attr.dexterity = (int)value;
+            break;
+            case sEntityAttrType.Intelligence:
+            tmp.attr.intelligence = (int)value;
+            break;
+            case sEntityAttrType.Stamina:
+            tmp.attr.stamina = (int)value;
+            break;
+            case sEntityAttrType.Equiplvl:
+            tmp.attr.equiplvl = (int)value;
+            break;
+            case sEntityAttrType.DamageMin:
+            tmp.attr.damageMin = (int)value;
+            break;
+            case sEntityAttrType.DamageMax:
+            tmp.attr.damageMax = (int)value;
+            break;
+            case sEntityAttrType.Defence:
+            tmp.attr.defence = (int)value;
+            break;
 		}
 	}
    
