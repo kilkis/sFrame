@@ -84,6 +84,16 @@ namespace excel2xml
                 MessageBox.Show("请先选择导出类型");
                 return;
             }
+            if( checkBox1.Checked)
+            {
+                DataTable dt = excelTableDataSet.Tables[0];//只用第一个表
+                if( !checkCombine(dt))
+                {
+                    MessageBox.Show("整合配置不正确，无法整合，修正后再导出");
+                    button2.Enabled = true;
+                    return;
+                }
+            }
             button2.Enabled = false;
             if (checkBox2.Checked)
                 exportBin();
@@ -96,6 +106,42 @@ namespace excel2xml
             button2.Enabled = true;
         }
 
+        bool isCombineStart(string name)
+        {
+            string tmp = name.Substring(0, 1);
+            if (tmp == textBox1.Text)
+                return true;
+            return false;
+        }
+
+        bool isCombineEnd(string name)
+        {
+            string tmp = name.Substring(0, 1);
+            if (tmp == textBox2.Text)
+                return true;
+            return false;
+        }
+
+        bool checkCombine(DataTable dt)
+        {
+            int index = 0;
+            int start = 0;
+            int end = 0;
+            foreach(DataColumn dc in dt.Columns)
+            {
+                if (isCombineEnd(dc.ColumnName))
+                    end = index;
+                if (isCombineStart(dc.ColumnName))
+                    start = index;
+                index++;
+            }
+            if( start != 0 || end != 0)
+            {
+                if (start >= end)
+                    return false;
+            }
+            return true;
+        }
         private void exportBin()
         {
             if( File.Exists(purename+".bin"))
@@ -104,6 +150,7 @@ namespace excel2xml
             }
             FileStream fs = new FileStream(purename+".bin", FileMode.CreateNew);
             BinaryWriter sw = new BinaryWriter(fs);
+
             //foreach (DataTable dt in excelTableDataSet.Tables)   //遍历所有的datatable
             {
                 DataTable dt = excelTableDataSet.Tables[0];//只用第一个表
@@ -112,15 +159,39 @@ namespace excel2xml
                 for (int i = 1; i < dt.Rows.Count; ++i )//遍历所有的行
                 {
                     DataRow dr = dt.Rows[i];
-                    
+
+                    string combine = "";
+                    bool isInCombine = false;
                     foreach (DataColumn dc in dt.Columns)   //遍历所有的列
                     {
                         if (!isClient(dc.ColumnName))
                             continue;
                         //Console.WriteLine("{0},   {1},   {2}", dt.TableName, dc.ColumnName, dr[dc]);   //表名,列名,单元格数据
-                        if (dc.ColumnName.EndsWith("(I)"))
+                        if( checkBox1.Checked )
+                        {
+                            if( isCombineStart(dc.ColumnName))
+                            {
+                                isInCombine = true;
+                            }
+                            if( isCombineEnd(dc.ColumnName))
+                            {
+                                isInCombine = false;
+                                combine += dr[dc].ToString();
+                                sw.Write(combine);
+                                continue;
+                            }
+                        }
+                        if (isInCombine )
+                        {
+                            combine += dr[dc].ToString() + ",";
+                        }
+                        else if (dc.ColumnName.EndsWith("(I)"))
                         {
                             sw.Write(int.Parse(dr[dc].ToString()));
+                        }
+                        else if( dc.ColumnName.EndsWith("(F)"))
+                        {
+                            sw.Write(float.Parse(dr[dc].ToString()));
                         }
                         else if (dc.ColumnName.EndsWith("(V)"))
                         {
@@ -163,6 +234,10 @@ namespace excel2xml
             {
                 DataRow dr = dt.Rows[i];
 
+                string combine = "";
+                bool isInCombine = false;
+                string cname = "";
+
                 string test = dt.Columns[0].ColumnName.ToString();
                 if (test.EndsWith("(I)"))
                     sw.WriteLine("\t" + dr[dt.Columns[0]].ToString() + ":{");
@@ -177,7 +252,27 @@ namespace excel2xml
                 {
                     if (!isServer(dc.ColumnName))
                         continue;
-                    if (dc.ColumnName.EndsWith("(V)"))
+                    
+                    if (checkBox1.Checked)
+                    {
+                        if (isCombineStart(dc.ColumnName))
+                        {
+                            isInCombine = true;
+                            cname = getPName(dc.ColumnName);
+                        }
+                        if (isCombineEnd(dc.ColumnName))
+                        {
+                            isInCombine = false;
+                            combine += dr[dc].ToString();
+                            sw.WriteLine("\t\t\"" + cname + "\":\"" + combine + "\",");
+                            continue;
+                        }
+                    }
+                    if (isInCombine)
+                    {
+                        combine += dr[dc].ToString() + ",";
+                    }
+                    else if (dc.ColumnName.EndsWith("(V)"))
                     {
                         sw.WriteLine("\t\t\"" + getPName(dc.ColumnName) + "\":(" + dr[dc].ToString() + "),");
                     }
@@ -205,6 +300,8 @@ namespace excel2xml
                 return "ReadSingle()";
             else if (name.EndsWith("(S)"))
                 return "ReadString()";
+            else if (name.EndsWith("(F)"))
+                return "ReadSingle()";
             return "Read()";
         }
         private string getType(string name)
@@ -215,20 +312,33 @@ namespace excel2xml
                 return "Vector3";
             else if (name.EndsWith("(S)"))
                 return "string";
+            else if (name.EndsWith("(F)"))
+                return "float";
             return "object";
         }
 
         private string getPName(string name)
         {
-            string tmp = name.Substring(0, 3);
-            if (tmp == "(C)" || tmp == "(S)")
-                name = name.Substring(3, name.Length - 3);
+            if( checkBox1.Checked)
+            {
+                string tmp1 = name.Substring(0, 1);
+                if( tmp1 == textBox1.Text || tmp1 == textBox2.Text)
+                    name = name.Substring(1, 1);
+            }
+            if (name.Length > 3)
+            {
+                string tmp = name.Substring(0, 3);
+                if (tmp == "(C)" || tmp == "(S)")
+                    name = name.Substring(3, name.Length - 3);
+            }
             if (name.EndsWith("(I)"))
                 return name.Replace("(I)", "");
             else if (name.EndsWith("(V)"))
                 return name.Replace("(V)", "");
             else if (name.EndsWith("(S)"))
                 return name.Replace("(S)", "");
+            else if( name.EndsWith("(F)"))
+                return name.Replace("(F)", "");
             return name;
         }
         private void exportCSharp()
@@ -255,10 +365,32 @@ namespace excel2xml
             string dataname = "data_" + fn;
             sw.WriteLine("\tpublic class data_"+fn);
             sw.WriteLine("\t{");
+
+            string combine = "";
+            bool isInCombine = false;
+            string cname = "";
+
             for (int i = 0; i < dt.Columns.Count; ++i)
             {
                 DataColumn dc = dt.Columns[i];
                 if (!isClient(dc.ColumnName))
+                    continue;
+                if (checkBox1.Checked)
+                {
+                    if (isCombineStart(dc.ColumnName))
+                    {
+                        isInCombine = true;
+                        cname = getPName(dc.ColumnName);
+                        sw.WriteLine("\t\tpublic List<" + getType(dc.ColumnName) + "> " + getPName(dc.ColumnName) + " = new List<" + getType(dc.ColumnName) + ">();");
+                    }
+                    
+                    if (isCombineEnd(dc.ColumnName))
+                    {
+                        isInCombine = false;
+                        continue;
+                    }
+                }
+                if (isInCombine)
                     continue;
                 sw.WriteLine("\t\tpublic " + getType(dc.ColumnName) + " " + getPName(dc.ColumnName) + ";");
             }
@@ -285,7 +417,29 @@ namespace excel2xml
                 DataColumn dc = dt.Columns[i];
                 if (!isClient(dc.ColumnName))
                     continue;
-                if( getType(dc.ColumnName) == "Vector3")
+                if (checkBox1.Checked)
+                {
+                    if (isCombineStart(dc.ColumnName))
+                    {
+                        isInCombine = true;
+                        sw.WriteLine("\t\t\t\tstring tmp = br.ReadString();");
+                    }
+                    if (isCombineEnd(dc.ColumnName))
+                    {
+                        isInCombine = false;
+                        sw.WriteLine("\t\t\t\tstring[] tmps1 = tmp.Split(',');");
+                        sw.WriteLine("\t\t\t\tfor (int j = 0; j < tmps1.Length; ++j)");
+                        sw.WriteLine("\t\t\t\t{");
+                        sw.WriteLine("\t\t\t\t\t" + cname + ".Add(tmps1[j]);");
+                        sw.WriteLine("\t\t\t\t}");
+                        continue;
+                    }
+                }
+                if (isInCombine)
+                {
+                    continue;
+                }
+                else if (getType(dc.ColumnName) == "Vector3")
                 {
                     sw.WriteLine("\t\t\t\t{");
                     sw.WriteLine("\t\t\t\t\tfloat x = br.ReadSingle();");
@@ -486,8 +640,8 @@ namespace excel2xml
             else
             {
                 checkBox1.Checked = false;
-                textBox1.Text = "[";
-                textBox2.Text = "]";
+                textBox1.Text = "{";
+                textBox2.Text = "}";
 
                 checkBox2.Checked = false;
                 checkBox3.Checked = false;
@@ -506,6 +660,18 @@ namespace excel2xml
             {
                 Directory.CreateDirectory(dir);
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Text == textBox2.Text)
+                MessageBox.Show("不能和结束符一致");
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Text == textBox2.Text)
+                MessageBox.Show("不能和开始符一致");
         }
     }
 }
