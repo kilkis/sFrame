@@ -2,9 +2,9 @@
 <root>
   <GameObject>
     <pos>
-      <x>-157.82</x>
+      <x>-32.7</x>
       <y>1.11</y>
-      <z>112.71</z>
+      <z>10.4</z>
     </pos>
     <dir>
       <x>0</x>
@@ -24,9 +24,9 @@
   </GameObject>
   <GameObject>
     <pos>
-      <x>-142.3</x>
+      <x>-17.2</x>
       <y>1.11</y>
-      <z>136.7</z>
+      <z>34.4</z>
     </pos>
     <dir>
       <x>0</x>

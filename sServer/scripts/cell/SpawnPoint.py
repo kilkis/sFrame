@@ -23,11 +23,15 @@ class SpawnPoint(KBEngine.Entity, GameObject):
 			"spawnPos" : tuple(self.position),
 			"uid" : datas["id"],
 			#"utype" : datas["etype"],
-			#"modelID" : datas["modelID"],
+			"mid" : self.spawnEntityNO,
 			"modelScale" : self.modelScale,
 			"dialogID" : 0,#datas["dialogID"],
 			#"name" : datas["name"],
 			#"descr" : datas.get("descr", ''),
+			
+			#property
+			"moveSpeed" : datas['MoveSpeed'],
+			#end property
 		}
 		
 		e = KBEngine.createEntity(datas["Type"], self.spaceID, tuple(self.position), tuple(self.direction), params)

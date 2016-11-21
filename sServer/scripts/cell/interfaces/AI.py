@@ -153,29 +153,30 @@ class AI:
 		if self.targetID <= 0:
 			return
 		
-		dragon = (self.modelID == 20002001)
+		#dragon = (self.modelID == 20002001)
 
 		# demo简单实现， 如果是龙的话， 攻击距离比较远, 攻击距离应该调用不同技能来判定
 		attackMaxDist = 2.0
-		if dragon:
-			attackMaxDist = 20.0
+		#if dragon:
+		#	attackMaxDist = 20.0
 			
 		entity = KBEngine.entities.get(self.targetID)
 
 		if entity.position.distTo(self.position) > attackMaxDist:
-			runSpeed = self.getDatas()["runSpeed"]
-			if runSpeed != self.moveSpeed:
-				self.moveSpeed = runSpeed
+			#su：移动速度就不该在ai里设置，这是基础属性
+			#runSpeed = self.getDatas()["runSpeed"]
+			#if runSpeed != self.moveSpeed:
+			#	self.moveSpeed = runSpeed
 			self.gotoPosition(entity.position, attackMaxDist - 0.2)
 			return
 		else:
 			self.resetSpeed()
-			
-			skillID = 1
-			if dragon:
-				skillID = 7000101
+			ERROR_MSG("in attack range")
+			#skillID = 1
+			#if dragon:
+			#	skillID = 7000101
 
-			self.spellTarget(skillID, entity.id)
+			#self.spellTarget(skillID, entity.id)
 			
 	def onThinkOther(self):
 		"""
@@ -229,7 +230,7 @@ class AI:
 		if not self.isState(GlobalDefine.ENTITY_STATE_FREE):
 			return
 			
-		DEBUG_MSG("%s::onEnterTrap: %i entityEntering=(%s)%i, range_xz=%s, range_y=%s, controllerID=%i, userarg=%i" % \
+		ERROR_MSG("%s::onEnterTrap: %i entityEntering=(%s)%i, range_xz=%s, range_y=%s, controllerID=%i, userarg=%i" % \
 						(self.getScriptName(), self.id, entityEntering.getScriptName(), entityEntering.id, \
 						range_xz, range_y, controllerID, userarg))
 		
@@ -254,6 +255,7 @@ class AI:
 		virtual method.
 		有敌人进入列表
 		"""
+		ERROR_MSG("enemy in")
 		if not self.isState(GlobalDefine.ENTITY_STATE_FIGHT):
 			self.changeState(GlobalDefine.ENTITY_STATE_FIGHT)
 		

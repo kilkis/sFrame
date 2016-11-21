@@ -63,9 +63,10 @@ class Motion:
 		return True
 
 	def resetSpeed(self):
-		walkSpeed = self.getDatas()["moveSpeed"]
-		if walkSpeed != self.moveSpeed:
-			self.moveSpeed = walkSpeed
+		pass
+		#walkSpeed = self.getDatas()["moveSpeed"]
+		#if walkSpeed != self.moveSpeed:
+		#	self.moveSpeed = walkSpeed
 				
 	def backSpawnPos(self):
 		"""

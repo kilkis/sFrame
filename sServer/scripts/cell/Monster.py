@@ -35,6 +35,7 @@ class Monster(KBEngine.Entity,
 		# 第0层是地面，第1层是忽略建筑物的寻路层
 		#if self.modelID == 20002001:
 		#	self.layer = 1 
+		ERROR_MSG("monster init, id is :%i, speed: %i"%(self.mid, self.moveSpeed))
 			
 	def initEntity(self):
 		"""
