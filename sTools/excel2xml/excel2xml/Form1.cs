@@ -176,14 +176,18 @@ namespace excel2xml
                             if( isCombineEnd(dc.ColumnName))
                             {
                                 isInCombine = false;
-                                combine += dr[dc].ToString();
+                                if (!string.IsNullOrEmpty(dr[dc].ToString()))
+                                    combine += dr[dc].ToString();
+                                else
+                                    combine = combine.Substring(0, combine.Length - 1);
                                 sw.Write(combine);
                                 continue;
                             }
                         }
                         if (isInCombine )
                         {
-                            combine += dr[dc].ToString() + ",";
+                            if( !string.IsNullOrEmpty(dr[dc].ToString()))
+                                combine += dr[dc].ToString() + ",";
                         }
                         else if (dc.ColumnName.EndsWith("(I)"))
                         {
@@ -263,14 +267,18 @@ namespace excel2xml
                         if (isCombineEnd(dc.ColumnName))
                         {
                             isInCombine = false;
-                            combine += dr[dc].ToString();
+                            if (!string.IsNullOrEmpty(dr[dc].ToString()))
+                                combine += dr[dc].ToString();
+                            else
+                                combine = combine.Substring(0, combine.Length - 1);
                             sw.WriteLine("\t\t\"" + cname + "\":\"" + combine + "\",");
                             continue;
                         }
                     }
                     if (isInCombine)
                     {
-                        combine += dr[dc].ToString() + ",";
+                        if( !string.IsNullOrEmpty(dr[dc].ToString()))
+                            combine += dr[dc].ToString() + ",";
                     }
                     else if (dc.ColumnName.EndsWith("(V)"))
                     {
