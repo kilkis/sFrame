@@ -8,6 +8,7 @@ CtrlNames = {
 	Notice = "NoticeCtrl",
 	ChooseCharacter = "ChooseCharacterCtrl",
 	CreateCharacter = "CreateCharacterCtrl",
+	BattleButton = "BattleButtonCtrl",
 }
 
 PanelNames = {
@@ -19,6 +20,7 @@ PanelNames = {
 	"NoticePanel",
 	"ChooseCharacterPanel",
 	"CreateCharacterPanel",
+	"BattleButtonPanel",
 }
 
 --协议类型--

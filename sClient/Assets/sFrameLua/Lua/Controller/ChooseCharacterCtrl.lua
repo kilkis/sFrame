@@ -56,6 +56,10 @@ end
 
 function ChooseCharacterCtrl.OnSelOK(go)
 	destroy(gameObject);
+	local ctrl = CtrlManager.GetCtrl(CtrlNames.BattleButton);
+	if ctrl ~= nil then
+		ctrl:Awake();
+	end
 	Flow.instance:changeNextState();
 end
 

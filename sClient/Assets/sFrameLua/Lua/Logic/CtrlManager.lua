@@ -7,7 +7,7 @@ require "Controller/LoginCreateInfoCtrl"
 require "Controller/NoticeCtrl"
 require "Controller/ChooseCharacterCtrl"
 require "Controller/CreateCharacterCtrl"
-
+require "Controller/BattleButtonCtrl"
 
 CtrlManager = {};
 local this = CtrlManager;
@@ -23,6 +23,7 @@ function CtrlManager.Init()
 	ctrlList[CtrlNames.Notice] = NoticeCtrl.New();
 	ctrlList[CtrlNames.ChooseCharacter] = ChooseCharacterCtrl.New();
 	ctrlList[CtrlNames.CreateCharacter] = CreateCharacterCtrl.New();
+	ctrlList[CtrlNames.BattleButton] = BattleButtonCtrl.New();
 	return this;
 end
 
