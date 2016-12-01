@@ -32,6 +32,7 @@ end
 --µ¥»÷ÊÂ¼þ--
 function BattleButtonCtrl.OnClick0(go)
 	log("click 0");
+	Network.instance:useTargetSkill(1);
 end
 
 function BattleButtonCtrl.OnClick1(go)

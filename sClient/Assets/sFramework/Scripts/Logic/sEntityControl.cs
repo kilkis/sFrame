@@ -2,6 +2,7 @@
 using KBEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public enum playerState
 {
@@ -15,18 +16,25 @@ public class sEntityControl : MonoBehaviour {
     //确认是否可以控制
     bool _enableControl = false;
 
-    int layer = 0;
+    int layerTerrain = 0;
+    int layerOthers = 0;
+
     Animation modelAnim;
     playerState curState;
     Vector3 focuspos;
 
+    //玩家的目标entity，使用技能的时候会自动选定，也可以手动选定
+    public long focusEntityID = 0;
+    //寻路路径
     List<Vector3> _curPath = new List<Vector3>();
 
     Transform _trans;
     
     // Use this for initialization
     void Start () {
-        layer = 1 << LayerMask.NameToLayer(sConst.terrainLayer);
+        layerTerrain = 1 << LayerMask.NameToLayer(sConst.terrainLayer);
+        layerOthers = 1 << LayerMask.NameToLayer(sConst.othersLayer);
+        
         curState = playerState.idle;
 
         _trans = gameObject.transform;
@@ -41,6 +49,15 @@ public class sEntityControl : MonoBehaviour {
            
             KBEngine.Event.fireIn("updatePlayer", _trans.position.x,
                 _trans.position.y, _trans.position.z, _trans.rotation.eulerAngles.y);
+
+        }
+    }
+
+    public void chooseSkillTarget(int sid)
+    {
+        //技能智能选择
+        if( sid > 0 )
+        {
 
         }
     }
@@ -78,34 +95,51 @@ public class sEntityControl : MonoBehaviour {
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
             if (Input.GetMouseButtonUp(0))
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
+                Debug.Log("click");
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitinfo;
-                if (Physics.Raycast(ray, out hitinfo, 999, layer))
+                if (Physics.Raycast(ray, out hitinfo, 999, layerOthers))
                 {
+                    
+                    string[] tmps = hitinfo.collider.name.Split('_');
+                    focusEntityID = int.Parse(tmps[tmps.Length - 1]);
+                }
+                else if (Physics.Raycast(ray, out hitinfo, 999, layerTerrain))
+                {
+                    
                     focuspos = hitinfo.point;
                     //Debug.Log("focus pos:" + focuspos);
                     //Debug.Log("cur pos:" + transform.position);
                     //只使用navmesh得到路线，路线跑动自己处理逻辑
                     //agent.ResetPath();
-                    
+
                     agent.SetDestination(hitinfo.point);
                     //Debug.Log("hit:" + hitinfo.point + ", "+transform.position);
                     _curPath.Clear();
-                    for(int i = 0; i < agent.path.corners.Length; ++i )
+                    for (int i = 0; i < agent.path.corners.Length; ++i)
                     {
                         _curPath.Add(agent.path.corners[i]);
                         //Debug.Log("point:" + agent.path.corners[i]);
                     }
                     //Debug.Log("path len:" + _curPath.Count);
                     agent.Stop();
-                    
+
                     changeAnimState(playerState.run);
+                   
                 }
             }
 
 #else
+            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            {
+                return;
+            }
 #endif
-            
+
         }
 
         //todo:需要加入服务器通知移动控制

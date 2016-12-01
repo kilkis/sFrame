@@ -43,5 +43,9 @@ public class sConst
     public static float cameraCheckInv = 1.0f;
     public static string terrainLayer = "terrain";
     public static string cameraColLayer = "scenecol";
+    public static string playerLayer = "player";
+    public static string playerParLayer = "playerpar";
+    public static string othersLayer = "others";
+    public static string othersParLayer = "otherspar";
     #endregion
 }

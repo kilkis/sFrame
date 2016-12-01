@@ -27,6 +27,11 @@ namespace sFramework
             KBEngine.Event.fireIn("login", usrName, passWord, System.Text.Encoding.UTF8.GetBytes("sFrame MMO"));
         }
 
+        public void useTargetSkill(int sid)
+        {
+            KBEngine.Event.fireIn("useTargetSkill", sid, (int)sEntityManager.GetInstance().selfPlayer.pc.focusEntityID);	
+        }
+
         public void sendMsg2Server(string cmdName, params object[] args )
         {
             Debug.Log(args[0].GetType() + " .. " + args[0].ToString());

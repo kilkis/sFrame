@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.EventSystems;
 public class sCamera : MonoBehaviour {
 
     public static sCamera instance;
@@ -105,12 +105,20 @@ public class sCamera : MonoBehaviour {
         //点击后转镜头
         if( Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             mouseClickPos = Input.mousePosition;
             nHorizontalAngle = horizontalAngle;
             nVerticalAngle = verticalAngle;
         }
         if ( Input.GetMouseButton(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             Vector3 offpos = Input.mousePosition - mouseClickPos;
             nHorizontalAngle = horizontalAngle + offpos.x/10.0f;
             nVerticalAngle = verticalAngle - offpos.y/10.0f;
@@ -123,6 +131,10 @@ public class sCamera : MonoBehaviour {
         }
         if (Input.GetMouseButtonUp(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             mouseClickPos = Vector3.zero;
             horizontalAngle = nHorizontalAngle;
             verticalAngle = nVerticalAngle;
@@ -174,6 +186,10 @@ public class sCamera : MonoBehaviour {
             //点击后转镜头
             if(Input.touches[0].phase==TouchPhase.Began)  
             {
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    return;
+                }
                 mouseClickPos = Input.mousePosition;
                 nHorizontalAngle = horizontalAngle;
                 nVerticalAngle = verticalAngle;

@@ -56,6 +56,8 @@ public class sEntityManager : sSingleton<sEntityManager>
         Debug.Log("self id:" + uid);
         selfPlayer.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, startpos, Quaternion.LookRotation(new Vector3(1, 0, 0))) as GameObject;
         selfPlayer.playerCC.SetActive(true);
+        selfPlayer.playerCC.name = sStringBuilder.combine(selfPlayer.playerCC.name, "_", uid);
+        selfPlayer.playerCC.layer = LayerMask.NameToLayer(sConst.playerLayer);
         selfPlayer.pc = selfPlayer.playerCC.GetComponent<sEntityControl>();
         selfPlayer.pc.enableControl(true);
 
@@ -107,6 +109,8 @@ public class sEntityManager : sSingleton<sEntityManager>
         sEntityInfo tmp = getOrCreatePlayer(uid);
 		tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, tmp.attr.position == Vector3.zero?startpos:tmp.attr.position, Quaternion.LookRotation(tmp.attr.direction)) as GameObject;
         tmp.playerCC.SetActive(true);
+        tmp.playerCC.name = sStringBuilder.combine(tmp.playerCC.name, "_", uid);
+        tmp.playerCC.layer = LayerMask.NameToLayer(sConst.othersLayer);
         tmp.pc = tmp.playerCC.GetComponent<sEntityControl>();
         tmp.uid = uid;
         tmp.pm = tmp.playerCC.GetComponent<sEntityModel>();
@@ -132,6 +136,8 @@ public class sEntityManager : sSingleton<sEntityManager>
 		sEntityInfo tmp = getOrCreatePlayer(uid);
         tmp.playerCC = GameObject.Instantiate(sULoading.instance.playerCC, tmp.attr.position == Vector3.zero ? startpos : tmp.attr.position, tmp.attr.direction == Vector3.zero?Quaternion.identity:Quaternion.LookRotation(tmp.attr.direction)) as GameObject;
 		tmp.playerCC.SetActive(true);
+        tmp.playerCC.name = sStringBuilder.combine(tmp.playerCC.name, "_", uid);
+        tmp.playerCC.layer = LayerMask.NameToLayer(sConst.othersLayer);
 		tmp.pc = tmp.playerCC.GetComponent<sEntityControl>();
 		tmp.uid = uid;
 		tmp.pm = tmp.playerCC.GetComponent<sEntityModel>();
