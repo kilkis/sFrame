@@ -143,7 +143,6 @@ class AI:
 		virtual method.
 		战斗时think
 		"""
-		ERROR_MSG("think fight")
 		if self.territoryControllerID > 0:
 			self.delTerritory()
 		

@@ -33,18 +33,3 @@ class SkillAttack(SkillInitiative):
 		"""
 		if self.getID() == 1:
 			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 10))
-		elif self.getID() == 1000101:
-			#caster.position = caster.getStopPoint(caster.yaw, 15.0)
-			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 100))
-		elif self.getID() == 2000101:
-			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 100))
-		elif self.getID() == 3000101:
-			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 100))
-		elif self.getID() == 4000101:
-			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 100))
-		elif self.getID() == 5000101:
-			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 100))
-		elif self.getID() == 6000101:
-			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 100))
-		elif self.getID() == 7000101:
-			receiver.recvDamage(caster.id, self.getID(), 0, random.randint(0, 10))

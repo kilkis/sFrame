@@ -57,3 +57,9 @@ class SkillBox:
 			return
 		
 		self.spellTarget(skillID, targetID)
+		
+	def startSpelling(self, srcEntityID, skillID, targetID):
+		pass
+	
+	def endSpelling(self, srcEntityID, skillID, targetID):
+		pass

@@ -27,6 +27,16 @@
 			<Arg>		SKILLID		</Arg>
 			<Arg>		ENTITY_ID	</Arg>
 		</useTargetSkill>
+		<startSpelling>
+			<Exposed/>
+			<Arg>	SKILLID	</Arg>
+			<Arg>	ENTITY_ID	</Arg>
+		</startSpelling>
+		<endSpelling>
+			<Exposed/>
+			<Arg>	SKILLID	</Arg>
+			<Arg>		ENTITY_ID	</Arg>
+		</endSpelling>
 	</CellMethods>
 
 	<ClientMethods>
