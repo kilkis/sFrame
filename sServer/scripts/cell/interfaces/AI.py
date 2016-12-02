@@ -73,7 +73,6 @@ class AI:
 		"""
 		virtual method.
 		"""
-		ERROR_MSG("think")
 		if self.isState(GlobalDefine.ENTITY_STATE_FREE):
 			self.onThinkFree()
 		elif self.isState(GlobalDefine.ENTITY_STATE_FIGHT):

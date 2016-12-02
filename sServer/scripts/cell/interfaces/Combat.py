@@ -71,7 +71,7 @@ class Combat(CombatPropertys):
 		
 		self.addEnemy(attackerID, damage)
 
-		DEBUG_MSG("%s::recvDamage: %i attackerID=%i, skillID=%i, damageType=%i, damage=%i" % \
+		ERROR_MSG("%s::recvDamage: %i attackerID=%i, skillID=%i, damageType=%i, damage=%i" % \
 			(self.getScriptName(), self.id, attackerID, skillID, damageType, damage))
 			
 		if self.HP <= damage:

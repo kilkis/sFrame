@@ -7,8 +7,10 @@
 
 	<Implements>
 		<Interface>	GameObject		</Interface>
+		<Interface>			State			</Interface>
 		<Interface>	NPCObject		</Interface>
 		<Interface>	Motion			</Interface>
+		<Interface>			Combat			</Interface>
 	</Implements>
 
 	<Properties>

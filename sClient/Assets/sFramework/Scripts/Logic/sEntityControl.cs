@@ -99,7 +99,6 @@ public class sEntityControl : MonoBehaviour {
                 {
                     return;
                 }
-                Debug.Log("click");
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitinfo;
                 if (Physics.Raycast(ray, out hitinfo, 999, layerOthers))
