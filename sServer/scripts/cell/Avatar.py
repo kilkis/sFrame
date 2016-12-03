@@ -11,6 +11,7 @@ from interfaces.State import State
 from interfaces.Flags import Flags
 from interfaces.Motion import Motion
 from interfaces.SkillBox import SkillBox
+from interfaces.SkillEffectMgr import SkillEffectMgr
 
 class Avatar(KBEngine.Entity,
 			GameObject, 
@@ -18,6 +19,7 @@ class Avatar(KBEngine.Entity,
 			State,
 			Motion, 
 			SkillBox,
+			SkillEffectMgr,
 			Combat, 
 			Spell, 
 			Teleport,
@@ -29,6 +31,7 @@ class Avatar(KBEngine.Entity,
 		State.__init__(self) 
 		Motion.__init__(self) 
 		SkillBox.__init__(self) 
+		SkillEffectMgr.__init__(self)
 		Combat.__init__(self) 
 		Spell.__init__(self) 
 		Teleport.__init__(self) 
@@ -63,7 +66,7 @@ class Avatar(KBEngine.Entity,
 		#DEBUG_MSG("%s::onTimer: %i, tid:%i, arg:%i" % (self.getScriptName(), self.id, tid, userArg))
 		GameObject.onTimer(self, tid, userArg)
 		Spell.onTimer(self, tid, userArg)
-		
+		SkillEffectMgr.onTimer(self, tid, userArg)
 		ERROR_MSG("on timer")
 		
 	def onGetWitness(self):
