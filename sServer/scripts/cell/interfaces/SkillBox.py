@@ -5,17 +5,12 @@ import GlobalConst
 import SCDefine
 from KBEDebug import * 
 
+#技能背包，保存自身技能相关内容（拥有的技能，配置使用的技能等）
 class SkillBox:
 	def __init__(self):
 		# 如果玩家没有学习技能，默认添加这些技能
 		if len(self.skills) == 0:
 			self.skills.append(1)
-			self.skills.append(1000101)
-			self.skills.append(2000101)
-			self.skills.append(3000101)
-			self.skills.append(4000101)
-			self.skills.append(5000101)
-			self.skills.append(6000101)
 
 	def hasSkill(self, skillID):
 		"""

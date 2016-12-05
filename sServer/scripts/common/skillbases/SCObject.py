@@ -92,6 +92,11 @@ class SCEntity(SCObject):
 			if flySpeed > 1.0:
 				return position.distTo(entity.position) / flySpeed
 		return 0.0
+	
+	def pushSE(self, cid, sid, seType, props):
+		entity = self.getObject()
+		if entity:
+			entity.pushSE(cid, sid, seType, props)
 
 class SCPosition(SCObject):
 	"""

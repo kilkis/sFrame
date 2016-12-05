@@ -154,6 +154,8 @@ class Combat(CombatPropertys):
 		"""
 		self.setHP(0)
 		self.setMP(0)
+		
+		self.delTimer(self.seTimer)
 
 	def onBeforeDie(self, killerID):
 		"""

@@ -6,6 +6,7 @@ import SCDefine
 from KBEDebug import * 
 import skillbases.SCObject as SCObject
 
+#技能释放判定放在这里，CD统计也放在这里
 class Spell:
 	def __init__(self):
 		#self.addTimer(1,1,SCDefine.TIMER_TYPE_BUFF_TICK)
@@ -38,10 +39,10 @@ class Spell:
 		"""
 		DEBUG_MSG("Spell::spellTarget(%i):skillID=%i, targetID=%i" % (self.id, skillID, targetID))
 		
-		skill = skills.getSkill(skillID)
-		if skill is None:
-			ERROR_MSG("Spell::spellTarget(%i):skillID=%i not found" % (self.id, skillID))
-			return
+		#skill = skills.getSkill(skillID)
+		#if skill is None:
+		#	ERROR_MSG("Spell::spellTarget(%i):skillID=%i not found" % (self.id, skillID))
+		#	return
 
 		target = KBEngine.entities.get(targetID)
 		if target is None:
@@ -49,16 +50,19 @@ class Spell:
 			return
 		
 		scobject = SCObject.createSCEntity(target)
-		ret = skill.canUse(self, scobject)
+		ret = self.canUse(skillID, self, scobject)
 		if ret != GlobalConst.GC_OK:
 			ERROR_MSG("Spell::spellTarget(%i): cannot spell skillID=%i, targetID=%i, code=%i" % (self.id, skillID, targetID, ret))
 			return
 			
-		skill.use(self, scobject)
+		self.use(skillID, self, scobject)
 	
 	def spellPosition(self, position):
 		pass
 		
+	def canUse(self, sid, caster, scObject):
+		ERROR_MSG("skill effecg mgr: canUSE")
+		return GlobalConst.GC_OK
 	#--------------------------------------------------------------------------------------------
 	#                              Callbacks
 	#--------------------------------------------------------------------------------------------

@@ -4,25 +4,29 @@ import math
 import time
 import KBEngine
 from KBEDebug import *
+import SCDefine
 from interfaces.Combat import Combat
 from interfaces.NPCObject import NPCObject
 from interfaces.Motion import Motion
 from interfaces.State import State
+from interfaces.SkillEffectMgr import SkillEffectMgr
 
-class NPC(KBEngine.Entity, NPCObject, Motion, Combat, State):
+class NPC(KBEngine.Entity, NPCObject, Motion, SkillEffectMgr, Combat, State):
 	def __init__(self):
 		KBEngine.Entity.__init__(self)
 		NPCObject.__init__(self)
 		Motion.__init__(self)
 		Combat.__init__(self)
 		State.__init__(self) 
-		
+		SkillEffectMgr.__init__(self)
+		self.seTimer = self.addTimer(0.1, 0.1, SCDefine.TIMER_TYPE_BUFF_TICK)
 		ERROR_MSG("npc init, id is :%i"%(self.mid))
 
 	def initEntity(self):
 		"""
 		virtual method.
 		"""
+		self.addTimer(0.1, 0.1, SCDefine.TIMER_TYPE_SPACE_SPAWN_TICK)
 		pass
 
 	def checkInTerritory(self):
@@ -46,8 +50,9 @@ class NPC(KBEngine.Entity, NPCObject, Motion, Combat, State):
 		KBEngine method.
 		引擎回调timer触发
 		"""
-		#DEBUG_MSG("%s::onTimer: %i, tid:%i, arg:%i" % (self.getScriptName(), self.id, tid, userArg))
+		#ERROR_MSG("%s::onTimer: %i, tid:%i, arg:%i" % (self.getScriptName(), self.id, tid, userArg))
 		NPCObject.onTimer(self, tid, userArg)
+		SkillEffectMgr.onTimer(self, tid, userArg)
 	
 	def onForbidChanged_(self, forbid, isInc):
 		"""
