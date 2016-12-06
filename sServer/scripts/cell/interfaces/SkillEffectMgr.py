@@ -5,8 +5,10 @@ import SCDefine
 from KBEDebug import * 
 import skillbases.SCObject as SCObject
 from skilleffects.se_directDamage import se_directDamage
+from skilleffects.se_followFlyer import se_followFlyer
 
 SE_DIRECTDAMAGE 				= 0x001
+SE_FOLLOWFLYER					= 0x002
 
 class SkillEffectMgr:
 	def __init__(self):
@@ -21,7 +23,6 @@ class SkillEffectMgr:
 				if value[i].logicUpdate(self):
 					self.needdel.append(value[i])
 			lenv = len(self.needdel)
-			ERROR_MSG("lenv:%i"%(lenv))
 			for i in range(0, lenv):
 				value.remove(self.needdel[i])
 		
@@ -31,6 +32,8 @@ class SkillEffectMgr:
 			self.ses[seType] = []
 		if seType == SE_DIRECTDAMAGE:
 			self.ses[seType].append(se_directDamage(casterID, sid, props))
+		elif seType == SE_FOLLOWFLYER:
+			self.ses[seType].append(se_followFlyer(casterID, sid, props))
 	
 	def popSE(self, seType):
 		ERROR_MSG("push se:%i"%(seType))
@@ -38,5 +41,9 @@ class SkillEffectMgr:
 		
 	def use(self, sid, caster, scObject):
 		ERROR_MSG("use skill:%i"%(sid))
-		scObject.pushSE(caster.id, sid, SE_DIRECTDAMAGE, {})
+		props = {}
+		#scObject.pushSE(caster.id, sid, SE_DIRECTDAMAGE, {})
+		props['startpos'] = caster.position
+		props['speed'] = 1.0
+		scObject.pushSE(caster.id, sid, SE_FOLLOWFLYER, props)
 		

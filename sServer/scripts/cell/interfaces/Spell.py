@@ -56,6 +56,8 @@ class Spell:
 			return
 			
 		self.use(skillID, self, scobject)
+		
+		self.otherClients.onSpellTarget(skillID, targetID)
 	
 	def spellPosition(self, position):
 		pass

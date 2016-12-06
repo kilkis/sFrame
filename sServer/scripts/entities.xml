@@ -9,6 +9,7 @@
 	<Avatar hasClient="true"></Avatar> <!-- <Avatar hasCell="true" hasBase="true" hasClient="true"></Avatar> -->
 	<Monster hasClient="true"></Monster>
 	<NPC hasClient="true"></NPC>
+	<Flyer hasClient="true"></Flyer>
 	<Gate hasClient="true"></Gate>
 	<Spaces/>
 	<Space/>

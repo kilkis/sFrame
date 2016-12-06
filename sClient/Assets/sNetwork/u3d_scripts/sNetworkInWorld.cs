@@ -60,6 +60,8 @@ public class sNetworkInWorld : MonoBehaviour
 		KBEngine.Event.registerOut("otherAvatarOnJump", this, "otherAvatarOnJump");
 		KBEngine.Event.registerOut("onAddSkill", this, "onAddSkill");
 
+        KBEngine.Event.registerOut("otherAvatarOnSpellTarget", this, "otherAvatarOnSpellTarget");
+
         KBEngine.Event.registerOut("onSetSpaceData", this, "onSetSpaceData");
         KBEngine.Event.registerOut("onEnterSpace", this, "onEnterSpace");
     }
@@ -232,7 +234,7 @@ public class sNetworkInWorld : MonoBehaviour
 	
 	public void onLeaveWorld(KBEngine.Entity entity)
 	{
-        Debug.LogError("onLeaveWorld");
+        Debug.Log("onLeaveWorld");
         //if(entity.renderObj == null)
         //	return;
 
@@ -410,4 +412,9 @@ public class sNetworkInWorld : MonoBehaviour
 			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().OnJump();
 		}
 	}
+
+    public void otherAvatarOnSpellTarget(KBEngine.Entity entity, int sid, int tid)
+    {
+        Debug.Log("############# otherAvatarOnSpellTarget:" + sid + "," + tid);
+    }
 }

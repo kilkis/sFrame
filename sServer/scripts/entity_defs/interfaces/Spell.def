@@ -8,5 +8,11 @@
 			<Arg>		ENTITY_ID	</Arg>
 		</spellTarget>
 	</CellMethods>
+	<ClientMethods>
+		<onSpellTarget>
+			<Arg>		SKILLID		</Arg>
+			<Arg>		ENTITY_ID	</Arg>
+		</onSpellTarget>
+	</ClientMethods>
 </root>
 
