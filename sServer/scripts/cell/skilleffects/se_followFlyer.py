@@ -15,12 +15,17 @@ class se_followFlyer(se_base):
 		self.delay = 0
 		
 	def logicUpdate(self, recv):
-		ERROR_MSG("se_followFlyer logicUpdate:%f, %f"%(self.curTime, self.delay))
+		#ERROR_MSG("se_followFlyer logicUpdate:%f, %f"%(self.curTime, self.delay))
 		#暂时不做动态计算的事情
 		if self.delay == 0:
 			self.delay = self.distToDelay(self.curpos, recv, self.speed)
+			ERROR_MSG("cal delay: %f"%(self.delay))
 		self.curTime = self.curTime + 0.1
 		if self.curTime >= self.delay:
-			recv.recvDamage(self.castID, self.sid, 0, 10)
+			hs = self.props['hs'].split(',')
+			for h in hs:
+				ERROR_MSG("transfrom:%i,%i,%i"%(self.castID, self.sid, int(h)))
+				recv.pushSE(self.castID, self.sid, int(h), self.props)
+				#recv.recvDamage(self.castID, self.sid, 0, 10)
 			return True
 		return False

@@ -97,6 +97,11 @@ class SCEntity(SCObject):
 		entity = self.getObject()
 		if entity:
 			entity.pushSE(cid, sid, seType, props)
+	
+	def createFollowFlyerSE(self, casterID, sid, props):
+		entity = self.getObject()
+		if entity:
+			entity.createFollowFlyerSE(casterID, sid, props)
 
 class SCPosition(SCObject):
 	"""

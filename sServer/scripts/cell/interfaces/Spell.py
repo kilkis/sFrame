@@ -54,17 +54,15 @@ class Spell:
 		if ret != GlobalConst.GC_OK:
 			ERROR_MSG("Spell::spellTarget(%i): cannot spell skillID=%i, targetID=%i, code=%i" % (self.id, skillID, targetID, ret))
 			return
-			
+		#自身激发技能效果
 		self.use(skillID, self, scobject)
-		
+		#将施法行为告知AOI范围内其他玩家
 		self.otherClients.onSpellTarget(skillID, targetID)
 	
 	def spellPosition(self, position):
 		pass
 		
-	def canUse(self, sid, caster, scObject):
-		ERROR_MSG("skill effecg mgr: canUSE")
-		return GlobalConst.GC_OK
+	
 	#--------------------------------------------------------------------------------------------
 	#                              Callbacks
 	#--------------------------------------------------------------------------------------------
