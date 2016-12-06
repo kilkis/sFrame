@@ -9,6 +9,7 @@ from interfaces.Combat import Combat
 from interfaces.NPCObject import NPCObject
 from interfaces.Motion import Motion
 from interfaces.SkillEffectMgr import SkillEffectMgr
+from interfaces.State import State
 
 class Flyer(KBEngine.Entity, NPCObject, Motion, SkillEffectMgr, Combat, State):
 	def __init__(self):

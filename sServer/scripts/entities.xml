@@ -10,6 +10,7 @@
 	<Monster hasClient="true"></Monster>
 	<NPC hasClient="true"></NPC>
 	<Flyer hasClient="true"></Flyer>
+	<Trap hasClient="true"></Trap>
 	<Gate hasClient="true"></Gate>
 	<Spaces/>
 	<Space/>
