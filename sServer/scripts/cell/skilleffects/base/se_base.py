@@ -11,6 +11,11 @@ class se_base:
 		self.props = props
 		self.curTime = 0
 		
+		self.life = 0
+		self.inv = 0
+		self.curTimes = 0
+		self.invTimes = 0
+		
 	def logicUpdate(self, recv):
 		return False
 		

@@ -67,13 +67,22 @@ public class sEntityManager : sSingleton<sEntityManager>
         selfPlayer.uid = uid;
         selfPlayer.pm = selfPlayer.playerCC.GetComponent<sEntityModel>();
         selfPlayer.pm.playerUID = uid;
+        
         selfPlayer.pm.bone = "FS_bone";
         selfPlayer.pm.chestName = "FS_chest_000";
         selfPlayer.pm.footName = "FS_foot_000";
         selfPlayer.pm.handName = "FS_hand_000";
         selfPlayer.pm.headName = "FS_head_000";
         selfPlayer.pm.legName = "FS_leg_000";
-		selfPlayer.pm.createAvatar(selfPlayer.playerCC);
+        /*
+        selfPlayer.pm.bone = "gs_bone";
+        selfPlayer.pm.chestName = "gs_sz_chest_001";
+        selfPlayer.pm.footName = "gs_sz_foot_001";
+        selfPlayer.pm.handName = "gs_sz_foot_001";
+        selfPlayer.pm.headName = "gs_sz_head_001";
+        selfPlayer.pm.legName = "gs_sz_leg_001";
+        */
+        selfPlayer.pm.createAvatar(selfPlayer.playerCC);
 		//selfPlayer.pm.createModel("cube", selfPlayer.playerCC);
 
         selfPlayer.delTime = 0;

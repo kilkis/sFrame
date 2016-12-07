@@ -2,6 +2,7 @@
 import KBEngine
 import GlobalConst
 import SCDefine
+import Math
 from KBEDebug import * 
 import skillbases.SCObject as SCObject
 import d_skill
@@ -21,6 +22,7 @@ class SkillEffectMgr:
 	def __init__(self):
 		self.ses = {}
 		self.needdel = []
+		self.traps = []#保存所有自己释放的陷阱类技能
 	
 	def onTimer(self, tid, userArg):
 		sescopy = self.ses.copy()
@@ -31,6 +33,11 @@ class SkillEffectMgr:
 			for i in range(0, lenv):
 				if value[i].logicUpdate(self):
 					self.ses[key].remove(value[i])
+		#陷阱类计时
+		trapcopy = self.traps.copy()
+		for trap in self.traps:
+			pass
+		
 				
 	#这个是一个类似通用的接口，直接效果可以调用，飞行物命中后，陷阱命中后都可以调用
 	#以增加效果到entity身上
@@ -48,13 +55,18 @@ class SkillEffectMgr:
 		if SE_FOLLOWFLYER not in self.ses:
 			self.ses[SE_FOLLOWFLYER] = []
 		self.ses[SE_FOLLOWFLYER].append(se_followFlyer(casterID, sid, props))
+	
+	def createTrap(self, casterID, sid, pos, props):
+		#addProximity需要以entity为中心点
+		e = KBEngine.createEntity("Trap", self.spaceID, tuple(pos), tuple(Math.Vector3(0,0,0)), props)
+		self.traps.append(e)
 		
 	def popSE(self, seType):
 		ERROR_MSG("push se:%i"%(seType))
 		
 	def use(self, sid, caster, scObject):
 		ERROR_MSG("use skill:%i"%(sid))
-		sid = 2
+		sid = 4
 		props = {}
 		skillData = d_skill.datas.get(sid)
 		if skillData['skillType'] == SE_DIRECT:
@@ -69,7 +81,7 @@ class SkillEffectMgr:
 		elif skillData['skillType'] == SE_FLYER:
 			pass
 		elif skillData['skillType'] == SE_TRAP:
-			pass
+			self.createTrap(caster.id, sid, scObject.getPosition(), props)
 		
 	def canUse(self, sid, caster, scObject):
 		ERROR_MSG("skill effecg mgr: canUSE")
