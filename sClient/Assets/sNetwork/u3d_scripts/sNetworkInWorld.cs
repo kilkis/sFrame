@@ -234,13 +234,18 @@ public class sNetworkInWorld : MonoBehaviour
 	
 	public void onLeaveWorld(KBEngine.Entity entity)
 	{
-        Debug.Log("onLeaveWorld");
+        Debug.Log("onLeaveWorld:" + entity.className);
         //if(entity.renderObj == null)
         //	return;
 
         //UnityEngine.GameObject.Destroy((UnityEngine.GameObject)entity.renderObj);
         //entity.renderObj = null;
-        sEntityManager.GetInstance().popPlayer(entity.id);
+        if( entity.className == "Trap")
+        {
+
+        }
+        else if( entity.className == "Avatar")
+            sEntityManager.GetInstance().popPlayer(entity.id);
     }
 
 	public void set_position(KBEngine.Entity entity)
