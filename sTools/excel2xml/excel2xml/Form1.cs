@@ -25,6 +25,12 @@ namespace excel2xml
 
         bool isClient(string name)
         {
+            if (checkBox1.Checked)
+            {
+                string tmp1 = name.Substring(0, 1);
+                if (tmp1 == textBox1.Text || tmp1 == textBox2.Text)
+                    name = name.Substring(1, name.Length - 1);
+            }
             string tmp = name.Substring(0, 3);
             if (tmp != "(S)")
                 return true;
@@ -33,6 +39,12 @@ namespace excel2xml
 
         bool isServer(string name)
         {
+            if (checkBox1.Checked)
+            {
+                string tmp1 = name.Substring(0, 1);
+                if (tmp1 == textBox1.Text || tmp1 == textBox2.Text)
+                    name = name.Substring(1, name.Length - 1);
+            }
             string tmp = name.Substring(0, 3);
             if (tmp != "(C)")
                 return true;
@@ -181,6 +193,7 @@ namespace excel2xml
                                 else
                                     combine = combine.Substring(0, combine.Length - 1);
                                 sw.Write(combine);
+                                combine = "";
                                 continue;
                             }
                         }
@@ -272,6 +285,7 @@ namespace excel2xml
                             else
                                 combine = combine.Substring(0, combine.Length - 1);
                             sw.WriteLine("\t\t\"" + cname + "\":\"" + combine + "\",");
+                            combine = "";
                             continue;
                         }
                     }
@@ -331,7 +345,7 @@ namespace excel2xml
             {
                 string tmp1 = name.Substring(0, 1);
                 if( tmp1 == textBox1.Text || tmp1 == textBox2.Text)
-                    name = name.Substring(1, 1);
+                    name = name.Substring(1, name.Length-1);
             }
             if (name.Length > 3)
             {
