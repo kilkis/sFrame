@@ -60,13 +60,17 @@ class SkillEffectMgr:
 		#addProximity需要以entity为中心点
 		e = KBEngine.createEntity("Trap", self.spaceID, tuple(pos), tuple(Math.Vector3(0,0,0)), props)
 		self.traps.append(e)
+	
+	def createFlyer(self, casterID, sid, pos, dir, props):
+		props['targetpos'] = pos+dir*100
+		e = KBEngine.createEntity("Flyer", self.spaceID, tuple(pos), tuple(dir), props)
 		
 	def popSE(self, seType):
 		ERROR_MSG("push se:%i"%(seType))
 		
 	def use(self, sid, caster, scObject):
 		ERROR_MSG("use skill:%i"%(sid))
-		sid = 4
+		sid = 3
 		props = {}
 		skillData = d_skill.datas.get(sid)
 		if skillData['skillType'] == SE_DIRECT:
@@ -79,7 +83,7 @@ class SkillEffectMgr:
 			props['hs'] = skillData['h']
 			scObject.createFollowFlyerSE(caster.id, sid, props)
 		elif skillData['skillType'] == SE_FLYER:
-			pass
+			self.createFlyer(caster.id, sid, self.position, self.direction, props)
 		elif skillData['skillType'] == SE_TRAP:
 			self.createTrap(caster.id, sid, scObject.getPosition(), props)
 		
