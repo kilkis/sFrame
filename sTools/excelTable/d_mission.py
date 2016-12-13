@@ -1,0 +1,14 @@
+datas={
+	1:{
+		"id":1,
+		"type":0,
+		"needMid":0,
+		"needLvl":0,
+		"needOther":0,
+		"reGet":0,
+		"reward":"1,1",
+		"autoNext":0,
+		"map":1,
+		"info":"1",
+		},
+}

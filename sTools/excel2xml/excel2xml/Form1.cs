@@ -31,8 +31,13 @@ namespace excel2xml
                 if (tmp1 == textBox1.Text || tmp1 == textBox2.Text)
                     name = name.Substring(1, name.Length - 1);
             }
-            string tmp = name.Substring(0, 3);
-            if (tmp != "(S)")
+            if (name.Length > 3)
+            {
+                string tmp = name.Substring(0, 3);
+                if (tmp != "(S)")
+                    return true;
+            }
+            else
                 return true;
             return false;
         }
@@ -45,8 +50,13 @@ namespace excel2xml
                 if (tmp1 == textBox1.Text || tmp1 == textBox2.Text)
                     name = name.Substring(1, name.Length - 1);
             }
-            string tmp = name.Substring(0, 3);
-            if (tmp != "(C)")
+            if (name.Length > 3)
+            {
+                string tmp = name.Substring(0, 3);
+                if (tmp != "(C)")
+                    return true;
+            }
+            else
                 return true;
             return false;
         }
