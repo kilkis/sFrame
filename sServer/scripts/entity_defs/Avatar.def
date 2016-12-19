@@ -48,7 +48,16 @@
 			<DatabaseLength> 32						</DatabaseLength>
 		</playerName>
 		
-
+		<itemList>
+			<Type> ITEM_INFO_LIST </Type>
+			<Flags> BASE_AND_CLIENT </Flags>
+			<Persistent> true </Persistent>
+		</itemList>
+		<equipItemList>
+			<Type> ITEM_INFO_LIST </Type>
+			<Flags> BASE_AND_CLIENT </Flags>
+			<Persistent> true </Persistent>
+		</equipItemList>
 		<own_val>
 			<Type>	UINT16					</Type>
 			<Flags>	OWN_CLIENT					</Flags>
@@ -60,6 +69,37 @@
 		<createCell>
 			<Arg>		MAILBOX					</Arg>
 		</createCell>
+		<sendChatMessage>
+			<Arg>		UNICODE		</Arg>
+			<Exposed/>
+		</sendChatMessage>
+		<reqItemList>
+			<Exposed/>
+		</reqItemList>
+		<pickUpResponse>
+			<Arg>  BOOL </Arg>
+			<Arg>  ENTITY_ID </Arg>
+			<Arg>  ITEM_ID  </Arg>
+			<Arg>  UINT32  </Arg>
+		</pickUpResponse>
+		<dropRequest>
+			<Exposed/>
+			<Arg> DBID </Arg>
+		</dropRequest>
+		<swapItemRequest>
+			<Exposed/>
+			<Arg> INT32 </Arg>
+			<Arg> INT32 </Arg>
+		</swapItemRequest>
+		<equipItemRequest>
+			<Exposed/>
+			<Arg> INT32 </Arg>
+			<Arg> INT32 </Arg>
+		</equipItemRequest>
+		<useItemRequest>
+			<Exposed/>
+			<Arg> INT32 </Arg>
+		</useItemRequest>
 	</BaseMethods>
 
 	<CellMethods>
@@ -67,7 +107,11 @@
 			<Exposed/>
 			<Arg>		UINT8						</Arg>
 		</relive>
-
+		<dropNotify>
+			<Arg> 	ITEM_ID	</Arg>
+			<Arg> 	DBID	</Arg>
+			<Arg> 	UINT32	</Arg>
+		</dropNotify>
 		<jump>
 			<Exposed/>
 		</jump>
@@ -76,6 +120,33 @@
 	<ClientMethods>
 		<onJump>
 		</onJump>
+		<ReceiveChatMessage>
+			<Arg>	UNICODE	</Arg>
+		</ReceiveChatMessage>
+
+		<onReqItemList>
+			<Arg>   ITEM_INFO_LIST   </Arg>
+			<Arg>   ITEM_INFO_LIST   </Arg>
+		</onReqItemList>
+
+		<pickUp_re>
+			<Arg>  ITEM_INFO </Arg>
+		</pickUp_re>
+
+		<dropItem_re>
+			<Arg> 	ITEM_ID	</Arg>
+			<Arg> 	DBID	</Arg>
+		</dropItem_re>
+
+		<equipItemRequest_re>
+			<Exposed/>
+			<Arg> ITEM_INFO </Arg>
+			<Arg> ITEM_INFO </Arg>
+		</equipItemRequest_re>
+
+		<errorInfo>
+			<Arg> 	INT32	</Arg>
+		</errorInfo>
 	</ClientMethods>
 </root>
 

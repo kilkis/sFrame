@@ -54,7 +54,29 @@ class Avatar(KBEngine.Entity,
 		启动销毁entitytimer
 		"""
 		pass
-
+		
+	def dropNotify(self, itemId, UUid, itemCount):
+		#todo:这里需要修改，用自身的物品表处理掉落的问题
+		datas = d_entities.datas.get(40001003)
+		
+		if datas is None:
+			ERROR_MSG("SpawnPoint::spawn:%i not found." % 40001003)
+			return
+			
+		params = {
+			"uid" : datas["id"],
+			"utype" : datas["etype"],
+			"modelID" : datas["modelID"],
+			"dialogID" : datas["dialogID"],
+			"name" : datas["name"],
+			"descr" : datas.get("descr", ''),
+			"itemId" : itemId,
+			"itemCount" : itemCount,
+		}
+		
+		e = KBEngine.createEntity("DroppedItem", self.spaceID, tuple(self.position), tuple(self.direction), params)
+		
+		self.client.dropItem_re(itemId, UUid)
 	#--------------------------------------------------------------------------------------------
 	#                              Callbacks
 	#--------------------------------------------------------------------------------------------

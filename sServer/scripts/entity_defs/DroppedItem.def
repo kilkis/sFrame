@@ -1,0 +1,36 @@
+<root>
+	<Volatile>
+		<position/>
+		<yaw/>
+		<!--<pitch> 20 </pitch>-->
+	</Volatile>
+
+	<Implements>
+		<Interface>	GameObject		</Interface>
+		<Interface>	NPCObject		</Interface>
+	</Implements>
+
+	<Properties>
+		<itemId>
+			<Type>			ITEM_ID			</Type>
+			<Flags>			ALL_CLIENTS		</Flags>
+			<Default>		0			</Default>
+			<Persistent>	true			</Persistent>
+		</itemId>
+		<itemCount>
+			<Type>			UINT32			</Type>
+			<Flags>			ALL_CLIENTS		</Flags>
+			<Default>		0			</Default>
+			<Persistent>	true			</Persistent>
+		</itemCount>
+	</Properties>
+
+	<BaseMethods>
+	</BaseMethods>
+
+	<CellMethods>
+		<pickUpRequest>
+			<Exposed/>
+		</pickUpRequest>
+	</CellMethods>
+</root>

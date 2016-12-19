@@ -64,6 +64,7 @@ class Account(KBEngine.Proxy):
 					break
 		"""
 		#根据角色类型来获取出生点(可以配置一样，也可以不一样)
+		ERROR_MSG("roleType:%i"%(roleType))
 		spaceData = d_newplayermapinfo.datas.get(roleType)
 		careerinitData = d_careerinit.datas.get(roleType)
 		props = {

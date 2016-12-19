@@ -9,6 +9,12 @@ from KBEDebug import *
 from interfaces.GameObject import GameObject
 from interfaces.Teleport import Teleport
 
+from Inventory import InventoryMgr
+
+from ITEM_INFO import TItemInfo
+
+import items
+
 class Avatar(KBEngine.Proxy,
 			GameObject,
 			Teleport):
@@ -24,6 +30,8 @@ class Avatar(KBEngine.Proxy,
 		self.cellData["dbid"] = self.databaseID
 		self.nameB = self.cellData["name"]
 		self.spaceUTypeB = self.cellData["spaceUType"]
+		#道具系统(背包和装备栏都在里面)
+		self.inventory = InventoryMgr(self)
 		
 		self._destroyTimer = 0
 
@@ -107,6 +115,77 @@ class Avatar(KBEngine.Proxy,
 	def onDestroyTimer(self):
 		DEBUG_MSG("Avatar::onDestroyTimer: %i" % (self.id))
 		self.destroySelf()
+		
+		
+	def sendChatMessage(self, msg):
+		DEBUG_MSG("Avatar[%i].sendChatMessage:" % self.id)
+		for player in KBEngine.entities.values():
+			if player.__class__.__name__ == "Avatar":
+				player.client.ReceiveChatMessage(msg)
 
+	def reqItemList(self):
+		if self.client:
+			self.client.onReqItemList(self.itemList, self.equipItemList)
+
+	def pickUpResponse(self, success, droppedItemID, itemID, itemCount):
+		if success:
+			itemUUIdList = self.inventory.addItem(itemID,itemCount)
+			for uuid in itemUUIdList:
+				self.client.pickUp_re(self.itemList[uuid])
+
+	def dropRequest( self, itemUUId ):
+		itemCount = self.itemList[itemUUId][2]
+		itemId = self.inventory.removeItem( itemUUId, itemCount)
+		self.cell.dropNotify( itemId, itemUUId , itemCount)
+
+	def swapItemRequest( self, srcIndex, dstIndex):
+		self.inventory.swapItem(srcIndex, dstIndex)
+
+	def equipItemRequest( self, itemIndex, equipIndex):
+		if self.inventory.equipItem(itemIndex, equipIndex) == -1:
+			self.client.errorInfo(4)
+		else:
+			#传回去装备和物品信息
+			itemUUId = self.inventory.getItemUidByIndex(itemIndex)
+			equipUUId = self.inventory.getEquipUidByIndex(equipIndex)
+			itemInfo = TItemInfo()
+			itemInfo.extend([0, 0, 0, itemIndex])
+			equipItemInfo = TItemInfo()
+			equipItemInfo.extend([0, 0, 0, equipIndex])
+			if itemUUId != 0:
+				itemInfo = self.itemList[itemUUId]
+			if equipUUId != 0:
+				equipItemInfo = self.equipItemList[equipUUId]
+			self.client.equipItemRequest_re(itemInfo,equipItemInfo)
+			#--------------------
+			avatarCell = self.cell
+			avatarCell.resetPropertys()
+			for key, info in self.equipItemList.items():
+				items.getItem(info[1]).use(self)
+
+			if equipIndex == 0:
+				uid = self.inventory.getEquipUidByIndex(equipIndex)
+				if uid == 0:
+					avatarCell.equipNotify(-1)
+				else:
+					avatarCell.equipNotify(self.equipItemList[uid][1])
+
+	def updatePropertys(self):
+		avatarCell = self.cell
+		avatarCell.resetPropertys()
+		for key, info in self.equipItemList.items():
+			items.getItem(info[1]).use(self)
+			
+				
+	def useItemRequest(self, itemIndex):
+		itemUUId = self.inventory.getItemUidByIndex(itemIndex)
+		item = items.getItem(self.itemList[itemUUId][1])
+		item.use(self)
+		itemCount = self.itemList[itemUUId][2]
+		itemId = self.inventory.removeItem( itemUUId, 1 )
+		if itemId == -1:#只是减少物品数量，并没有销毁
+			self.client.pickUp_re(self.itemList[itemUUId])
+		else:#销毁物品
+			self.client.dropItem_re( itemId, itemUUId)
 
 
