@@ -48,6 +48,11 @@
 			<DatabaseLength> 32						</DatabaseLength>
 		</playerName>
 		
+		<own_val>
+			<Type>	UINT16					</Type>
+			<Flags>	OWN_CLIENT					</Flags>
+		</own_val>
+		-->
 		<itemList>
 			<Type> ITEM_INFO_LIST </Type>
 			<Flags> BASE_AND_CLIENT </Flags>
@@ -58,11 +63,6 @@
 			<Flags> BASE_AND_CLIENT </Flags>
 			<Persistent> true </Persistent>
 		</equipItemList>
-		<own_val>
-			<Type>	UINT16					</Type>
-			<Flags>	OWN_CLIENT					</Flags>
-		</own_val>
-		-->
 	</Properties>
 
 	<BaseMethods>
