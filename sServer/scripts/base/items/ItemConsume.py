@@ -17,10 +17,16 @@ class ItemConsume(ItemBase):
 		ItemBase.loadFromDict(self, dictDatas)
 		
 		# 加血
-		self.hp = dictDatas.get('hp', 0)
+		self.hp = dictDatas.get('hpAdd', 0)
 		
 		# 加魔法
-		self.mp = dictDatas.get("mp", 0)
+		self.mp = dictDatas.get("mpAdd", 0)
+		
+		# 加金币
+		self.gold =  dictDatas.get("goldAdd", 0)
+		
+		# 加钻石
+		self.gem = dictDatas.get("gemAdd", 0)
 		
 		# cd
 		self.limitCD = dictDatas.get("limitCD", 1)
