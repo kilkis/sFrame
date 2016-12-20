@@ -126,9 +126,22 @@ class Avatar(KBEngine.Proxy,
 	def reqItemList(self):
 		if self.client:
 			self.client.onReqItemList(self.itemList, self.equipItemList)
+	
+	#增加资源
+	def addResource(self, itemID, itemCount):
+		pass
+	#减少资源
+	def delResource(self, itemID, itemCount):
+		pass
 
 	def pickUpResponse(self, success, droppedItemID, itemID, itemCount):
 		if success:
+			if self.inventory.isResource(itemID):
+				self.addResource(itemID, itemCount)
+				return
+			if self.inventory.isMissionItem(itemID):
+				self.addMissionItem(itemID, itemCount)
+				return
 			itemUUIdList = self.inventory.addItem(itemID,itemCount)
 			for uuid in itemUUIdList:
 				self.client.pickUp_re(self.itemList[uuid])
@@ -187,5 +200,10 @@ class Avatar(KBEngine.Proxy,
 			self.client.pickUp_re(self.itemList[itemUUId])
 		else:#销毁物品
 			self.client.dropItem_re( itemId, itemUUId)
-
+	#自动整理背包,todo:需要确定规则
+	def autoSwapBag(self):
+		pass
+	#自动整理仓库,todo:需要确定规则
+	def autoSwapWarehouse(self):
+		pass
 

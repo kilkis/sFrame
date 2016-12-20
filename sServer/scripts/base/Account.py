@@ -80,6 +80,8 @@ class Account(KBEngine.Proxy):
 			"exp"				: 0,
 			"equipLvl"			: 0,
 			"money"				: 0,
+			"buyBagNum"			: 0,
+			"buyWarehouseNum"	: 0,
 			"strength"			: careerinitData['strength'],
 			"dexterity"			: careerinitData['dexterity'],
 			"intelligence"		: careerinitData['intelligence'],
